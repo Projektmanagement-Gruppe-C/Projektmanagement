@@ -49,3 +49,7 @@ local.properties
 
 # OS X
 .DS_Store
+
+# Secrets
+.env
+*.env
