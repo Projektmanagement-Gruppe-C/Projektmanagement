@@ -23,10 +23,10 @@ jobs:
         distribution: 'temurin'
     - name: Run test.coverage target
       run: ant test.coverage
-
+    - run: ls -la ./build/coverage
     # Upload the coverage report to Codecov
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v2
       with:
-        files: build/coverage/coverage.xml
+        directory: ./build/coverage
         flags: unittests
