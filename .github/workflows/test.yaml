@@ -21,8 +21,8 @@ jobs:
       with:
         java-version: '11'
         distribution: 'temurin'
-    - name: Run test.run target
-      run: ant test.run
+    - name: Run test.coverage target
+      run: ant test.coverage
 
     # Upload the coverage report to Codecov
     - name: Upload coverage to Codecov
