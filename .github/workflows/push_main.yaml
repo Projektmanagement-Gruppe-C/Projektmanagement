@@ -1,12 +1,10 @@
 # This workflow will build a Java project with Ant
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-ant
 
-name: Run Tests
+name: Push Main
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
     branches: [ "main" ]
 
 jobs:
@@ -23,18 +21,9 @@ jobs:
         distribution: 'temurin'
     - name: Run test.coverage target
       run: ant test.coverage
-    # If it's a commit to main, then upload the html report to the gh-pages branch
+    # Upload the html report to the gh-pages branch
     - name: Upload coverage report to gh-pages
       if: github.ref == 'refs/heads/main'
       uses: JamesIves/github-pages-deploy-action@v4
       with:
         folder: build/coverage/html
-    # If it's a pull request, then post a comment with the coverage report
-    - name: Post coverage report as comment
-      if: github.event_name == 'pull_request'
-      uses: madrapps/jacoco-report@v1.3
-      with:
-        paths: ./build/coverage/jacoco.xml
-        token: ${{ secrets.GITHUB_TOKEN }}
-        min-coverage-overall: 40
-        min-coverage-changed-files: 60
