@@ -12,4 +12,11 @@ public class KundeTest {
         kunde.setHausnummer(1);
         assertEquals(1, kunde.getHausnummer());
     }
+
+    @Test
+    void testVorname() {
+        Kunde kunde = new Kunde();
+        kunde.setVorname("Max");
+        assertEquals("Max", kunde.getVorname());
+    }
 }
