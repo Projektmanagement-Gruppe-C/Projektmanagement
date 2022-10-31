@@ -23,10 +23,18 @@ jobs:
         distribution: 'temurin'
     - name: Run test.coverage target
       run: ant test.coverage
-    - run: ls -la ./build/coverage
-    # Upload the coverage report to Codecov
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v2
+    # If it's a commit to main, then upload the html report to the gh-pages branch
+    - name: Upload coverage report to gh-pages
+      if: github.ref == 'refs/heads/main'
+      uses: JamesIves/github-pages-deploy-action@v4
       with:
-        directory: ./build/coverage
-        flags: unittests
+        folder: build/coverage/html
+    # If it's a pull request, then post a comment with the coverage report
+    - name: Post coverage report as comment
+      if: github.event_name == 'pull_request'
+      uses: madrapps/jacoco-report@v1.3
+      with:
+        paths: ./build/coverage/jacoco.xml
+        token: ${{ secrets.GITHUB_TOKEN }}
+        min-coverage-overall: 40
+        min-coverage-changed-files: 60

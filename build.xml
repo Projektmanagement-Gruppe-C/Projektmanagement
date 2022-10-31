@@ -79,8 +79,10 @@
                     </fileset>
                 </sourcefiles>
             </structure>
-            <!-- Export xml coverage report -->
-            <xml destfile="build/coverage/jacoco*.xml"/>
+            <!-- Export html report -->
+            <html destdir="build/coverage/html"/>
+            <!-- Export xml report -->
+            <xml destfile="build/coverage/jacoco.xml"/>
         </jacoco:report>
     </target>
 
