@@ -21,7 +21,7 @@ Bitte löschen Sie nicht relevante Optionen.
 - [ ] Sind die JUnit Tests erfolgreich?
 - [ ] Ist die  Test Abdeckung nicht schlechter geworden?
 
-# Todo aus dem Issue:
-<!-- Hier das Todo aus dem verlinktem Issue einfügen -->
-- [ ] TODO 1
-- [ ] TODO 2
+# Akzeptanzkriterien aus dem Issue:
+<!-- Hier die Akzeptanzkriterien aus dem verlinktem Issue einfügen -->
+- [ ] Kriterium 1
+- [ ] Kriterium 2
