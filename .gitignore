@@ -52,4 +52,7 @@ local.properties
 
 # Secrets
 .env
+
+# Build directory
+build
 *.env

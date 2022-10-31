@@ -1,0 +1,53 @@
+<project default="compile">
+    <path id="main.classpath">
+        <pathelement path="build/test"/>
+        <pathelement path="build/main"/>
+        <fileset dir="${ant.home}/lib" includes="*.jar" />
+        <!-- Include lib/junit -->
+        <fileset dir="lib/junit" includes="*.jar" />
+        <!-- Include lib/javafx -->
+        <fileset dir="lib/javafx" includes="*.jar" />
+    </path>
+
+    <path id="test.classpath">
+        <pathelement path="build/test"/>
+        <pathelement path="build/main"/>
+        <fileset dir="${ant.home}/lib" includes="*.jar" />
+        <!-- Include Console Launcher -->
+        <pathelement path="lib/junit/junit-platform-console-standalone-1.9.1.jar"/>
+    </path>
+
+    <target name="compile">
+        <mkdir dir="bin"/>
+        <!-- Include lib/javafx ´-->
+        <javac srcdir="src" destdir="bin" includeantruntime="true">
+            <classpath>
+                <fileset dir="lib/javafx">
+                    <include name="*.jar"/>
+                </fileset>
+            </classpath>
+        </javac>
+    </target>
+
+    <!-- Compile test classes -->
+    <target name="compile-test">
+        <mkdir dir="build/main"/>
+        <mkdir dir="build/test"/>
+        <javac destdir="build/main" srcdir="src" includeantruntime="false" classpathref="main.classpath"/>
+        <javac destdir="build/test" srcdir="test" includeantruntime="false" classpathref="main.classpath" />
+    </target>
+
+    <!-- Run tests -->
+    <target name="test.run" depends="compile-test">
+        <java classpathref="test.classpath" classname="org.junit.platform.console.ConsoleLauncher" fork="true" failonerror="true">
+            <arg value="--scan-classpath"/>
+            <arg line="--reports-dir build/test-report"/>
+        </java>
+        <junitreport todir="build/test-report">
+            <fileset dir="build/test-report">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="frames" todir="build/test-report/html"/>
+        </junitreport>
+    </target>
+</project>

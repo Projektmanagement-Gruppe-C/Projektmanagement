@@ -15,7 +15,7 @@ public class GrundrissView extends BasisView{
    
     //---Anfang Attribute der grafischen Oberflaeche---
     private Label lblWandKueche    	     
-        = new Label("Wand zur Abtrennung der Küche von dem Essbereich");
+        = new Label("Wand zur Abtrennung der KÃ¼che von dem Essbereich");
     private TextField txtPreisWandKueche 	= new TextField();
     private Label lblWandKuecheEuro 		= new Label("Euro");
     private CheckBox chckBxWandKueche 		= new CheckBox();
@@ -30,7 +30,7 @@ public class GrundrissView extends BasisView{
     public GrundrissView (GrundrissControl grundrissControl, Stage grundrissStage){
     	super(grundrissStage);
         this.grundrissControl = grundrissControl;
-        grundrissStage.setTitle("Sonderwünsche zu Grundriss-Varianten");
+        grundrissStage.setTitle("SonderwÃ¼nsche zu Grundriss-Varianten");
                 
 	    this.initKomponenten();
 	    this.leseGrundrissSonderwuensche();
