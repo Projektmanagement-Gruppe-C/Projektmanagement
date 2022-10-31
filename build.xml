@@ -80,7 +80,7 @@
                 </sourcefiles>
             </structure>
             <!-- Export xml coverage report -->
-            <xml destfile="build/coverage/coverage.xml"/>
+            <xml destfile="build/coverage/jacoco*.xml"/>
         </jacoco:report>
     </target>
 
