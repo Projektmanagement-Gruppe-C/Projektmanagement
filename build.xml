@@ -1,4 +1,9 @@
-<project default="compile">
+<project default="compile" xmlns:jacoco="antlib:org.jacoco.ant">
+
+    <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
+        <classpath path="lib/jacoco/jacocoant.jar"/>
+    </taskdef>
+
     <path id="main.classpath">
         <pathelement path="build/test"/>
         <pathelement path="build/main"/>
@@ -30,7 +35,7 @@
     </target>
 
     <!-- Compile test classes -->
-    <target name="compile-test">
+    <target name="compile.test">
         <mkdir dir="build/main"/>
         <mkdir dir="build/test"/>
         <javac destdir="build/main" srcdir="src" includeantruntime="false" classpathref="main.classpath"/>
@@ -38,16 +43,45 @@
     </target>
 
     <!-- Run tests -->
-    <target name="test.run" depends="compile-test">
-        <java classpathref="test.classpath" classname="org.junit.platform.console.ConsoleLauncher" fork="true" failonerror="true">
-            <arg value="--scan-classpath"/>
-            <arg line="--reports-dir build/test-report"/>
-        </java>
-        <junitreport todir="build/test-report">
-            <fileset dir="build/test-report">
-                <include name="TEST-*.xml"/>
-            </fileset>
-            <report format="frames" todir="build/test-report/html"/>
-        </junitreport>
+    <target name="test.run" depends="compile.test">
+        <mkdir dir="build/coverage"/>
+        <jacoco:coverage destfile="build/coverage/jacoco.exec">
+            <java classpathref="test.classpath" classname="org.junit.platform.console.ConsoleLauncher" fork="true" failonerror="true">
+                <arg value="--scan-classpath"/>
+                <arg line="--reports-dir build/test-report"/>
+            </java>
+        </jacoco:coverage>
+            <junitreport todir="build/test-report">
+                <fileset dir="build/test-report">
+                    <include name="TEST-*.xml"/>
+                </fileset>
+                <report format="frames" todir="build/test-report/html"/>
+            </junitreport>
     </target>
+
+    <!-- Create coverage report -->
+    <target name="test.coverage" depends="test.run">
+        <!-- Create JaCoCo Report -->
+        <jacoco:report>
+            <executiondata>
+                <file file="build/coverage/jacoco.exec"/>
+            </executiondata>
+
+            <structure name="JaCoCo Report">
+                <classfiles>
+                    <fileset dir="build/main">
+                        <include name="**/*.class"/>
+                    </fileset>
+                </classfiles>
+                <sourcefiles encoding="UTF-8">
+                    <fileset dir="src">
+                        <include name="**/*.java"/>
+                    </fileset>
+                </sourcefiles>
+            </structure>
+            <!-- Export xml coverage report -->
+            <xml destfile="build/coverage/coverage.xml"/>
+        </jacoco:report>
+    </target>
+
 </project>
