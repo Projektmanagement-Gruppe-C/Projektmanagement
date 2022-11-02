@@ -28,7 +28,6 @@ replay_pid*
 
 # IntelliJ
 out/
-.idea/
 .idea_modules/
 *.iml
 *.ipr

@@ -14,12 +14,12 @@ public abstract class BasisView {
  
     //---Anfang Attribute der grafischen Oberflaeche---
 	Stage sonderwunschStage;
-	private BorderPane borderPane 		= new BorderPane();
-	private GridPane gridPane 		 	= new GridPane();
-	private GridPane gridPaneButtons 	= new GridPane();
-   	private Label lblSonderwunsch   	= new Label("Sonderwunsch");
-    private Button btnBerechnen 	 	= new Button("Preis berechnen");
-    private Button btnSpeichern 	 	= new Button("Speichern");
+	private final BorderPane borderPane 		= new BorderPane();
+	private final GridPane gridPane 		 	= new GridPane();
+	private final GridPane gridPaneButtons 	= new GridPane();
+   	private final Label lblSonderwunsch   	= new Label("Sonderwunsch");
+    private final Button btnBerechnen 	 	= new Button("Preis berechnen");
+    private final Button btnSpeichern 	 	= new Button("Speichern");
     //-------Ende Attribute der grafischen Oberflaeche-------
   
    /**

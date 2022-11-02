@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 public final class GrundrissControl {
 	
 	// das View-Objekt des Grundriss-Fensters
-	private GrundrissView grundrissView;
+	private final GrundrissView grundrissView;
 
 	/**
 	 * erzeugt ein ControlObjekt inklusive View-Objekt und Model-Objekt zum 

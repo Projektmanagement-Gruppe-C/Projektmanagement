@@ -16,25 +16,25 @@ import javafx.stage.Stage;
 public class KundeView{
  
 	// das Control-Objekt des Grundfensters mit den Kundendaten
-	private KundeControl kundeControl;
+	private final KundeControl kundeControl;
 	// das Model-Objekt des Grundfensters mit den Kundendaten
-	private KundeModel kundeModel;
+	private final KundeModel kundeModel;
 
     //---Anfang Attribute der grafischen Oberflaeche---
-	private BorderPane borderPane 		= new BorderPane();
-	private GridPane gridPane 			= new GridPane();
-	private Label lblKunde    	      	= new Label("Kunde");
-    private Label lblNummerHaus     	= new Label("Plannummer des Hauses");
-    private ComboBox<Integer> 
-        cmbBxNummerHaus                 = new ComboBox<Integer>();
-    private Label lblVorname         	= new Label("Vorname");
-    private TextField txtVorname     	= new TextField();   
-    private Button btnAnlegen	 	  	= new Button("Anlegen");
-    private Button btnAendern 	      	= new Button("Ändern");
-    private Button btnLoeschen 	 		= new Button("Löschen");
-    private MenuBar mnBar 			  	= new MenuBar();
-    private Menu mnSonderwuensche    	= new Menu("Sonderwünsche");
-    private MenuItem mnItmGrundriss  	= new MenuItem("Grundrissvarianten");
+	private final BorderPane borderPane 		= new BorderPane();
+	private final GridPane gridPane 			= new GridPane();
+	private final Label lblKunde    	      	= new Label("Kunde");
+    private final Label lblNummerHaus     	= new Label("Plannummer des Hauses");
+    private final ComboBox<Integer>
+        cmbBxNummerHaus                 = new ComboBox<>();
+    private final Label lblVorname         	= new Label("Vorname");
+    private final TextField txtVorname     	= new TextField();
+    private final Button btnAnlegen	 	  	= new Button("Anlegen");
+    private final Button btnAendern 	      	= new Button("Ändern");
+    private final Button btnLoeschen 	 		= new Button("Löschen");
+    private final MenuBar mnBar 			  	= new MenuBar();
+    private final Menu mnSonderwuensche    	= new Menu("Sonderwünsche");
+    private final MenuItem mnItmGrundriss  	= new MenuItem("Grundrissvarianten");
     //-------Ende Attribute der grafischen Oberflaeche-------
   
     /**
@@ -85,7 +85,7 @@ public class KundeView{
 	    borderPane.setTop(mnBar);
 	    mnBar.getMenus().add(mnSonderwuensche);
 	    mnSonderwuensche.getItems().add(mnItmGrundriss);
-    }
+	}
 
     /* initialisiert die Listener zu den Steuerelementen auf de Maske */
     private void initListener(){
