@@ -13,9 +13,9 @@ import javafx.stage.Stage;
 public class KundeControl {
        
     // das View-Objekt des Grundfensters mit den Kundendaten
-	private KundeView kundeView;
+	private final KundeView kundeView;
     // das Model-Objekt des Grundfensters mit den Kundendaten
-    private KundeModel kundeModel;
+    private final KundeModel kundeModel;
     /* das GrundrissControl-Objekt fuer die Sonderwuensche
        zum Grundriss zu dem Kunden */
     private GrundrissControl grundrissControl;

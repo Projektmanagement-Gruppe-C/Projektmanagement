@@ -10,6 +10,14 @@ public final class KundeModel {
 	
 	// enthaelt den aktuellen Kunden
 	private Kunde kunde;
+
+	public KundeDao kundeDao;
+
+	public ObservableList<KundeEntity> getKunden() {
+		return kunden;
+	}
+
+	private final ObservableList<KundeEntity> kunden;
 	
 	/* enthaelt die Plannummern der Haeuser, diese muessen vielleicht noch
 	   in eine andere Klasse verschoben werden */
@@ -22,10 +30,17 @@ public final class KundeModel {
 	private static KundeModel kundeModel;
 	
 	// privater Konstruktor zur Realisierung des Singleton-Pattern
-	private KundeModel(){
+	private KundeModel(KundeDao kundeDao) {
 		super();
+		kunden = FXCollections.observableArrayList();
+		this.kundeDao = kundeDao;
 	}
-	
+
+	public void loadKunden() {
+		kunden.clear();
+		kunden.addAll(kundeDao.getAllKunden());
+	}
+
 	/**
 	 *  Methode zum Erhalt des einzigen KundeModel-Objekts.
 	 *  Das Singleton-Pattern wird realisiert.
@@ -34,7 +49,7 @@ public final class KundeModel {
 	 */
 	public static KundeModel getInstance(){
 		if(kundeModel == null){
-			kundeModel = new KundeModel();
+			kundeModel = new KundeModel(KundeDao.getInstance());
 		}
 		return kundeModel;	
 	}

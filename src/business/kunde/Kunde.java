@@ -7,6 +7,16 @@ public class Kunde {
 	private String nachname;
 	private String telefonnummer;
 	private String email;
+
+	public int getKundennummer() {
+		return kundennummer;
+	}
+
+	public void setKundennummer(int kundennummer) {
+		this.kundennummer = kundennummer;
+	}
+
+	private int kundennummer;
 		  
 	public int getHausnummer() {
 		return hausnummer;
@@ -47,5 +57,11 @@ public class Kunde {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Kunde [kundennummer=" + kundennummer + ", vorname=" + vorname + ", nachname=" + nachname
+				+ ", telefonnummer=" + telefonnummer + ", email=" + email + "]";
+	}
+
 }

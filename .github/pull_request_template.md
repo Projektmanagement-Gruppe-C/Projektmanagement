@@ -20,8 +20,3 @@ Bitte löschen Sie nicht relevante Optionen.
 - [ ] Wurden JUnit Tests geschrieben?
 - [ ] Sind die JUnit Tests erfolgreich?
 - [ ] Ist die  Test Abdeckung nicht schlechter geworden?
-
-# Akzeptanzkriterien aus dem Issue:
-<!-- Hier die Akzeptanzkriterien aus dem verlinktem Issue einfügen -->
-- [ ] Kriterium 1
-- [ ] Kriterium 2

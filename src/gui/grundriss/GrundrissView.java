@@ -11,14 +11,14 @@ import javafx.stage.Stage;
 public class GrundrissView extends BasisView{
  
  	// das Control-Objekt des Grundriss-Fensters
-	private GrundrissControl grundrissControl;
+	private final GrundrissControl grundrissControl;
    
     //---Anfang Attribute der grafischen Oberflaeche---
-    private Label lblWandKueche    	     
+    private final Label lblWandKueche
         = new Label("Wand zur Abtrennung der Küche von dem Essbereich");
-    private TextField txtPreisWandKueche 	= new TextField();
-    private Label lblWandKuecheEuro 		= new Label("Euro");
-    private CheckBox chckBxWandKueche 		= new CheckBox();
+    private final TextField txtPreisWandKueche 	= new TextField();
+    private final Label lblWandKuecheEuro 		= new Label("Euro");
+    private final CheckBox chckBxWandKueche 		= new CheckBox();
     //-------Ende Attribute der grafischen Oberflaeche-------
   
     /**
