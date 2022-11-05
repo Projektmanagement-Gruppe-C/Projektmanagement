@@ -5,6 +5,10 @@ public class KundeEntity {
         return kundeID;
     }
 
+    public void setKundeID(int kundeID) {
+        this.kundeID = kundeID;
+    }
+
     private int kundeID;
 
     public String getVorname() {
@@ -43,4 +47,26 @@ public class KundeEntity {
     private String nachname;
     private String telefonnummer;
     private String email;
+
+    private int plannummer;
+
+    public int getPlannummer() {
+        return plannummer;
+    }
+
+    public void setPlannummer(int plannummer) {
+        this.plannummer = plannummer;
+    }
+
+    public KundeEntity() {
+    }
+
+    public KundeEntity(int kundeID, String vorname, String nachname, String telefonnummer, String email, int plannummer) {
+        this.kundeID = kundeID;
+        this.vorname = vorname;
+        this.nachname = nachname;
+        this.telefonnummer = telefonnummer;
+        this.email = email;
+        this.plannummer = plannummer;
+    }
 }
