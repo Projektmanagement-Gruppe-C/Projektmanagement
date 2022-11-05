@@ -64,4 +64,16 @@ public class Kunde {
 				+ ", telefonnummer=" + telefonnummer + ", email=" + email + "]";
 	}
 
+	Kunde() {}
+
+	Kunde(
+			KundeEntity kundeEntity
+	) {
+		this.kundennummer = kundeEntity.getKundeID();
+		this.vorname = kundeEntity.getVorname();
+		this.nachname = kundeEntity.getNachname();
+		this.telefonnummer = kundeEntity.getTelefonnummer();
+		this.email = kundeEntity.getEmail();
+		this.hausnummer = kundeEntity.getPlannummer();
+	}
 }

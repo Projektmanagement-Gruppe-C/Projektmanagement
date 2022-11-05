@@ -25,7 +25,7 @@ public class DatenbankTest {
     public void testMockDBConnection() throws Exception {
         Mockito.when(mockConnection.createStatement()).thenReturn(mockStatement);
         Mockito.when(mockConnection.createStatement().executeUpdate(Mockito.anyString())).thenReturn(1);
-        int result = datenbank.executeQuery("");
+        int result = datenbank.executeUpdate("");
         Assertions.assertEquals(1, result);
         Mockito.verify(mockConnection.createStatement(), Mockito.times(1)).executeUpdate(Mockito.anyString());
     }

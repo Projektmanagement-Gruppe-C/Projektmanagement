@@ -1,23 +1,38 @@
 package business.kunde;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.sql.SQLException;
 import javafx.collections.*;
   
 /** 
  * Klasse, welche das Model des Grundfensters mit den Kundendaten enthaelt.
  */
-public final class KundeModel {
+public class KundeModel {
+
+	public static final String KUNDE_PROPERTY = "kunde";
 	
 	// enthaelt den aktuellen Kunden
 	private Kunde kunde;
 
-	public KundeDao kundeDao;
+	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
-	public ObservableList<KundeEntity> getKunden() {
-		return kunden;
+	public void addPropertyChangeListener(PropertyChangeListener listener) {
+		pcs.addPropertyChangeListener(listener);
 	}
 
-	private final ObservableList<KundeEntity> kunden;
+	public void removePropertyChangeListener(PropertyChangeListener listener) {
+		pcs.removePropertyChangeListener(listener);
+	}
+
+	private void setKunde(Kunde kunde) {
+		Kunde oldKunde = this.kunde;
+		this.kunde = kunde;
+		System.out.println("KundeModel.setKunde(): " + kunde);
+		this.pcs.firePropertyChange("kunde", oldKunde, kunde);
+	}
+
+	public KundeDao kundeDao;
 	
 	/* enthaelt die Plannummern der Haeuser, diese muessen vielleicht noch
 	   in eine andere Klasse verschoben werden */
@@ -32,13 +47,18 @@ public final class KundeModel {
 	// privater Konstruktor zur Realisierung des Singleton-Pattern
 	private KundeModel(KundeDao kundeDao) {
 		super();
-		kunden = FXCollections.observableArrayList();
 		this.kundeDao = kundeDao;
 	}
 
-	public void loadKunden() {
-		kunden.clear();
-		kunden.addAll(kundeDao.getAllKunden());
+	public void loadKundeByPlannummer(int plannummer) {
+		if (plannummer < 0) {
+			throw new IllegalArgumentException("Plannummer muss >= 0 sein");
+		}
+		if (plannummer > 24) {
+			throw new IllegalArgumentException("Plannummer muss <= 24 sein");
+		}
+		KundeEntity kunde = kundeDao.getKundeByPlanNr(plannummer);
+		setKunde(kunde == null ? null : new Kunde(kunde));
 	}
 
 	/**
@@ -47,7 +67,7 @@ public final class KundeModel {
 	 *  @return KundeModel, welches das einzige Objekt dieses
 	 *          Typs ist.
 	 */
-	public static KundeModel getInstance(){
+	public static KundeModel getInstance() throws SQLException, ClassNotFoundException {
 		if(kundeModel == null){
 			kundeModel = new KundeModel(KundeDao.getInstance());
 		}
@@ -76,10 +96,9 @@ public final class KundeModel {
 	 * speichert ein Kunde-Objekt in die Datenbank
 	 * @param kunde, Kunde-Objekt, welches zu speichern ist
 	 * @throws SQLException, Fehler beim Speichern in die Datenbank
-	 * @throws Exception, unbekannter Fehler
 	 */
 	public void speichereKunden(Kunde kunde)
-	    throws SQLException, Exception{
+	    throws SQLException{
         // Speicherung des Kunden in der DB
    	    this.kunde = kunde;
 	}  

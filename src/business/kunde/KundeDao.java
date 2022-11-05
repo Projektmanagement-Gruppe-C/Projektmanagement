@@ -1,21 +1,41 @@
 package business.kunde;
 
-import java.util.List;
+import business.datenbank.Datenbank;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class KundeDao {
     private static KundeDao instance;
+    private final Datenbank datenbank;
 
-    public List<KundeEntity> getAllKunden() {
+    public KundeEntity getKundeByPlanNr(int planNr) {
+        try (ResultSet resultSet = datenbank.executeQuery("SELECT * FROM Kunde WHERE planNr = " + planNr)) {
+            if (resultSet.next()) {
+                return new KundeEntity(
+                        resultSet.getInt("KundeID"),
+                        resultSet.getString("Vorname"),
+                        resultSet.getString("Nachname"),
+                        resultSet.getString("Email"),
+                        resultSet.getString("TelefonNr"),
+                        resultSet.getInt("PlanNr")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
-    private KundeDao() {
-
+    private KundeDao(
+            Datenbank datenbank
+    ) {
+        this.datenbank = datenbank;
     }
 
-    public static KundeDao getInstance() {
+    public static KundeDao getInstance() throws SQLException, ClassNotFoundException {
         if (instance == null) {
-            instance = new KundeDao();
+            instance = new KundeDao(Datenbank.getInstance());
         }
         return instance;
     }
