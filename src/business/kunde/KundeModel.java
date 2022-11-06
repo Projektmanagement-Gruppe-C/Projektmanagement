@@ -28,7 +28,6 @@ public class KundeModel {
 	private void setKunde(Kunde kunde) {
 		Kunde oldKunde = this.kunde;
 		this.kunde = kunde;
-		System.out.println("KundeModel.setKunde(): " + kunde);
 		this.pcs.firePropertyChange("kunde", oldKunde, kunde);
 	}
 

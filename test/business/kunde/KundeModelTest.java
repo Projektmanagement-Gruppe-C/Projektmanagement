@@ -94,11 +94,13 @@ public class KundeModelTest {
         Assertions.assertEquals(KundeModel.KUNDE_PROPERTY, listener.propertyName);
         Assertions.assertNull(listener.oldValue);
         Kunde kunde = new Kunde(mockKunde);
+        System.out.println(kunde);
         // Assert that all fields are equal
         Assertions.assertEquals(kunde.getVorname(), ((Kunde) listener.newValue).getVorname());
         Assertions.assertEquals(kunde.getNachname(), ((Kunde) listener.newValue).getNachname());
         Assertions.assertEquals(kunde.getEmail(), ((Kunde) listener.newValue).getEmail());
         Assertions.assertEquals(kunde.getTelefonnummer(), ((Kunde) listener.newValue).getTelefonnummer());
+        System.out.println(listener.newValue);
         MatcherAssert.assertThat(kunde, samePropertyValuesAs((Kunde) listener.newValue));
     }
 }
