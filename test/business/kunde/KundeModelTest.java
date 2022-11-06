@@ -10,17 +10,36 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
+import org.hamcrest.MatcherAssert;
 
+import java.beans.PropertyChangeListener;
 import java.lang.reflect.Field;
 import java.util.List;
 
+import static org.hamcrest.Matchers.samePropertyValuesAs;
+
 public class KundeModelTest {
+    // Test Property Change Listener
+    private static class TestPropertyChangeListener implements PropertyChangeListener {
+        public String propertyName;
+        public Object oldValue;
+        public Object newValue;
+
+        @Override
+        public void propertyChange(java.beans.PropertyChangeEvent evt) {
+            propertyName = evt.getPropertyName();
+            oldValue = evt.getOldValue();
+            newValue = evt.getNewValue();
+        }
+    }
+
     private KundeDao kundeDao;
 
     @Rule
     public MockitoRule mockitoRule = MockitoJUnit.rule();
 
     private List<KundeEntity> mockKunden;
+    private final KundeEntity mockKunde = new KundeEntity();
 
     @BeforeEach
     public void setUp() {
@@ -28,7 +47,7 @@ public class KundeModelTest {
         kundeDao = Mockito.mock(KundeDao.class);
         setMock(kundeDao);
 
-        KundeEntity mockKunde = new KundeEntity();
+
         mockKunde.setVorname("Max");
         mockKunde.setNachname("Mustermann");
         mockKunde.setEmail("max@mustermann.de");
@@ -55,16 +74,32 @@ public class KundeModelTest {
     }
 
     @Test
-    public void testGetAllKunden() {
-        MockitoAnnotations.openMocks(this);
-        Mockito.when(kundeDao.getAllKunden()).thenReturn(mockKunden);
+    public void testGetKundeByPlanNr() throws Exception {
+        // Mock the DAO response
+        Mockito.when(kundeDao.getKundeByPlanNr(1)).thenReturn(mockKunde);
+
+        // Create a test listener
+        TestPropertyChangeListener listener = new TestPropertyChangeListener();
+
+        // Verify the property listener update method is called
         KundeModel kundeModel = KundeModel.getInstance();
-        kundeModel.loadKunden();
 
-        Mockito.verify(kundeDao, Mockito.times(1)).getAllKunden();
+        // Add the listener
+        kundeModel.addPropertyChangeListener(listener);
 
-        // Verify that the kundeModel contains the mockKunde
-        Assertions.assertEquals(mockKunden, kundeModel.getKunden());
+        // Load Kunde
+        kundeModel.loadKundeByPlannummer(1);
+
+        // Verify the listener was called
+        Assertions.assertEquals(KundeModel.KUNDE_PROPERTY, listener.propertyName);
+        Assertions.assertNull(listener.oldValue);
+        Kunde kunde = new Kunde(mockKunde);
+        // Assert that all fields are equal
+        Assertions.assertEquals(kunde.getVorname(), ((Kunde) listener.newValue).getVorname());
+        Assertions.assertEquals(kunde.getNachname(), ((Kunde) listener.newValue).getNachname());
+        Assertions.assertEquals(kunde.getEmail(), ((Kunde) listener.newValue).getEmail());
+        Assertions.assertEquals(kunde.getTelefonnummer(), ((Kunde) listener.newValue).getTelefonnummer());
+        MatcherAssert.assertThat(kunde, samePropertyValuesAs((Kunde) listener.newValue));
     }
 }
 

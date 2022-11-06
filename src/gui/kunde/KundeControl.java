@@ -1,5 +1,7 @@
 package gui.kunde;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.sql.SQLException;
 
 import business.kunde.Kunde;
@@ -10,7 +12,7 @@ import javafx.stage.Stage;
 /**
  * Klasse, welche das Grundfenster mit den Kundendaten kontrolliert.
  */
-public class KundeControl {
+public class KundeControl implements PropertyChangeListener {
        
     // das View-Objekt des Grundfensters mit den Kundendaten
 	private final KundeView kundeView;
@@ -25,8 +27,9 @@ public class KundeControl {
 	 * Grundfenster mit den Kundendaten.
 	 * @param primaryStage, Stage fuer das View-Objekt zu dem Grundfenster mit den Kundendaten
 	 */
-    public KundeControl(Stage primaryStage) { 
-        this.kundeModel = KundeModel.getInstance(); 
+    public KundeControl(Stage primaryStage) throws SQLException, ClassNotFoundException {
+        this.kundeModel = KundeModel.getInstance();
+		this.kundeModel.addPropertyChangeListener(this);
         this.kundeView = new KundeView(this, primaryStage, kundeModel);
     }
     
@@ -60,4 +63,17 @@ public class KundeControl {
                 "Unbekannter Fehler");
     	}
     }
+
+	public void loadKundeByPlannummer(int plannummer) {
+		kundeModel.loadKundeByPlannummer(plannummer);
+	}
+
+	@Override
+	public void propertyChange(PropertyChangeEvent e) {
+		String propertyName = e.getPropertyName();
+		if (propertyName.equals(KundeModel.KUNDE_PROPERTY)){
+			Kunde kunde = (Kunde) e.getNewValue();
+			this.kundeView.setKundeDaten(kunde);
+		}
+	}
 }

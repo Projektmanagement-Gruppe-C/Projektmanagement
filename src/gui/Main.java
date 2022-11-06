@@ -9,7 +9,11 @@ public class Main extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) {
-		new KundeControl(primaryStage);
+		try {
+			KundeControl kundeControl = new KundeControl(primaryStage);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	}	
 	
 	public static void main(String[] args)
