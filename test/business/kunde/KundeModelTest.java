@@ -16,8 +16,6 @@ import java.beans.PropertyChangeListener;
 import java.lang.reflect.Field;
 import java.util.List;
 
-import static org.hamcrest.Matchers.samePropertyValuesAs;
-
 public class KundeModelTest {
     // Test Property Change Listener
     private static class TestPropertyChangeListener implements PropertyChangeListener {
@@ -94,14 +92,12 @@ public class KundeModelTest {
         Assertions.assertEquals(KundeModel.KUNDE_PROPERTY, listener.propertyName);
         Assertions.assertNull(listener.oldValue);
         Kunde kunde = new Kunde(mockKunde);
-        System.out.println(kunde);
         // Assert that all fields are equal
         Assertions.assertEquals(kunde.getVorname(), ((Kunde) listener.newValue).getVorname());
         Assertions.assertEquals(kunde.getNachname(), ((Kunde) listener.newValue).getNachname());
         Assertions.assertEquals(kunde.getEmail(), ((Kunde) listener.newValue).getEmail());
         Assertions.assertEquals(kunde.getTelefonnummer(), ((Kunde) listener.newValue).getTelefonnummer());
-        System.out.println(listener.newValue);
-        MatcherAssert.assertThat(kunde, samePropertyValuesAs((Kunde) listener.newValue));
+        MatcherAssert.assertThat(kunde, org.hamcrest.Matchers.samePropertyValuesAs((Kunde) listener.newValue));
     }
 }
 
