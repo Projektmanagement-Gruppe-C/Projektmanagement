@@ -7,6 +7,7 @@
     <path id="main.classpath">
         <pathelement path="build/test"/>
         <pathelement path="build/main"/>
+        <fileset dir="lib/hamcrest" includes="*.jar"/>
         <fileset dir="${ant.home}/lib" includes="*.jar" />
         <!-- Include lib/javafx -->
         <fileset dir="lib/javafx" includes="*.jar" />
