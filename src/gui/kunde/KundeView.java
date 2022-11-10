@@ -25,10 +25,17 @@ public class KundeView {
     private final GridPane gridPane = new GridPane();
     private final Label lblKunde = new Label("Kunde");
     private final Label lblNummerHaus = new Label("Plannummer des Hauses");
-    private final ComboBox<Integer>
-            cmbBxNummerHaus = new ComboBox<>();
+    private final ComboBox<Integer> cmbBxNummerHaus = new ComboBox<>();
     private final Label lblVorname = new Label("Vorname");
     private final TextField txtVorname = new TextField();
+    private final Label lblKundennummer = new Label("Kundennummer");
+    private final TextField txtKundennummer = new TextField();
+    private final Label lblNachname = new Label("Nachname");
+    private final TextField txtNachname = new TextField();
+    private final Label lblTelefonnummer = new Label("Telefonnummer");
+    private final TextField txtTelefonnummer = new TextField();
+    private final Label lblEmail = new Label("E-Mail Adresse");
+    private final TextField txtEmail = new TextField();
     private final Button btnAnlegen = new Button("Anlegen");
     private final Button btnAendern = new Button("Ändern");
     private final Button btnLoeschen = new Button("Löschen");
@@ -52,6 +59,7 @@ public class KundeView {
         primaryStage.setTitle(this.kundeModel.getUeberschrift());
         Scene scene = new Scene(borderPane, 550, 400);
         primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
         primaryStage.show();
 
         this.initKomponenten();
@@ -65,7 +73,6 @@ public class KundeView {
         gridPane.setHgap(10);
         gridPane.setVgap(10);
         gridPane.setPadding(new Insets(25, 25, 25, 25));
-
         gridPane.add(lblKunde, 0, 1);
         lblKunde.setMinSize(150, 40);
         lblKunde.setFont(Font.font("Arial", FontWeight.BOLD, 24));
@@ -73,14 +80,23 @@ public class KundeView {
         gridPane.add(cmbBxNummerHaus, 1, 2);
         cmbBxNummerHaus.setMinSize(150, 25);
         cmbBxNummerHaus.setItems(this.kundeModel.getPlannummern());
-        gridPane.add(lblVorname, 0, 3);
-        gridPane.add(txtVorname, 1, 3);
+        gridPane.add(lblKundennummer, 0, 3);
+        gridPane.add(txtKundennummer, 1, 3);
+        //txtKundennummer.setPromptText("Kundennummer eingeben");
+        gridPane.add(lblVorname, 0, 4);
+        gridPane.add(txtVorname, 1, 4);
+        gridPane.add(lblNachname, 0, 5);
+        gridPane.add(txtNachname, 1, 5);
+        gridPane.add(lblTelefonnummer, 0, 6);
+        gridPane.add(txtTelefonnummer, 1, 6);
+        gridPane.add(lblEmail, 0, 7);
+        gridPane.add(txtEmail, 1, 7);
         // Buttons
-        gridPane.add(btnAnlegen, 0, 7);
+        gridPane.add(btnAnlegen, 0, 10);
         btnAnlegen.setMinSize(150, 25);
-        gridPane.add(btnAendern, 1, 7);
+        gridPane.add(btnAendern, 1, 10);
         btnAendern.setMinSize(150, 25);
-        gridPane.add(btnLoeschen, 2, 7);
+        gridPane.add(btnLoeschen, 2, 10);
         btnLoeschen.setMinSize(150, 25);
         // MenuBar und Menu
         borderPane.setTop(mnBar);
@@ -88,7 +104,7 @@ public class KundeView {
         mnSonderwuensche.getItems().add(mnItmGrundriss);
     }
 
-    /* initialisiert die Listener zu den Steuerelementen auf de Maske */
+    /* initialisiert die Listener zu den Steuerelementen auf der Maske */
     private void initListener() {
         cmbBxNummerHaus.setOnAction(event -> {
             int plannummer = cmbBxNummerHaus.getValue();
