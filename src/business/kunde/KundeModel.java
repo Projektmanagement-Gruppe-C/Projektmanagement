@@ -26,13 +26,9 @@ public class KundeModel {
 	}
 
 	private void setKunde(Kunde kunde) {
-		if(kunde.istValide()) {
-			Kunde oldKunde = this.kunde;
-			this.kunde = kunde;
-			this.pcs.firePropertyChange("kunde", oldKunde, kunde);
-		} else {
-			throw new IllegalArgumentException("Kunde ist nicht valide.");
-		}
+		Kunde oldKunde = this.kunde;
+		this.kunde = kunde;
+		this.pcs.firePropertyChange("kunde", oldKunde, kunde);
 	}
 
 	public KundeDao kundeDao;
