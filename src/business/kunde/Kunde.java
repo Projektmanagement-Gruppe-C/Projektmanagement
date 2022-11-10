@@ -1,6 +1,8 @@
 package business.kunde;
 
-public class Kunde {
+import business.IValidierung;
+
+public class Kunde implements IValidierung {
 	
 	private int hausnummer;
 	private String vorname;
@@ -75,5 +77,16 @@ public class Kunde {
 		this.telefonnummer = kundeEntity.getTelefonnummer();
 		this.email = kundeEntity.getEmail();
 		this.hausnummer = kundeEntity.getPlannummer();
+	}
+
+	@Override
+	public boolean istValide() {
+
+		if((!getNachname().isBlank()) && ( (getTelefonnummer() != null && getTelefonnummer().matches("[0-9]+")) || ((getEmail() != null) && getEmail().contains("@") ) )  && ( (getHausnummer() >= 1) && ( getHausnummer() <= 24 ) ) )
+
+		return true;
+		else
+			return false;
+
 	}
 }
