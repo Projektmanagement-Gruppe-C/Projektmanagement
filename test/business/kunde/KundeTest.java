@@ -20,7 +20,7 @@ public class KundeTest {
     Kunde kunde = new Kunde();
 
     kunde.setNachname("Mustermann");
-    kunde.setTelefonnummer("0151123456343");
+    kunde.setTelefonnummer("015156454764");
     kunde.setEmail("");
     kunde.setHausnummer(23);
 
