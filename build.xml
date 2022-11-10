@@ -43,7 +43,7 @@
     <target name="compile">
         <mkdir dir="bin"/>
         <!-- Include lib/javafx ´-->
-        <javac srcdir="src" destdir="bin" includeantruntime="true">
+        <javac srcdir="src" destdir="bin" includeantruntime="true" encoding="iso-8859-1">
             <classpath>
                 <fileset dir="lib/javafx">
                     <include name="*.jar"/>
@@ -56,8 +56,8 @@
     <target name="compile.test">
         <mkdir dir="build/main"/>
         <mkdir dir="build/test"/>
-        <javac destdir="build/main" srcdir="src" includeantruntime="false" classpathref="main.classpath"/>
-        <javac destdir="build/test" srcdir="test" includeantruntime="false" classpathref="main.classpath" />
+        <javac destdir="build/main" srcdir="src" includeantruntime="false" classpathref="main.classpath" encoding="iso-8859-1"/>
+        <javac destdir="build/test" srcdir="test" includeantruntime="false" classpathref="main.classpath" encoding="iso-8859-1"/>
     </target>
 
     <!-- Run tests -->
