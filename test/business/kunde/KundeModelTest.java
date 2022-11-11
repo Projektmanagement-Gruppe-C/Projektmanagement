@@ -52,6 +52,7 @@ public class KundeModelTest {
         mockKunde.setNachname("Mustermann");
         mockKunde.setEmail("max@mustermann.de");
         mockKunde.setTelefonnummer("0123456789");
+        mockKunde.setPlannummer(20);
 
         mockKunden = List.of(mockKunde);
     }
