@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import business.kunde.Kunde;
 import business.kunde.KundeModel;
 import gui.grundriss.GrundrissControl;
+import gui.aussenanlagen.AussenanlagenControl;
 import javafx.stage.Stage;
 
 /**
@@ -21,6 +22,9 @@ public class KundeControl implements PropertyChangeListener {
     /* das GrundrissControl-Objekt fuer die Sonderwuensche
        zum Grundriss zu dem Kunden */
     private GrundrissControl grundrissControl;
+	/* das AussenanlagenControl-Objekt fuer die Sonderwuensche
+       zum Aussenanlagen zu dem Kunden */
+	private AussenanlagenControl aussenanlagenControl;
     
     /**
 	 * erzeugt ein ControlObjekt inklusive View-Objekt und Model-Objekt zum 
@@ -43,6 +47,17 @@ public class KundeControl implements PropertyChangeListener {
       	}
     	this.grundrissControl.oeffneGrundrissView();
     }
+
+	/*
+	 * erstellt, falls nicht vorhanden, ein Aussenanlagen-Control-Objekt.
+	 * Das AussenanlagenView wird sichtbar gemacht.
+	 */
+	public void oeffneAussenanlagenControl(){
+		if (this.aussenanlagenControl == null){
+			this.aussenanlagenControl = new AussenanlagenControl(kundeModel);
+		}
+		this.aussenanlagenControl.oeffneAussenanlagenView();
+	}
     
 	/**
 	 * speichert ein Kunde-Objekt in die Datenbank
