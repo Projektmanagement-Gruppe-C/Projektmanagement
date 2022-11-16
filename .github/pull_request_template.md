@@ -6,8 +6,6 @@ Fixes # (issue)
 
 ## Art der Änderung
 
-Bitte löschen Sie nicht relevante Optionen.
-
 - [ ] Bug fix (Non-Breaking Change, die ein Problem behebt)
 - [ ] Neues Feature (Non-Breaking Change, die Funktionalität hinzufügt)
 - [ ] Breaking change (Fehlerbehebung oder Funktion, die dazu führen würde, dass vorhandene Funktionen nicht wie erwartet funktionieren)

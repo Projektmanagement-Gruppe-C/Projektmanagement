@@ -24,8 +24,12 @@ public class KundeView {
     private final BorderPane borderPane = new BorderPane();
     private final GridPane gridPane = new GridPane();
     private final Label lblKunde = new Label("Kunde");
-    private final Label lblNummerHaus = new Label("Plannummer des Hauses");
+
+    private final Label lblNummerHaus = new Label("Hausnummer");
     private final ComboBox<Integer> cmbBxNummerHaus = new ComboBox<>();
+    private final Label lblPlannummer = new Label("Plannummer des Hauses");
+    private final TextField txtPlannummer = new TextField();
+
     private final Label lblVorname = new Label("Vorname");
     private final TextField txtVorname = new TextField();
     private final Label lblKundennummer = new Label("Kundennummer");
@@ -42,7 +46,11 @@ public class KundeView {
     private final MenuBar mnBar = new MenuBar();
     private final Menu mnSonderwuensche = new Menu("Sonderwünsche");
     private final MenuItem mnItmGrundriss = new MenuItem("Grundrissvarianten");
+    private MenuItem mnItmAussenanlage  = new MenuItem("Aussenanlage");
     private final MenuItem mnItmInnentueren = new MenuItem("Innentueren");
+    
+
+
     //-------Ende Attribute der grafischen Oberflaeche-------
 
     /**
@@ -58,7 +66,7 @@ public class KundeView {
         this.kundeModel = kundeModel;
 
         primaryStage.setTitle(this.kundeModel.getUeberschrift());
-        Scene scene = new Scene(borderPane, 550, 400);
+        Scene scene = new Scene(borderPane, 550, 450);
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();
@@ -81,28 +89,33 @@ public class KundeView {
         gridPane.add(cmbBxNummerHaus, 1, 2);
         cmbBxNummerHaus.setMinSize(150, 25);
         cmbBxNummerHaus.setItems(this.kundeModel.getPlannummern());
-        gridPane.add(lblKundennummer, 0, 3);
-        gridPane.add(txtKundennummer, 1, 3);
+
+        gridPane.add(lblPlannummer, 0, 3);
+        gridPane.add(txtPlannummer, 1, 3);
+        gridPane.add(lblKundennummer, 0, 4);
+        gridPane.add(txtKundennummer, 1, 4);
         //txtKundennummer.setPromptText("Kundennummer eingeben");
-        gridPane.add(lblVorname, 0, 4);
-        gridPane.add(txtVorname, 1, 4);
-        gridPane.add(lblNachname, 0, 5);
-        gridPane.add(txtNachname, 1, 5);
-        gridPane.add(lblTelefonnummer, 0, 6);
-        gridPane.add(txtTelefonnummer, 1, 6);
-        gridPane.add(lblEmail, 0, 7);
-        gridPane.add(txtEmail, 1, 7);
+        gridPane.add(lblVorname, 0, 5);
+        gridPane.add(txtVorname, 1, 5);
+        gridPane.add(lblNachname, 0, 6);
+        gridPane.add(txtNachname, 1, 6);
+        gridPane.add(lblTelefonnummer, 0, 7);
+        gridPane.add(txtTelefonnummer, 1, 7);
+        gridPane.add(lblEmail, 0, 8);
+        gridPane.add(txtEmail, 1, 8);
         // Buttons
-        gridPane.add(btnAnlegen, 0, 10);
+        gridPane.add(btnAnlegen, 0, 12);
         btnAnlegen.setMinSize(150, 25);
-        gridPane.add(btnAendern, 1, 10);
+        gridPane.add(btnAendern, 1, 12);
         btnAendern.setMinSize(150, 25);
-        gridPane.add(btnLoeschen, 2, 10);
+        gridPane.add(btnLoeschen, 2, 12);
+
         btnLoeschen.setMinSize(150, 25);
         // MenuBar und Menu
         borderPane.setTop(mnBar);
         mnBar.getMenus().add(mnSonderwuensche);
         mnSonderwuensche.getItems().add(mnItmGrundriss);
+        mnSonderwuensche.getItems().add(mnItmAussenanlage);
         mnSonderwuensche.getItems().add(mnItmInnentueren);
     }
 
@@ -117,6 +130,7 @@ public class KundeView {
         btnAendern.setOnAction(aEvent -> aendereKunden());
         btnLoeschen.setOnAction(aEvent -> loescheKunden());
         mnItmGrundriss.setOnAction(aEvent -> kundeControl.oeffneGrundrissControl());
+        mnItmAussenanlage.setOnAction(actionEvent -> kundeControl.oeffneAussenanlageControl());
         mnItmInnentueren.setOnAction(aEvent -> kundeControl.oeffneInnentuerenControl());
     }
 
