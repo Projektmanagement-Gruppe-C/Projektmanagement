@@ -47,6 +47,9 @@ public class KundeView {
     private final Menu mnSonderwuensche = new Menu("Sonderwünsche");
     private final MenuItem mnItmGrundriss = new MenuItem("Grundrissvarianten");
     private MenuItem mnItmAussenanlage  = new MenuItem("Aussenanlage");
+    private final MenuItem mnItmInnentueren = new MenuItem("Innentueren");
+    
+
 
     //-------Ende Attribute der grafischen Oberflaeche-------
 
@@ -113,6 +116,7 @@ public class KundeView {
         mnBar.getMenus().add(mnSonderwuensche);
         mnSonderwuensche.getItems().add(mnItmGrundriss);
         mnSonderwuensche.getItems().add(mnItmAussenanlage);
+        mnSonderwuensche.getItems().add(mnItmInnentueren);
     }
 
     /* initialisiert die Listener zu den Steuerelementen auf der Maske */
@@ -127,6 +131,7 @@ public class KundeView {
         btnLoeschen.setOnAction(aEvent -> loescheKunden());
         mnItmGrundriss.setOnAction(aEvent -> kundeControl.oeffneGrundrissControl());
         mnItmAussenanlage.setOnAction(actionEvent -> kundeControl.oeffneAussenanlageControl());
+        mnItmInnentueren.setOnAction(aEvent -> kundeControl.oeffneInnentuerenControl());
     }
 
     private void holeInfoDachgeschoss() {

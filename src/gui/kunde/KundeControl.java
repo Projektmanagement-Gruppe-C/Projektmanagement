@@ -8,6 +8,7 @@ import business.kunde.Kunde;
 import business.kunde.KundeModel;
 import gui.aussenanlage.AussenanlageControl;
 import gui.grundriss.GrundrissControl;
+import gui.innentueren.InnentuerenControl;
 import javafx.stage.Stage;
 
 /**
@@ -16,13 +17,19 @@ import javafx.stage.Stage;
 public class KundeControl implements PropertyChangeListener {
        
     // das View-Objekt des Grundfensters mit den Kundendaten
-	private final KundeView kundeView;
+	  private final KundeView kundeView;
     // das Model-Objekt des Grundfensters mit den Kundendaten
     private final KundeModel kundeModel;
     /* das GrundrissControl-Objekt fuer die Sonderwuensche
        zum Grundriss zu dem Kunden */
     private GrundrissControl grundrissControl;
-	private AussenanlageControl aussenanlageControl;
+
+    /* das InnentuerenControl-Objekt fuer die Sonderwuensche
+    zu den Innentueren zu dem Kunden */
+    private InnentuerenControl innentuerenControl;
+
+	  private AussenanlageControl aussenanlageControl;
+
     
     /**
 	 * erzeugt ein ControlObjekt inklusive View-Objekt und Model-Objekt zum 
@@ -46,12 +53,26 @@ public class KundeControl implements PropertyChangeListener {
     	this.grundrissControl.oeffneGrundrissView();
     }
 
-	public void oeffneAussenanlageControl(){
-		if(this.aussenanlageControl == null){
-			this.aussenanlageControl = new AussenanlageControl();
-		}
-		this.aussenanlageControl.oeffneAussenanlageView();
-	}
+    /*
+     * erstellt, falls nicht vorhanden, ein Innentueren-Control-Objekt.
+     * Das InnentuerenView wird sichtbar gemacht.
+     */
+    public void oeffneInnentuerenControl() {
+    	if(this.innentuerenControl == null) {
+    		this.innentuerenControl = new InnentuerenControl(kundeModel);
+    	}
+    	this.innentuerenControl.oeffneInnentuerenView();
+    }
+    
+
+
+	  public void oeffneAussenanlageControl(){
+		  if(this.aussenanlageControl == null){
+			  this.aussenanlageControl = new AussenanlageControl();
+		  }
+		  this.aussenanlageControl.oeffneAussenanlageView();
+	  }
+
 	/**
 	 * speichert ein Kunde-Objekt in die Datenbank
 	 * @param kunde, Kunde-Objekt, welches zu speichern ist
