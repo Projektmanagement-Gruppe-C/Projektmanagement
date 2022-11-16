@@ -58,6 +58,3 @@ local.properties
 # Build directory
 build
 *.env
-
-#meine Classdatei
-.classpath
