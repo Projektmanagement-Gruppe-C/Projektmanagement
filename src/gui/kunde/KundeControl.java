@@ -47,9 +47,17 @@ public class KundeControl implements PropertyChangeListener {
      * Das GrundrissView wird sichtbar gemacht.
      */
     public void oeffneGrundrissControl(){
+		if (this.kundeModel.getKunde() == null) {
+			this.kundeView.zeigeFehlermeldung("Fehler", "Bitte zuerst einen Kunden auswählen.");
+			return;
+		}
     	if (this.grundrissControl == null){
-    		this.grundrissControl = new GrundrissControl(kundeModel);
-      	}
+			try {
+				this.grundrissControl = new GrundrissControl(this.kundeModel.getKunde().getId());
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+		}
     	this.grundrissControl.oeffneGrundrissView();
     }
 

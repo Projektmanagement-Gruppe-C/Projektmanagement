@@ -3,7 +3,8 @@ package business.kunde;
 import business.IValidierung;
 
 public class Kunde implements IValidierung {
-	
+
+	private int id;
 	private int hausnummer;
 	private String vorname;
 	private String nachname;
@@ -60,6 +61,10 @@ public class Kunde implements IValidierung {
 		this.email = email;
 	}
 
+	public int getId() {
+		return id;
+	}
+
 	@Override
 	public String toString() {
 		return "Kunde [kundennummer=" + kundennummer + ", vorname=" + vorname + ", nachname=" + nachname
@@ -71,6 +76,7 @@ public class Kunde implements IValidierung {
 	Kunde(
 			KundeEntity kundeEntity
 	) {
+		this.id = kundeEntity.getKundeID();
 		this.kundennummer = kundeEntity.getKundeID();
 		this.vorname = kundeEntity.getVorname();
 		this.nachname = kundeEntity.getNachname();
