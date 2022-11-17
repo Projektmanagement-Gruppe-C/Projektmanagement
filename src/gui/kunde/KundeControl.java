@@ -63,17 +63,50 @@ public class KundeControl implements PropertyChangeListener {
                 "Unbekannter Fehler");
     	}
     }
-
 	public void loadKundeByPlannummer(int plannummer) {
 		kundeModel.loadKundeByPlannummer(plannummer);
 	}
-
+	/**
+	 * LÖSCHT ein Kunde-Objekt in die Datenbank
+	 * @param planNr, int, welches zu löschen ist
+	 */
+	public void loescheKunde(int planNr){
+		try{
+			kundeModel.loescheKunde(planNr);
+		}
+		catch(SQLException exc){
+			exc.printStackTrace();
+			this.kundeView.zeigeFehlermeldung("SQLException",
+					"Fehler beim Löschen in die Datenbank");
+		}
+		catch(Exception exc){
+			exc.printStackTrace();
+			this.kundeView.zeigeFehlermeldung("Exception",
+					"Unbekannter Fehler");
+		}
+	}
 	@Override
 	public void propertyChange(PropertyChangeEvent e) {
 		String propertyName = e.getPropertyName();
 		if (propertyName.equals(KundeModel.KUNDE_PROPERTY)){
 			Kunde kunde = (Kunde) e.getNewValue();
 			this.kundeView.setKundeDaten(kunde);
+		}
+	}
+
+	public void aendereKunden(Kunde kunde) {
+		try{
+			kundeModel.aendereKunden(kunde);
+		}
+		catch(SQLException exc){
+			exc.printStackTrace();
+			this.kundeView.zeigeFehlermeldung("SQLException",
+					"Fehler beim Speichern in die Datenbank");
+		}
+		catch(Exception exc){
+			exc.printStackTrace();
+			this.kundeView.zeigeFehlermeldung("Exception",
+					"Unbekannter Fehler");
 		}
 	}
 }

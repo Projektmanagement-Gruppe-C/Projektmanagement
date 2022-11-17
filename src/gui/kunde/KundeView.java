@@ -10,6 +10,8 @@ import javafx.scene.layout.*;
 import javafx.scene.text.*;
 import javafx.stage.Stage;
 
+import java.sql.ResultSet;
+
 /**
  * Klasse, welche das Grundfenster mit den Kundendaten bereitstellt.
  */
@@ -30,6 +32,8 @@ public class KundeView {
     private final TextField txtVorname = new TextField();
     private final Label lblKundennummer = new Label("Kundennummer");
     private final TextField txtKundennummer = new TextField();
+    private final Label lblHausnummer = new Label("HausNummer");
+    private final TextField txtHausnummer = new TextField();
     private final Label lblNachname = new Label("Nachname");
     private final TextField txtNachname = new TextField();
     private final Label lblTelefonnummer = new Label("Telefonnummer");
@@ -91,6 +95,8 @@ public class KundeView {
         gridPane.add(txtTelefonnummer, 1, 6);
         gridPane.add(lblEmail, 0, 7);
         gridPane.add(txtEmail, 1, 7);
+        gridPane.add(lblHausnummer, 0, 8);
+        gridPane.add(txtHausnummer, 1, 8);
         // Buttons
         gridPane.add(btnAnlegen, 0, 10);
         btnAnlegen.setMinSize(150, 25);
@@ -106,14 +112,22 @@ public class KundeView {
 
     /* initialisiert die Listener zu den Steuerelementen auf der Maske */
     private void initListener() {
+
         cmbBxNummerHaus.setOnAction(event -> {
             int plannummer = cmbBxNummerHaus.getValue();
             holeInfoDachgeschoss();
             kundeControl.loadKundeByPlannummer(plannummer);
         });
+
         btnAnlegen.setOnAction(aEvent -> legeKundenAn());
+
         btnAendern.setOnAction(aEvent -> aendereKunden());
-        btnLoeschen.setOnAction(aEvent -> loescheKunden());
+
+        btnLoeschen.setOnAction(aEvent -> {
+            int plannummer = cmbBxNummerHaus.getValue();
+            loescheKunde(plannummer);
+        });
+
         mnItmGrundriss.setOnAction(aEvent -> kundeControl.oeffneGrundrissControl());
     }
 
@@ -126,20 +140,53 @@ public class KundeView {
     private void legeKundenAn() {
         Kunde kunde = null;
         // Objekt kunde fuellen
+        String vorname = txtVorname.getText();
+        String nachname= txtNachname.getText();
+        String email= txtEmail.getText();
+        int kundenNr = Integer.parseInt(txtKundennummer.getText());
+        int hausNr = Integer.parseInt(txtHausnummer.getText());
+        String tel = txtTelefonnummer.getText();
+        int planNr = cmbBxNummerHaus.getValue();
+        KundeEntity kundeEntity = new KundeEntity(kundenNr,vorname,nachname,tel,email,planNr,hausNr);
+        kunde = new Kunde(kundeEntity);
         kundeControl.speichereKunden(kunde);
     }
 
     private void aendereKunden() {
+        Kunde kunde = null;
+        String vorname = txtVorname.getText();
+        String nachname= txtNachname.getText();
+        String email= txtEmail.getText();
+        int kundenNr = Integer.parseInt(txtKundennummer.getText());
+        int hausNr = Integer.parseInt(txtHausnummer.getText());
+        String tel = txtTelefonnummer.getText();
+        int planNr = cmbBxNummerHaus.getValue();
+        KundeEntity kundeEntity = new KundeEntity(kundenNr,vorname,nachname,tel,email,planNr,hausNr);
+        kunde = new Kunde(kundeEntity);
+        kundeControl.aendereKunden(kunde);
+
     }
 
-    private void loescheKunden() {
+    private void loescheKunde(int plannummer) {
+        kundeControl.loescheKunde(plannummer);
     }
 
     public void setKundeDaten(Kunde kunde) {
         if (kunde != null) {
             txtVorname.setText(kunde.getVorname());
+            txtEmail.setText(kunde.getEmail());
+            txtKundennummer.setText(""+kunde.getKundennummer());
+            txtTelefonnummer.setText(""+kunde.getTelefonnummer());
+            txtNachname.setText(""+kunde.getNachname());
+            txtHausnummer.setText(""+ kunde.getHausnummer());
+
         } else {
             txtVorname.setText("");
+            txtNachname.setText("");
+            txtKundennummer.setText("");
+            txtTelefonnummer.setText("");
+            txtEmail.setText("");
+            txtHausnummer.setText("");
         }
     }
 

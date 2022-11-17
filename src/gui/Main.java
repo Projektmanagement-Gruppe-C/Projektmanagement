@@ -1,7 +1,6 @@
 package gui;
 
 import gui.kunde.KundeControl;
-
 import javafx.application.Application;
 import javafx.stage.Stage;
 
