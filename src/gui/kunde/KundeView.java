@@ -150,6 +150,7 @@ public class KundeView {
         KundeEntity kundeEntity = new KundeEntity(kundenNr,vorname,nachname,tel,email,planNr,hausNr);
         kunde = new Kunde(kundeEntity);
         kundeControl.speichereKunden(kunde);
+
     }
 
     private void aendereKunden() {
@@ -165,10 +166,17 @@ public class KundeView {
         kunde = new Kunde(kundeEntity);
         kundeControl.aendereKunden(kunde);
 
+
     }
 
     private void loescheKunde(int plannummer) {
         kundeControl.loescheKunde(plannummer);
+        txtVorname.setText("");
+        txtNachname.setText("");
+        txtKundennummer.setText("");
+        txtTelefonnummer.setText("");
+        txtEmail.setText("");
+        txtHausnummer.setText("");
     }
 
     public void setKundeDaten(Kunde kunde) {
@@ -199,6 +207,13 @@ public class KundeView {
     public void zeigeFehlermeldung(String ueberschrift, String meldung) {
         Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle("Fehlermeldung");
+        alert.setHeaderText(ueberschrift);
+        alert.setContentText(meldung);
+        alert.show();
+    }
+    public void zeigeMeldung(String ueberschrift, String meldung) {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Info");
         alert.setHeaderText(ueberschrift);
         alert.setContentText(meldung);
         alert.show();

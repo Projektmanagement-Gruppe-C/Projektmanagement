@@ -50,8 +50,18 @@ public class KundeControl implements PropertyChangeListener {
 	 */
     public void speichereKunden(Kunde kunde){
       	try{
-    		kundeModel.speichereKunden(kunde);
+			  if(kunde.istValide()) {
+				  kundeModel.speichereKunden(kunde);
+				  kundeView.zeigeMeldung("Speichern erfolgreich","Das Speichern war ein voller Erfolg");
+
+			  }
+			  else{
+				  this.kundeView.zeigeFehlermeldung("Daten fehler",
+						  "Die eingeben Daten bitte überarbeiten ");
+			  }
     	}
+
+
     	catch(SQLException exc){
     		exc.printStackTrace();
     		this.kundeView.zeigeFehlermeldung("SQLException",
@@ -73,6 +83,8 @@ public class KundeControl implements PropertyChangeListener {
 	public void loescheKunde(int planNr){
 		try{
 			kundeModel.loescheKunde(planNr);
+			kundeView.zeigeMeldung("Löschen erfolgreich","Das Löschen war ein voller Erfolg");
+
 		}
 		catch(SQLException exc){
 			exc.printStackTrace();
@@ -97,6 +109,8 @@ public class KundeControl implements PropertyChangeListener {
 	public void aendereKunden(Kunde kunde) {
 		try{
 			kundeModel.aendereKunden(kunde);
+			kundeView.zeigeMeldung("Ändern erfolgreich","Das Anpassen war ein voller Erfolg");
+
 		}
 		catch(SQLException exc){
 			exc.printStackTrace();
