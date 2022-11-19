@@ -20,12 +20,12 @@ public class GrundrissView extends BasisView{
     private final Label lblWandKuecheEuro 		= new Label("Euro");
     private final CheckBox chckBxWandKueche 		= new CheckBox();
    
-    private final Label lblTurKueche = new Label("Tür in der Wand zwischen Küche und Essbereich");
+    private final Label lblTurKueche = new Label("Tï¿½r in der Wand zwischen Kï¿½che und Essbereich");
     private final TextField txtTurKueche 	= new TextField();
     private final Label lblTurKuecheEuro 		= new Label("Euro");
     private final CheckBox chckBxTurKueche 		= new CheckBox();
     
-    private final Label lblGrossZimmer = new Label("Großes Zimmer im OG statt zwei kleine Zimmern");
+    private final Label lblGrossZimmer = new Label("Groï¿½es Zimmer im OG statt zwei kleine Zimmern");
     private final TextField txtGrossZimmer 	= new TextField();
     private final Label lblGrossZimmerEuro		= new Label("Euro");
     private final CheckBox chckBxGrossZimmer 		= new CheckBox();
@@ -40,7 +40,7 @@ public class GrundrissView extends BasisView{
     private final Label lblVorBadEuro		= new Label("Euro");
     private final CheckBox chckBxVorBad 		= new CheckBox();
     
-    private final Label lblAusBad = new Label("Ausführung eines Bades im DG");
+    private final Label lblAusBad = new Label("Ausfï¿½hrung eines Bades im DG");
     private final TextField txtAusBad 	= new TextField();
     private final Label lblAusBadEuro		= new Label("Euro");
     private final CheckBox chckBxAusBad 		= new CheckBox();
@@ -137,8 +137,15 @@ public class GrundrissView extends BasisView{
  		// Es wird erst die Methode pruefeKonstellationSonderwuensche(int[] ausgewaehlteSw)
   		// aus dem Control aufgerufen, dann die Sonderwuensche gespeichert.
   	}
-  	
- 	
- }
+
+	/*schreibt die ausgesuchten Sonderwuensche in eine CSV-Datei */
+	@Override
+	protected void schreibeInCSV() {
+		//TODO
+		System.out.println("CSV Export_Grundriss");
+	}
+
+
+}
 
 

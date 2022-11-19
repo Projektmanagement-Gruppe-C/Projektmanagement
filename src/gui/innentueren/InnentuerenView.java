@@ -111,8 +111,15 @@ public class InnentuerenView extends BasisView{
  		// Es wird erst die Methode pruefeKonstellationSonderwuensche(int[] ausgewaehlteSw)
   		// aus dem Control aufgerufen, dann die Sonderwuensche gespeichert.
   	}
-  	
- 	
- }
+
+	/*schreibt die ausgesuchten Sonderwuensche in eine CSV-Datei */
+	@Override
+	protected void schreibeInCSV() {
+		//TODO
+		System.out.println("CSV Export_Innentüren");
+	}
+
+
+}
 
 
