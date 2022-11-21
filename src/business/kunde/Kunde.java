@@ -9,6 +9,16 @@ public class Kunde implements IValidierung {
 	private String nachname;
 	private String telefonnummer;
 	private String email;
+	private int kundennummer;
+	private  int plannummer;
+
+	public int getPlannummer() {
+		return plannummer;
+	}
+
+	public void setPlannummer(int plannummer) {
+		this.plannummer = plannummer;
+	}
 
 	public int getKundennummer() {
 		return kundennummer;
@@ -18,8 +28,6 @@ public class Kunde implements IValidierung {
 		this.kundennummer = kundennummer;
 	}
 
-	private int kundennummer;
-		  
 	public int getHausnummer() {
 		return hausnummer;
 	}
@@ -67,16 +75,18 @@ public class Kunde implements IValidierung {
 	}
 
 	Kunde() {}
-
-	Kunde(
-			KundeEntity kundeEntity
-	) {
+//TODO FRagen ob hier public darf
+	public Kunde(
+            KundeEntity kundeEntity
+    ) {
 		this.kundennummer = kundeEntity.getKundeID();
 		this.vorname = kundeEntity.getVorname();
 		this.nachname = kundeEntity.getNachname();
 		this.telefonnummer = kundeEntity.getTelefonnummer();
 		this.email = kundeEntity.getEmail();
-		this.hausnummer = kundeEntity.getPlannummer();
+		this.hausnummer = kundeEntity.getHausnr();
+		this.plannummer = kundeEntity.getPlannummer();
+
 	}
 
 	@Override

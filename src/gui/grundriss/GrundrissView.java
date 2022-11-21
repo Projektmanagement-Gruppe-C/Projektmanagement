@@ -125,8 +125,10 @@ public class GrundrissView extends BasisView{
     private void leseGrundrissSonderwuensche(){
     	this.grundrissControl.leseGrundrissSonderwuensche();
     }
-    
+
  	/* berechnet den Preis der ausgesuchten Sonderwuensche und zeigt diesen an */
+
+
   	protected void berechneUndZeigePreisSonderwuensche(){
   		// Es wird erst die Methode pruefeKonstellationSonderwuensche(int[] ausgewaehlteSw)
   		// aus dem Control aufgerufen, dann der Preis berechnet.
