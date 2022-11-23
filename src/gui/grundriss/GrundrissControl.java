@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 public final class GrundrissControl {
 	
 	// das View-Objekt des Grundriss-Fensters
-	private final GrundrissView grundrissView;
+	private final GrundrissView GrundrissView;
 
 	/**
 	 * erzeugt ein ControlObjekt inklusive View-Objekt und Model-Objekt zum 
@@ -21,14 +21,14 @@ public final class GrundrissControl {
 	public GrundrissControl(KundeModel kundeModel){  
 	   	Stage stageGrundriss = new Stage();
     	stageGrundriss.initModality(Modality.APPLICATION_MODAL);
-    	this.grundrissView = new GrundrissView(this, stageGrundriss);
+    	this.GrundrissView = new GrundrissView(this, stageGrundriss);
 	}
 	    
 	/**
 	 * macht das GrundrissView-Objekt sichtbar.
 	 */
 	public void oeffneGrundrissView(){ 
-		this.grundrissView.oeffneGrundrissView();
+		this.GrundrissView.oeffneGrundrissView();
 	}
 
 	public void leseGrundrissSonderwuensche(){

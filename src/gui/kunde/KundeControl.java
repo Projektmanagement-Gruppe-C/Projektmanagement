@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 import business.kunde.Kunde;
 import business.kunde.KundeModel;
+import gui.GrundrissKunde.GrundrissKundeControl;
 import gui.aussenanlage.AussenanlageControl;
 import gui.grundriss.GrundrissControl;
 import gui.innentueren.InnentuerenControl;
@@ -22,13 +23,17 @@ public class KundeControl implements PropertyChangeListener {
     private final KundeModel kundeModel;
     /* das GrundrissControl-Objekt fuer die Sonderwuensche
        zum Grundriss zu dem Kunden */
-    private GrundrissControl grundrissControl;
+    private GrundrissControl GrundrissControl;
 
     /* das InnentuerenControl-Objekt fuer die Sonderwuensche
     zu den Innentueren zu dem Kunden */
     private InnentuerenControl innentuerenControl;
 
-	  private AussenanlageControl aussenanlageControl;
+	private AussenanlageControl aussenanlageControl;
+
+	private GrundrissKundeControl GrundrissKundeControl;
+
+
 
     
     /**
@@ -47,11 +52,24 @@ public class KundeControl implements PropertyChangeListener {
      * Das GrundrissView wird sichtbar gemacht.
      */
     public void oeffneGrundrissControl(){
-    	if (this.grundrissControl == null){
-    		this.grundrissControl = new GrundrissControl(kundeModel);
+    	if (this.GrundrissControl == null){
+    		this.GrundrissControl = new GrundrissControl(kundeModel);
       	}
-    	this.grundrissControl.oeffneGrundrissView();
+    	this.GrundrissControl.oeffneGrundrissView();
     }
+	/*
+	 * erstellt, falls nicht vorhanden, ein Grundriss-Control-Objekt.
+	 * Das GrundrissKundeView wird sichtbar gemacht.
+	 */
+
+
+	public void oeffneGrundrissKundeControl(){
+		if (this.GrundrissKundeControl == null){
+			this.GrundrissKundeControl = new GrundrissKundeControl(kundeModel);
+		}
+		this.GrundrissKundeControl.oeffneGrundrissKundeView();
+	}
+
 
     /*
      * erstellt, falls nicht vorhanden, ein Innentueren-Control-Objekt.
@@ -105,4 +123,5 @@ public class KundeControl implements PropertyChangeListener {
 			this.kundeView.setKundeDaten(kunde);
 		}
 	}
+
 }

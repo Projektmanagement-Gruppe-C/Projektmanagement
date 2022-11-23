@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 public class GrundrissView extends BasisView{
  
  	// das Control-Objekt des Grundriss-Fensters
-	private final GrundrissControl grundrissControl;
+	private final GrundrissControl GrundrissControl;
    
     //---Anfang Attribute der grafischen Oberflaeche---
     private final Label lblWandKueche
@@ -55,12 +55,12 @@ public class GrundrissView extends BasisView{
     /**
      * erzeugt ein GrundrissView-Objekt, belegt das zugehoerige Control
      * mit dem vorgegebenen Objekt und initialisiert die Steuerelemente der Maske
-     * @param grundrissControl GrundrissControl, enthaelt das zugehoerige Control
+     * @param GrundrissControl GrundrissControl, enthaelt das zugehoerige Control
      * @param grundrissStage Stage, enthaelt das Stage-Objekt fuer diese View
      */
-    public GrundrissView (GrundrissControl grundrissControl, Stage grundrissStage){
+    public GrundrissView (GrundrissControl GrundrissControl, Stage grundrissStage){
     	super(grundrissStage);
-        this.grundrissControl = grundrissControl;
+        this.GrundrissControl = GrundrissControl;
         grundrissStage.setTitle("Sonderwünsche zu Grundriss-Varianten");
                 
 	    this.initKomponenten();
@@ -123,7 +123,7 @@ public class GrundrissView extends BasisView{
 	}
     
     private void leseGrundrissSonderwuensche(){
-    	this.grundrissControl.leseGrundrissSonderwuensche();
+    	this.GrundrissControl.leseGrundrissSonderwuensche();
     }
     
  	/* berechnet den Preis der ausgesuchten Sonderwuensche und zeigt diesen an */
