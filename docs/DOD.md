@@ -10,8 +10,7 @@ angesehen wird.
 - Sind die Aktzeptanzkriterien erfüllt?
 - Wurden JUnit Tests geschrieben?
 - Kann erfolgreich mit ``main`` gemerged werden?
-- Sind alle Tests nach dem merge erfolgreich?
-
+- Sind alle Tests nach dem merge erfolgreich?q
 ## Einhaltung
 
 Um die Einhaltung der DoD zu gewährleisten muss auf einem Feature Branch entwickelt werden.  

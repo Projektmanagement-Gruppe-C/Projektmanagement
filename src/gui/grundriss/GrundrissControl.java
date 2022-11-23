@@ -29,9 +29,9 @@ public final class GrundrissControl {
 	   	Stage stageGrundriss = new Stage();
     	stageGrundriss.initModality(Modality.APPLICATION_MODAL);
 		this.grundrissModel = GrundrissModel.getInstance();
-    	this.grundrissView = new GrundrissView(this, stageGrundriss);
+    	this.grundrissView = new GrundrissView(this, this.grundrissModel, stageGrundriss);
 	}
-	    
+
 	/**
 	 * macht das GrundrissView-Objekt sichtbar.
 	 */
@@ -46,4 +46,5 @@ public final class GrundrissControl {
 	public boolean pruefeKonstellationSonderwuensche(int[] ausgewaehlteSw){
 		return true;
 	}
+
 }
