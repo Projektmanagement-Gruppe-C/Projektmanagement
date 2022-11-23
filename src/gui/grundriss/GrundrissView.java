@@ -209,5 +209,4 @@ public class GrundrissView extends BasisView{
 		}
 		return gesamtBetrag;
 	}
-
 }

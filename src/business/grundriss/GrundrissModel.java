@@ -38,7 +38,6 @@ public class GrundrissModel {
                         + "VALUES('" + this.kunde.getKundennummer() + "', "
                         + "'" + sonderwunschId + "', "
                         + "'" + this.kunde.getHausnummer() +"');";
-
     }
     public static GrundrissModel getInstance() throws SQLException, ClassNotFoundException {
         if (instance == null) {
