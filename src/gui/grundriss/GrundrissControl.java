@@ -46,5 +46,4 @@ public final class GrundrissControl {
 	public boolean pruefeKonstellationSonderwuensche(int[] ausgewaehlteSw){
 		return true;
 	}
-
 }
