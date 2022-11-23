@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 import business.kunde.Kunde;
 import business.kunde.KundeModel;
-import gui.GrundrissKunde.GrundrissKundeControl;
+import gui.grundrissKunde.GrundrissKundeControl;
 import gui.aussenanlage.AussenanlageControl;
 import gui.grundriss.GrundrissControl;
 import gui.innentueren.InnentuerenControl;

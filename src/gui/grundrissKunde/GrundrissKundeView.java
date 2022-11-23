@@ -1,4 +1,4 @@
-package gui.GrundrissKunde;
+package gui.grundrissKunde;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;

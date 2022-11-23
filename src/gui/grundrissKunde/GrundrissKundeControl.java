@@ -1,4 +1,4 @@
-package gui.GrundrissKunde;
+package gui.grundrissKunde;
 
 import business.kunde.KundeModel;
 import javafx.stage.Modality;
