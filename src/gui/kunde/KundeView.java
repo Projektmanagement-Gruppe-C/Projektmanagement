@@ -47,7 +47,7 @@ public class KundeView {
     private final MenuBar mnBar = new MenuBar();
     private final Menu mnSonderwuensche = new Menu("Sonderwünsche");
     private final MenuItem mnItmGrundriss = new MenuItem("Grundrissvarianten");
-    private MenuItem mnItmAussenanlage  = new MenuItem("Aussenanlage");
+    private final MenuItem mnItmAussenanlage  = new MenuItem("Aussenanlage");
     private final MenuItem mnItmInnentueren = new MenuItem("Innentueren");
     
 
@@ -137,6 +137,8 @@ public class KundeView {
         mnItmAussenanlage.setOnAction(actionEvent -> kundeControl.oeffneAussenanlageControl());
         mnItmInnentueren.setOnAction(aEvent -> kundeControl.oeffneInnentuerenControl());
         btnZeigeGrundrissKunde.setOnAction(aEvent -> kundeControl.oeffneGrundrissKundeControl());
+        //btnZeigeGrundrissKunde.setOnAction(aEvent -> kundeControl.oeffneHundeControl());
+
 
     }
 

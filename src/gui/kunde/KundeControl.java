@@ -57,6 +57,17 @@ public class KundeControl implements PropertyChangeListener {
       	}
     	this.GrundrissControl.oeffneGrundrissView();
     }
+
+	/*
+	public void oeffneHundeControl(){
+		if (this.HundeControl == null){
+			this.HundeControl = new HundeControl(kundeModel);
+		}
+		this.HundeControl.oeffneHundeView();
+	}
+
+	 */
+
 	/*
 	 * erstellt, falls nicht vorhanden, ein Grundriss-Control-Objekt.
 	 * Das GrundrissKundeView wird sichtbar gemacht.
