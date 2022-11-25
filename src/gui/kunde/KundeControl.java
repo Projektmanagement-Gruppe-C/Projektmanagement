@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 import business.kunde.Kunde;
 import business.kunde.KundeModel;
+import gui.fensterAussentuere.FensterTuereControl;
 import gui.aussenanlage.AussenanlageControl;
 import gui.grundriss.GrundrissControl;
 import gui.innentueren.InnentuerenControl;
@@ -16,7 +17,8 @@ import javafx.stage.Stage;
  */
 public class KundeControl implements PropertyChangeListener {
        
-    // das View-Objekt des Grundfensters mit den Kundendaten
+   ;
+	// das View-Objekt des Grundfensters mit den Kundendaten
 	  private final KundeView kundeView;
     // das Model-Objekt des Grundfensters mit den Kundendaten
     private final KundeModel kundeModel;
@@ -29,6 +31,8 @@ public class KundeControl implements PropertyChangeListener {
     private InnentuerenControl innentuerenControl;
 
 	  private AussenanlageControl aussenanlageControl;
+	  
+	  private FensterTuereControl fensterTuereControl;
 
     
     /**
@@ -104,5 +108,12 @@ public class KundeControl implements PropertyChangeListener {
 			Kunde kunde = (Kunde) e.getNewValue();
 			this.kundeView.setKundeDaten(kunde);
 		}
+	}
+
+	public void oeffneFensterTuereView() {
+		if (this.fensterTuereControl == null) {
+			this.fensterTuereControl = new FensterTuereControl(kundeModel);
+		}
+		this.fensterTuereControl.oeffneFensterTuereView();
 	}
 }

@@ -6,5 +6,12 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JavaFx"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JUnits"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/dotenv"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/hamcrest"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jacoco"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/mockito"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/mysql_connector"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
