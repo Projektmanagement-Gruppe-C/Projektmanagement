@@ -1,4 +1,4 @@
-package business.grundriss;
+package business.innentureen;
 
 import business.datenbank.Datenbank;
 
@@ -7,29 +7,29 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GrundrissDao {
+public class InnentuerenDao {
 
-    private static GrundrissDao instance;
+    private static InnentuerenDao instance;
 
     private final Datenbank datenbank;
 
-    private GrundrissDao(Datenbank datenbank) {
+    private InnentuerenDao(Datenbank datenbank) {
         this.datenbank = datenbank;
     }
 
-    public static GrundrissDao getInstance() throws SQLException {
+    public static InnentuerenDao getInstance() throws SQLException {
         if (instance == null) {
-            instance = new GrundrissDao(Datenbank.getInstance());
+            instance = new InnentuerenDao(Datenbank.getInstance());
         }
         return instance;
     }
 
-    public List<GrundrissEntity> getAussenanlagen() {
-        List<GrundrissEntity> aussenanlagen = new ArrayList<>();
+    public List<InnentuerenEntity> getInnentueren() {
+        List<InnentuerenEntity> innentuerenEntities = new ArrayList<>();
         try {
-            ResultSet resultSet = datenbank.executeQuery("SELECT * FROM Außenanlage_Sonderwunsch");
+            ResultSet resultSet = datenbank.executeQuery("SELECT * FROM Innentüren_Sonderwunsch");
             while (resultSet.next()) {
-                aussenanlagen.add(new GrundrissEntity(
+                innentuerenEntities.add(new InnentuerenEntity(
                         resultSet.getInt(1),
                         resultSet.getString(2),
                         resultSet.getDouble(3)
@@ -38,6 +38,6 @@ public class GrundrissDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return aussenanlagen;
+        return innentuerenEntities;
     }
 }

@@ -1,4 +1,4 @@
-package business.grundriss;
+package business.fenster_und_Außenpposten;
 
 import business.datenbank.Datenbank;
 
@@ -7,29 +7,29 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GrundrissDao {
+public class Fenster_AußentuerenDao {
 
-    private static GrundrissDao instance;
+    private static Fenster_AußentuerenDao instance;
 
     private final Datenbank datenbank;
 
-    private GrundrissDao(Datenbank datenbank) {
+    private Fenster_AußentuerenDao(Datenbank datenbank) {
         this.datenbank = datenbank;
     }
 
-    public static GrundrissDao getInstance() throws SQLException {
+    public static Fenster_AußentuerenDao getInstance() throws SQLException {
         if (instance == null) {
-            instance = new GrundrissDao(Datenbank.getInstance());
+            instance = new Fenster_AußentuerenDao(Datenbank.getInstance());
         }
         return instance;
     }
 
-    public List<GrundrissEntity> getAussenanlagen() {
-        List<GrundrissEntity> aussenanlagen = new ArrayList<>();
+    public List<Fenster_AußentuerenEntity> getAussenanlagen() {
+        List<Fenster_AußentuerenEntity> aussenanlagen = new ArrayList<>();
         try {
             ResultSet resultSet = datenbank.executeQuery("SELECT * FROM Außenanlage_Sonderwunsch");
             while (resultSet.next()) {
-                aussenanlagen.add(new GrundrissEntity(
+                aussenanlagen.add(new Fenster_AußentuerenEntity(
                         resultSet.getInt(1),
                         resultSet.getString(2),
                         resultSet.getDouble(3)

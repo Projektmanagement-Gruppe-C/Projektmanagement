@@ -1,17 +1,17 @@
-package business.grundriss;
+package business.fenster_und_Außenpposten;
 
 import business.IValidierung;
 
-public class Grundriss implements IValidierung {
+public class Fenster_Außentueren implements IValidierung {
 
     private int id;
     private String beschreibung;
     private double preis;
 
-    public Grundriss() {
+    public Fenster_Außentueren() {
     }
 
-    public Grundriss(GrundrissEntity entity) {
+    public Fenster_Außentueren(Fenster_AußentuerenEntity entity) {
         this.id = entity.getId();
         this.beschreibung = entity.getBeschreibung();
         this.preis = entity.getPreis();

@@ -1,4 +1,4 @@
-package business.grundriss;
+package business.sanitaer;
 
 import business.datenbank.Datenbank;
 
@@ -7,29 +7,29 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GrundrissDao {
+public class SanitaerDao {
 
-    private static GrundrissDao instance;
+    private static SanitaerDao instance;
 
     private final Datenbank datenbank;
 
-    private GrundrissDao(Datenbank datenbank) {
+    private SanitaerDao(Datenbank datenbank) {
         this.datenbank = datenbank;
     }
 
-    public static GrundrissDao getInstance() throws SQLException {
+    public static SanitaerDao getInstance() throws SQLException {
         if (instance == null) {
-            instance = new GrundrissDao(Datenbank.getInstance());
+            instance = new SanitaerDao(Datenbank.getInstance());
         }
         return instance;
     }
 
-    public List<GrundrissEntity> getAussenanlagen() {
-        List<GrundrissEntity> aussenanlagen = new ArrayList<>();
+    public List<SanitaerEntity> getAussenanlagen() {
+        List<SanitaerEntity> aussenanlagen = new ArrayList<>();
         try {
             ResultSet resultSet = datenbank.executeQuery("SELECT * FROM Außenanlage_Sonderwunsch");
             while (resultSet.next()) {
-                aussenanlagen.add(new GrundrissEntity(
+                aussenanlagen.add(new SanitaerEntity(
                         resultSet.getInt(1),
                         resultSet.getString(2),
                         resultSet.getDouble(3)

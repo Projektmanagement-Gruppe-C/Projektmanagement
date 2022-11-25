@@ -1,4 +1,4 @@
-package business.grundriss;
+package business.fliesen;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -6,26 +6,26 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class GrundrissModel {
+public class FliesenModel {
 
     public static final String AUSSENANLAGE_PROPERTY = "aussenanlage";
 
     private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
-    private List<Grundriss> aussenanlagen;
+    private List<Fliesen> aussenanlagen;
 
-    private final GrundrissDao grundrissDao;
-    private static GrundrissModel grundrissModel;
+    private final FliesenDao fliesenDao;
+    private static FliesenModel fliesenModel;
 
-    private GrundrissModel(GrundrissDao grundrissDao) {
-        this.grundrissDao = grundrissDao;
+    private FliesenModel(FliesenDao fliesenDao) {
+        this.fliesenDao = fliesenDao;
     }
 
-    public static GrundrissModel getInstance() throws SQLException {
-        if (grundrissModel == null) {
-            grundrissModel = new GrundrissModel(GrundrissDao.getInstance());
+    public static FliesenModel getInstance() throws SQLException {
+        if (fliesenModel == null) {
+            fliesenModel = new FliesenModel(FliesenDao.getInstance());
         }
-        return grundrissModel;
+        return fliesenModel;
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -37,13 +37,13 @@ public class GrundrissModel {
     }
 
     public void loadAussenanlagen() {
-        List<Grundriss> aussenanlagen = grundrissDao.getAussenanlagen()
-                .stream().map(Grundriss::new).collect(Collectors.toList());
+        List<Fliesen> aussenanlagen = fliesenDao.getAussenanlagen()
+                .stream().map(Fliesen::new).collect(Collectors.toList());
         setAussenanlagen(aussenanlagen);
     }
 
-    private void setAussenanlagen(List<Grundriss> aussenanlagen) {
-        List<Grundriss> oldAnlagen = this.aussenanlagen;
+    private void setAussenanlagen(List<Fliesen> aussenanlagen) {
+        List<Fliesen> oldAnlagen = this.aussenanlagen;
         this.aussenanlagen = aussenanlagen;
         this.pcs.firePropertyChange("aussenanlage", oldAnlagen, aussenanlagen);
     }

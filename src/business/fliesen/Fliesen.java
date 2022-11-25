@@ -1,17 +1,17 @@
-package business.grundriss;
+package business.fliesen;
 
 import business.IValidierung;
 
-public class Grundriss implements IValidierung {
+public class Fliesen implements IValidierung {
 
     private int id;
     private String beschreibung;
     private double preis;
 
-    public Grundriss() {
+    public Fliesen() {
     }
 
-    public Grundriss(GrundrissEntity entity) {
+    public Fliesen(FliesenEntity entity) {
         this.id = entity.getId();
         this.beschreibung = entity.getBeschreibung();
         this.preis = entity.getPreis();

@@ -1,17 +1,17 @@
-package business.grundriss;
+package business.innentureen;
 
 import business.IValidierung;
 
-public class Grundriss implements IValidierung {
+public class Innentueren implements IValidierung {
 
     private int id;
     private String beschreibung;
     private double preis;
 
-    public Grundriss() {
+    public Innentueren() {
     }
 
-    public Grundriss(GrundrissEntity entity) {
+    public Innentueren(InnentuerenEntity entity) {
         this.id = entity.getId();
         this.beschreibung = entity.getBeschreibung();
         this.preis = entity.getPreis();
@@ -43,7 +43,7 @@ public class Grundriss implements IValidierung {
 
     @Override
     public String toString() {
-        return "Aussenanlage{" +
+        return "Innentüren{" +
                 "id=" + id +
                 ", beschreibung='" + beschreibung + '\'' +
                 ", preis=" + preis +
