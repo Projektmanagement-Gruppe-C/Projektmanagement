@@ -62,6 +62,10 @@ public class KundeModel {
 		setKunde(kunde == null ? null : new Kunde(kunde));
 	}
 
+	public int getPlanNr() {
+		return kunde.getPlannummer();
+	}
+
 	/**
 	 *  Methode zum Erhalt des einzigen KundeModel-Objekts.
 	 *  Das Singleton-Pattern wird realisiert.

@@ -1,14 +1,18 @@
 package gui.grundriss;
 
 import gui.basis.BasisView;
+import gui.kunde.KundeView;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+
+import javax.swing.*;
+import java.util.Arrays;
 
 /**
  * Klasse, welche das Fenster mit den Sonderwuenschen zu 
  * den Grundrissvarianten bereitstellt.
  */
-public class GrundrissView extends BasisView{
+public class GrundrissView extends BasisView implements business.IValidierung {
  
  	// das Control-Objekt des Grundriss-Fensters
 	private final GrundrissControl grundrissControl;
@@ -112,15 +116,18 @@ public class GrundrissView extends BasisView{
     	super.getGridPaneSonderwunsch().add(txtGesamtP, 1, 8);
     	txtGesamtP.setEditable(false);
     	super.getGridPaneSonderwunsch().add(lblGesamtPEuro, 2, 8);
-    	
-    }  
-    
+
+    }
+
+	public CheckBox[] getCheckBoxArray() {
+		CheckBox[] array = {chckBxWandKueche,chckBxTurKueche,chckBxGrossZimmer,chckBxAbtTreppen,chckBxVorBad,chckBxAusBad};
+		return array;
+	}
+
     /**
 	 * macht das GrundrissView-Objekt sichtbar.
 	 */
-	public void oeffneGrundrissView(){ 
-		super.oeffneBasisView();
-	}
+	public void oeffneGrundrissView(){super.oeffneBasisView();}
     
     private void leseGrundrissSonderwuensche(){
     	this.grundrissControl.leseGrundrissSonderwuensche();
@@ -138,6 +145,7 @@ public class GrundrissView extends BasisView{
   	protected void speichereSonderwuensche(){
  		// Es wird erst die Methode pruefeKonstellationSonderwuensche(int[] ausgewaehlteSw)
   		// aus dem Control aufgerufen, dann die Sonderwuensche gespeichert.
+		istValide();
   	}
 
 	/*schreibt die ausgesuchten Sonderwuensche in eine CSV-Datei */
@@ -147,7 +155,33 @@ public class GrundrissView extends BasisView{
 		System.out.println("CSV Export_Grundriss");
 	}
 
+	@Override
+	public boolean istValide() {
+		//TODO
+		int plannummer = 1;
 
+		int[] EG = {1,6,7,14,15,24};
+
+		if(Arrays.asList(EG).contains(plannummer)) {
+			//EG
+			if(chckBxAbtTreppen.isSelected()) {
+				chckBxAbtTreppen.setSelected(false);
+				chckBxAbtTreppen.setDisable(true);
+			}
+
+			if(chckBxVorBad.isSelected()) {
+				chckBxVorBad.setSelected(false);
+				chckBxVorBad.setDisable(true);
+			}
+
+			if(chckBxAusBad.isSelected()) {
+				chckBxAusBad.setSelected(false);
+				chckBxAusBad.setDisable(true);
+			}
+		}
+
+		return false;
+	}
 }
 
 

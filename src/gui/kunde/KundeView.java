@@ -10,6 +10,7 @@ import javafx.scene.layout.*;
 import javafx.scene.text.*;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.sql.ResultSet;
 
 /**
@@ -131,6 +132,11 @@ public class KundeView {
         mnItmGrundriss.setOnAction(aEvent -> kundeControl.oeffneGrundrissControl());
     }
 
+    public int getPlanNr() {
+        return cmbBxNummerHaus.getSelectionModel().getSelectedItem();
+        //System.out.println(cmbBxNummerHaus.getSelectionModel().getSelectedItem());
+    }
+
     private void holeInfoDachgeschoss() {
     }
 
@@ -152,7 +158,6 @@ public class KundeView {
         kundeControl.speichereKunden(kunde);
 
     }
-
     private void aendereKunden() {
         Kunde kunde = null;
         String vorname = txtVorname.getText();
@@ -220,5 +225,6 @@ public class KundeView {
     }
 
 }
+
 
 

@@ -1,5 +1,7 @@
 package gui.grundriss;
 
+import business.kunde.Kunde;
+import business.kunde.KundeEntity;
 import business.kunde.KundeModel;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -27,11 +29,13 @@ public final class GrundrissControl {
 	/**
 	 * macht das GrundrissView-Objekt sichtbar.
 	 */
-	public void oeffneGrundrissView(){ 
+	public void oeffneGrundrissView(){
 		this.grundrissView.oeffneGrundrissView();
 	}
 
 	public void leseGrundrissSonderwuensche(){
+		//KundeEntity kunde = kundeDao.getKundeByPlanNr(plannummer);
+		//setKunde(kunde == null ? null : new Kunde(kunde));
     } 
 	
 	public boolean pruefeKonstellationSonderwuensche(int[] ausgewaehlteSw){
