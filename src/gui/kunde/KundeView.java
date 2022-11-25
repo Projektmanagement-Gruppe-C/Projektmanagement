@@ -1,5 +1,6 @@
 package gui.kunde;
 
+import business.aussenanlage.AussenanlageModel;
 import business.kunde.*;
 
 import javafx.geometry.*;
@@ -11,6 +12,7 @@ import javafx.scene.text.*;
 import javafx.stage.Stage;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * Klasse, welche das Grundfenster mit den Kundendaten bereitstellt.
@@ -21,6 +23,7 @@ public class KundeView {
     private final KundeControl kundeControl;
     // das Model-Objekt des Grundfensters mit den Kundendaten
     private final KundeModel kundeModel;
+
 
     //---Anfang Attribute der grafischen Oberflaeche---
     private final BorderPane borderPane = new BorderPane();
@@ -45,7 +48,7 @@ public class KundeView {
     private final Button btnLoeschen = new Button("Löschen");
     private final MenuBar mnBar = new MenuBar();
     private final Menu mnSonderwuensche = new Menu("Sonderwünsche");
-    private final MenuItem mnItmGrundriss = new MenuItem("Grundrissvarianten");
+    private final MenuItem mnItmAussenfenster = new MenuItem("Aussenfenstervarianten");
     //-------Ende Attribute der grafischen Oberflaeche-------
 
     /**
@@ -55,8 +58,7 @@ public class KundeView {
      * @param primaryStage Stage, enthaelt das Stage-Objekt fuer diese View
      * @param kundeModel   KundeModel, enthaelt das zugehoerige Model
      */
-    public KundeView(KundeControl kundeControl, Stage primaryStage,
-                     KundeModel kundeModel) {
+    public KundeView(KundeControl kundeControl, Stage primaryStage, KundeModel kundeModel) {
         this.kundeControl = kundeControl;
         this.kundeModel = kundeModel;
 
@@ -107,16 +109,15 @@ public class KundeView {
         // MenuBar und Menu
         borderPane.setTop(mnBar);
         mnBar.getMenus().add(mnSonderwuensche);
-        mnSonderwuensche.getItems().add(mnItmGrundriss);
+        mnSonderwuensche.getItems().add(mnItmAussenfenster);
     }
 
     /* initialisiert die Listener zu den Steuerelementen auf der Maske */
     private void initListener() {
 
         cmbBxNummerHaus.setOnAction(event -> {
-            int plannummer = cmbBxNummerHaus.getValue();
+            leseKunden();
             holeInfoDachgeschoss();
-            kundeControl.loadKundeByPlannummer(plannummer);
         });
 
         btnAnlegen.setOnAction(aEvent -> legeKundenAn());
@@ -128,13 +129,36 @@ public class KundeView {
             loescheKunde(plannummer);
         });
 
-        mnItmGrundriss.setOnAction(aEvent -> kundeControl.oeffneGrundrissControl());
+        mnItmAussenfenster.setOnAction(aEvent -> {
+            try {
+                kundeControl.oeffneAussenanlageControl();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
     }
 
-    private void holeInfoDachgeschoss() {
+    private boolean holeInfoDachgeschoss() {
+        int plannummer = cmbBxNummerHaus.getValue();
+        switch (plannummer){
+            case 1:
+            case 6:
+            case 7:
+            case 14:
+            case 15:
+            case 24:
+                    System.out.println("Kein Dach");
+                    return false;
+            default:
+                System.out.println("Ein Dach");
+                return true;
+        }
     }
 
     private void leseKunden() {
+        int plannummer = cmbBxNummerHaus.getValue();
+        kundeControl.loadKundeByPlannummer(plannummer);
     }
 
     private void legeKundenAn() {
@@ -217,6 +241,7 @@ public class KundeView {
         alert.setHeaderText(ueberschrift);
         alert.setContentText(meldung);
         alert.show();
+
     }
 
 }

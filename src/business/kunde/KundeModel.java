@@ -60,6 +60,7 @@ public class KundeModel {
 		setKunde(kunde == null ? null : new Kunde(kunde));
 	}
 
+
 	/**
 	 *  Methode zum Erhalt des einzigen KundeModel-Objekts.
 	 *  Das Singleton-Pattern wird realisiert.
@@ -100,5 +101,25 @@ public class KundeModel {
 	    throws SQLException{
         // Speicherung des Kunden in der DB
    	    this.kunde = kunde;
-	}  
+		kundeDao.speichereKundeByButton(kunde);
+	}
+
+	/**
+	 * Löscht ein Kunde-Objekt aus der Datenbank
+	 * @param planNr Int, welches zu löschen ist
+	 * @throws SQLException, Fehler beim Speichern in die Datenbank
+	 */
+
+	public void loescheKunde(int planNr)
+			throws SQLException{
+		kundeDao.loescheKundeByButton(planNr);
+	}
+
+	public void aendereKunden(Kunde kunde) throws SQLException {
+		kundeDao.aendereKunden(kunde);
+	}
+
+	public Kunde getKunde() {
+		return kunde;
+	}
 }

@@ -18,7 +18,7 @@ public final class GrundrissControl {
 	 * Fenster fuer die Sonderwuensche zum Grundriss.
 	 * @param grundrissStage, Stage fuer das View-Objekt zu den Sonderwuenschen zum Grundriss
 	 */
-	public GrundrissControl(KundeModel kundeModel){  
+	public GrundrissControl(){
 	   	Stage stageGrundriss = new Stage();
     	stageGrundriss.initModality(Modality.APPLICATION_MODAL);
     	this.grundrissView = new GrundrissView(this, stageGrundriss);

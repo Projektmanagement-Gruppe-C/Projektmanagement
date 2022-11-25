@@ -18,7 +18,8 @@ public final class InnentuerenControl {
 	 * Fenster fuer die Sonderwuensche zu den Innentueren.
 	 * @param innentuerenStage, Stage fuer das View-Objekt zu den Sonderwuenschen zu den Innentueren
 	 */
-	public InnentuerenControl(KundeModel kundeModel){  
+	public InnentuerenControl( ){
+
 	   	Stage stageGrundriss = new Stage();
     	stageGrundriss.initModality(Modality.APPLICATION_MODAL);
     	this.innentuerenView = new InnentuerenView(this, stageGrundriss);

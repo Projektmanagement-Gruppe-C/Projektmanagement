@@ -25,7 +25,7 @@ public class AussenanlageDao {
     }
 
     public List<AussenanlageEntity> getAussenanlagen() {
-        List<AussenanlageEntity> aussenanlagen = new ArrayList<>();
+        List<AussenanlageEntity>    aussenanlagen = new ArrayList<>();
         try {
             ResultSet resultSet = datenbank.executeQuery("SELECT * FROM Außenanlage_Sonderwunsch");
             while (resultSet.next()) {
@@ -34,10 +34,13 @@ public class AussenanlageDao {
                         resultSet.getString(2),
                         resultSet.getDouble(3)
                 ));
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return aussenanlagen;
     }
+
+
 }

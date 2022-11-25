@@ -4,6 +4,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.sql.SQLException;
 
+import business.aussenanlage.AussenanlageModel;
 import business.kunde.Kunde;
 import business.kunde.KundeModel;
 import gui.aussenanlage.AussenanlageControl;
@@ -30,6 +31,8 @@ public class KundeControl implements PropertyChangeListener {
 
 	  private AussenanlageControl aussenanlageControl;
 
+	  private AussenanlageModel aussenanlageModel;
+
     
     /**
 	 * erzeugt ein ControlObjekt inklusive View-Objekt und Model-Objekt zum 
@@ -48,7 +51,7 @@ public class KundeControl implements PropertyChangeListener {
      */
     public void oeffneGrundrissControl(){
     	if (this.grundrissControl == null){
-    		this.grundrissControl = new GrundrissControl(kundeModel);
+    		this.grundrissControl = new GrundrissControl();
       	}
     	this.grundrissControl.oeffneGrundrissView();
     }
@@ -59,14 +62,14 @@ public class KundeControl implements PropertyChangeListener {
      */
     public void oeffneInnentuerenControl() {
     	if(this.innentuerenControl == null) {
-    		this.innentuerenControl = new InnentuerenControl(kundeModel);
+    		this.innentuerenControl = new InnentuerenControl();
     	}
     	this.innentuerenControl.oeffneInnentuerenView();
     }
     
 
 
-	  public void oeffneAussenanlageControl(){
+	  public void oeffneAussenanlageControl() throws Exception {
 		  if(this.aussenanlageControl == null){
 			  this.aussenanlageControl = new AussenanlageControl();
 		  }
@@ -85,8 +88,7 @@ public class KundeControl implements PropertyChangeListener {
 
 			  }
 			  else{
-				  this.kundeView.zeigeFehlermeldung("Daten fehler",
-						  "Die eingeben Daten bitte überarbeiten ");
+				  this.kundeView.zeigeFehlermeldung("Daten fehler", "Die eingeben Daten bitte überarbeiten ");
 			  }
     	}
 
