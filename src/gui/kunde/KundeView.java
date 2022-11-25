@@ -132,6 +132,8 @@ public class KundeView {
         mnItmAussenfenster.setOnAction(aEvent -> {
             try {
                 kundeControl.oeffneAussenanlageControl();
+            } catch (NullPointerException e2){
+                zeigeFehlermeldung("Kein Kunde","Wähl Kunden aus du OTTO");
             } catch (Exception e) {
                 e.printStackTrace();
             }

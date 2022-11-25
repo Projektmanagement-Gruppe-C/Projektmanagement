@@ -110,8 +110,7 @@ public class KundeModel {
 	 * @throws SQLException, Fehler beim Speichern in die Datenbank
 	 */
 
-	public void loescheKunde(int planNr)
-			throws SQLException{
+	public void loescheKunde(int planNr) throws SQLException{
 		kundeDao.loescheKundeByButton(planNr);
 	}
 

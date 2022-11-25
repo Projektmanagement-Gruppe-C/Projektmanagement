@@ -48,4 +48,9 @@ public class AussenanlageModel {
         setAussenanlagen(aussenanlagen);
         return aussenanlagen;
     }
+
+    public List<Integer> loadAussenanlagenListe(int kID) {
+        List<Integer> aussenanlagen_kunde = aussenanlageDao.getAussenanlagenListe(kID);
+        return aussenanlagen_kunde;
+    }
 }
