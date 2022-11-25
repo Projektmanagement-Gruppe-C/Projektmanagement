@@ -49,6 +49,7 @@ public class KundeView {
     private final MenuItem mnItmGrundriss = new MenuItem("Grundrissvarianten");
     private final MenuItem mnItmAussenanlage  = new MenuItem("Aussenanlage");
     private final MenuItem mnItmInnentueren = new MenuItem("Innentueren");
+    private final MenuItem mnItmExportCsv = new MenuItem("Export als CSV");
     
 
 
@@ -113,14 +114,15 @@ public class KundeView {
         btnLoeschen.setMinSize(150, 25);
         gridPane.add(btnZeigeGrundrissKunde, 0, 13);
         btnZeigeGrundrissKunde.setMinSize(150, 25);
-
         btnLoeschen.setMinSize(150, 25);
+ 
         // MenuBar und Menu
         borderPane.setTop(mnBar);
         mnBar.getMenus().add(mnSonderwuensche);
         mnSonderwuensche.getItems().add(mnItmGrundriss);
         mnSonderwuensche.getItems().add(mnItmAussenanlage);
         mnSonderwuensche.getItems().add(mnItmInnentueren);
+        mnSonderwuensche.getItems().add(mnItmExportCsv);
     }
 
     /* initialisiert die Listener zu den Steuerelementen auf der Maske */
@@ -137,8 +139,7 @@ public class KundeView {
         mnItmAussenanlage.setOnAction(actionEvent -> kundeControl.oeffneAussenanlageControl());
         mnItmInnentueren.setOnAction(aEvent -> kundeControl.oeffneInnentuerenControl());
         btnZeigeGrundrissKunde.setOnAction(aEvent -> kundeControl.oeffneGrundrissKundeControl());
-        //btnZeigeGrundrissKunde.setOnAction(aEvent -> kundeControl.oeffneHundeControl());
-
+        mnItmExportCsv.setOnAction(aEvent -> exportSonderwuenscheCsv());
 
     }
 
@@ -158,6 +159,10 @@ public class KundeView {
     }
 
     private void loescheKunden() {
+    }
+    
+    private void exportSonderwuenscheCsv() {
+    	
     }
 
     public void setKundeDaten(Kunde kunde) {

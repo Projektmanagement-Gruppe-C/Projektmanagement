@@ -21,7 +21,7 @@ public class AussenanlageModel {
         this.aussenanlageDao = aussenanlageDao;
     }
 
-    public static AussenanlageModel getInstance() throws SQLException {
+    public static AussenanlageModel getInstance() {
         if (aussenanlageModel == null) {
             aussenanlageModel = new AussenanlageModel(AussenanlageDao.getInstance());
         }
