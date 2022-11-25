@@ -79,18 +79,8 @@ public class KundeControl implements PropertyChangeListener {
 	 */
     public void speichereKunden(Kunde kunde){
       	try{
-			  if(kunde.istValide()) {
-				  kundeModel.speichereKunden(kunde);
-				  kundeView.zeigeMeldung("Speichern erfolgreich","Das Speichern war ein voller Erfolg");
-
-			  }
-			  else{
-				  this.kundeView.zeigeFehlermeldung("Daten fehler",
-						  "Die eingeben Daten bitte überarbeiten ");
-			  }
+    		kundeModel.speichereKunden(kunde);
     	}
-
-
     	catch(SQLException exc){
     		exc.printStackTrace();
     		this.kundeView.zeigeFehlermeldung("SQLException",
@@ -102,54 +92,17 @@ public class KundeControl implements PropertyChangeListener {
                 "Unbekannter Fehler");
     	}
     }
+
 	public void loadKundeByPlannummer(int plannummer) {
 		kundeModel.loadKundeByPlannummer(plannummer);
 	}
-	/**
-	 * LÖSCHT ein Kunde-Objekt in die Datenbank
-	 * @param planNr, int, welches zu löschen ist
-	 */
-	public void loescheKunde(int planNr){
-		try{
-			kundeModel.loescheKunde(planNr);
-			kundeView.zeigeMeldung("Löschen erfolgreich","Das Löschen war ein voller Erfolg");
 
-		}
-		catch(SQLException exc){
-			exc.printStackTrace();
-			this.kundeView.zeigeFehlermeldung("SQLException",
-					"Fehler beim Löschen in die Datenbank");
-		}
-		catch(Exception exc){
-			exc.printStackTrace();
-			this.kundeView.zeigeFehlermeldung("Exception",
-					"Unbekannter Fehler");
-		}
-	}
 	@Override
 	public void propertyChange(PropertyChangeEvent e) {
 		String propertyName = e.getPropertyName();
 		if (propertyName.equals(KundeModel.KUNDE_PROPERTY)){
 			Kunde kunde = (Kunde) e.getNewValue();
 			this.kundeView.setKundeDaten(kunde);
-		}
-	}
-
-	public void aendereKunden(Kunde kunde) {
-		try{
-			kundeModel.aendereKunden(kunde);
-			kundeView.zeigeMeldung("Ändern erfolgreich","Das Anpassen war ein voller Erfolg");
-
-		}
-		catch(SQLException exc){
-			exc.printStackTrace();
-			this.kundeView.zeigeFehlermeldung("SQLException",
-					"Fehler beim Speichern in die Datenbank");
-		}
-		catch(Exception exc){
-			exc.printStackTrace();
-			this.kundeView.zeigeFehlermeldung("Exception",
-					"Unbekannter Fehler");
 		}
 	}
 }
