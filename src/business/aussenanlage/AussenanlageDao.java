@@ -46,5 +46,16 @@ public class AussenanlageDao {
         return aussenanlagen;
     }
 
-
+    public List<Integer> getAussenanlagenListe(int kID) {
+        List<Integer> aussenanlagen_kunde_entities = new ArrayList<>();
+        try {
+            ResultSet resultSet = datenbank.executeQuery("SELECT Sonderwunschid FROM Außenanlage_Sonderwunsch_Kunde WHERE Kundeid="+kID+"\n");
+            while (resultSet.next()) {
+                aussenanlagen_kunde_entities.add(resultSet.getInt(1));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return aussenanlagen_kunde_entities;
+    }
 }

@@ -2,13 +2,13 @@ package gui.aussenanlage;
 
 import business.aussenanlage.Aussenanlage;
 import business.aussenanlage.AussenanlageModel;
-import business.kunde.Kunde;
 import gui.basis.BasisView;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class AussenanlageView extends BasisView {
@@ -44,15 +44,18 @@ public class AussenanlageView extends BasisView {
 
     // -------Ende Attribute der grafischen Oberflaeche-------
 
-    public AussenanlageView(AussenanlageControl aussenanlageControl, Stage aussenanlageStage,AussenanlageModel aussenanlageModel) {
+    public AussenanlageView(AussenanlageControl aussenanlageControl, Stage aussenanlageStage,AussenanlageModel aussenanlageModel) throws SQLException, ClassNotFoundException {
         super(aussenanlageStage);
         this.aussenanlageControl = aussenanlageControl;
         aussenanlageStage.setTitle("Sonderwuensche zu Aussenanlage-Varianten");
 
-        this.aussenanlageControl.leseAussenanlageSonderwuensche();
+       // this.aussenanlageControl.leseAussenanlageSonderwuensche();
         this.aussenanlageModel = aussenanlageModel;
         this.initKomponenten();
         setInhalt();
+        getAussenanlageKunde();
+
+
     }
 
     /* initialisiert die Steuerelemente auf der Maske */
@@ -81,7 +84,7 @@ public class AussenanlageView extends BasisView {
 
     @Override
     protected void berechneUndZeigePreisSonderwuensche() {
-
+        int gsmtPreis;
     }
 
     @Override
@@ -100,6 +103,27 @@ public class AussenanlageView extends BasisView {
         super.oeffneBasisView();
     }
 
+    protected void getAussenanlageKunde() throws SQLException, ClassNotFoundException {
+        List<Integer> liste=aussenanlageControl.connectKunde();
+        for(int i:liste){
+            if(i==1)
+                chckTerasse.setSelected(true);
+            else if(i==2)
+                chckElAntriebEG.setSelected(true);
+            else if(i==3)
+                chckElAntriebDG.setSelected(true);
+            else if(i==4)
+                chckElMarkiseEG.setSelected(true);
+            else if(i==5)
+                chckElMarkiseDG.setSelected(true);
+            else if(i==6)
+                chckElGaragenTor.setSelected(true);
+            else if(i==7)
+                chckSektionalGarage.setSelected(true);
+
+        }
+
+    }
 
     protected void setInhalt() {
         if (aussenanlageModel != null) {
@@ -111,6 +135,7 @@ public class AussenanlageView extends BasisView {
             txtElMarkiseDG.setText(la.get(4).getPreis() + "");
             txtElGaragenTor.setText(la.get(5).getPreis() + "");
             txtSektionalGarage.setText(la.get(6).getPreis() + "");
+
         }
     }
 }
