@@ -48,6 +48,7 @@ public class KundeView {
     private final MenuItem mnItmGrundriss = new MenuItem("Grundrissvarianten");
     private MenuItem mnItmAussenanlage  = new MenuItem("Aussenanlage");
     private final MenuItem mnItmInnentueren = new MenuItem("Innentueren");
+    private final MenuItem mnItmExportCsv = new MenuItem("Export als CSV");
     
 
 
@@ -109,14 +110,15 @@ public class KundeView {
         gridPane.add(btnAendern, 1, 12);
         btnAendern.setMinSize(150, 25);
         gridPane.add(btnLoeschen, 2, 12);
-
         btnLoeschen.setMinSize(150, 25);
+ 
         // MenuBar und Menu
         borderPane.setTop(mnBar);
         mnBar.getMenus().add(mnSonderwuensche);
         mnSonderwuensche.getItems().add(mnItmGrundriss);
         mnSonderwuensche.getItems().add(mnItmAussenanlage);
         mnSonderwuensche.getItems().add(mnItmInnentueren);
+        mnSonderwuensche.getItems().add(mnItmExportCsv);
     }
 
     /* initialisiert die Listener zu den Steuerelementen auf der Maske */
@@ -132,6 +134,7 @@ public class KundeView {
         mnItmGrundriss.setOnAction(aEvent -> kundeControl.oeffneGrundrissControl());
         mnItmAussenanlage.setOnAction(actionEvent -> kundeControl.oeffneAussenanlageControl());
         mnItmInnentueren.setOnAction(aEvent -> kundeControl.oeffneInnentuerenControl());
+        mnItmExportCsv.setOnAction(aEvent -> exportSonderwuenscheCsv());
     }
 
     private void holeInfoDachgeschoss() {
@@ -150,6 +153,10 @@ public class KundeView {
     }
 
     private void loescheKunden() {
+    }
+    
+    private void exportSonderwuenscheCsv() {
+    	
     }
 
     public void setKundeDaten(Kunde kunde) {
