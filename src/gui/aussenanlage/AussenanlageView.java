@@ -1,24 +1,30 @@
 package gui.aussenanlage;
 
+import business.aussenanlage.Aussenanlage;
+import business.aussenanlage.AussenanlageModel;
+import business.kunde.Kunde;
 import gui.basis.BasisView;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.util.List;
+
 public class AussenanlageView extends BasisView {
 
     // das Control-Objekt des Grundriss-Fensters
     private AussenanlageControl aussenanlageControl;
+    private AussenanlageModel aussenanlageModel;
 
     // ---Anfang Attribute der grafischen Oberflaeche---
     private Label lblTerasse = new Label("Abstellraum auf der Terrasse des EG");
-    private Label lblElAntriebEG = new Label("Vorbereitung f�r elektrische Antriebe Markise EG");
-    private Label lblElAntriebDG = new Label("Vorbereitung f�r elektrische Antriebe Markise DG");
+    private Label lblElAntriebEG = new Label("Vorbereitung fuer elektrische Antriebe Markise EG");
+    private Label lblElAntriebDG = new Label("Vorbereitung fuer elektrische Antriebe Markise DG");
     private Label lblElMarkiseEG = new Label("Elektrische Markise EG");
     private Label lblElMarkiseDG = new Label("Elektrische Markise DG");
-    private Label lblElGaragenTor = new Label("Eleketrischen Antrieb f�r das Garagentor");
-    private Label lblSektionalGarage = new Label("Sektionaltor anstatt Schwingtor f�r die Garage");
+    private Label lblElGaragenTor = new Label("Eleketrischen Antrieb fuer das Garagentor");
+    private Label lblSektionalGarage = new Label("Sektionaltor anstatt Schwingtor fuer die Garage");
 
     private TextField txtTerasse = new TextField();
     private TextField txtElAntriebEG = new TextField();
@@ -38,20 +44,22 @@ public class AussenanlageView extends BasisView {
 
     // -------Ende Attribute der grafischen Oberflaeche-------
 
-    public AussenanlageView(AussenanlageControl aussenanlageControl, Stage aussenanlageStage) {
+    public AussenanlageView(AussenanlageControl aussenanlageControl, Stage aussenanlageStage,AussenanlageModel aussenanlageModel) {
         super(aussenanlageStage);
         this.aussenanlageControl = aussenanlageControl;
-        aussenanlageStage.setTitle("Sonderw�nsche zu Aussenanlage-Varianten");
+        aussenanlageStage.setTitle("Sonderwuensche zu Aussenanlage-Varianten");
 
-        this.initKomponenten();
         this.aussenanlageControl.leseAussenanlageSonderwuensche();
+        this.aussenanlageModel = aussenanlageModel;
+        this.initKomponenten();
+        setInhalt();
     }
 
     /* initialisiert die Steuerelemente auf der Maske */
     protected void initKomponenten() {
         super.initKomponenten();
 
-        Label[] lblSonderwunschArray = {lblTerasse, lblElAntriebEG, lblElAntriebDG,
+        Label[] lblSonderwunschArray = { lblTerasse, lblElAntriebEG, lblElAntriebDG,
                 lblElMarkiseEG, lblElMarkiseDG, lblElGaragenTor, lblSektionalGarage};
 
         TextField[] txtFieldArray = {txtTerasse, txtElAntriebEG, txtElAntriebDG,
@@ -91,5 +99,22 @@ public class AussenanlageView extends BasisView {
     public void oeffneAussenanlageView() {
         super.oeffneBasisView();
     }
+
+
+    protected void setInhalt() {
+        if (aussenanlageModel != null) {
+            List<Aussenanlage> la = aussenanlageModel.loadAussenanlagen();
+            txtTerasse.setText(la.get(0).getPreis() + "");
+            txtElAntriebEG.setText(la.get(1).getPreis() + "");
+            txtElAntriebDG.setText(la.get(2).getPreis() + "");
+            txtElMarkiseEG.setText(la.get(3).getPreis() + "");
+            txtElMarkiseDG.setText(la.get(4).getPreis() + "");
+            txtElGaragenTor.setText(la.get(5).getPreis() + "");
+            txtSektionalGarage.setText(la.get(6).getPreis() + "");
+        }
+    }
 }
+
+
+
 

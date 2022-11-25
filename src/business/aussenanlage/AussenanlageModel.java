@@ -36,15 +36,16 @@ public class AussenanlageModel {
         pcs.removePropertyChangeListener(listener);
     }
 
-    public void loadAussenanlagen() {
-        List<Aussenanlage> aussenanlagen = aussenanlageDao.getAussenanlagen()
-                .stream().map(Aussenanlage::new).collect(Collectors.toList());
-        setAussenanlagen(aussenanlagen);
-    }
-
     private void setAussenanlagen(List<Aussenanlage> aussenanlagen) {
         List<Aussenanlage> oldAnlagen = this.aussenanlagen;
         this.aussenanlagen = aussenanlagen;
         this.pcs.firePropertyChange("aussenanlage", oldAnlagen, aussenanlagen);
+    }
+
+    public List<Aussenanlage> loadAussenanlagen() {
+        List<Aussenanlage> aussenanlagen = aussenanlageDao.getAussenanlagen()
+                .stream().map(Aussenanlage::new).collect(Collectors.toList());
+        setAussenanlagen(aussenanlagen);
+        return aussenanlagen;
     }
 }

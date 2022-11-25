@@ -4,6 +4,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.sql.SQLException;
 
+import business.aussenanlage.AussenanlageModel;
 import business.kunde.Kunde;
 import business.kunde.KundeModel;
 import gui.aussenanlage.AussenanlageControl;
@@ -30,6 +31,8 @@ public class KundeControl implements PropertyChangeListener {
 
 	  private AussenanlageControl aussenanlageControl;
 
+	  private AussenanlageModel aussenanlageModel;
+
     
     /**
 	 * erzeugt ein ControlObjekt inklusive View-Objekt und Model-Objekt zum 
@@ -48,7 +51,7 @@ public class KundeControl implements PropertyChangeListener {
      */
     public void oeffneGrundrissControl(){
     	if (this.grundrissControl == null){
-    		this.grundrissControl = new GrundrissControl(kundeModel);
+    		this.grundrissControl = new GrundrissControl();
       	}
     	this.grundrissControl.oeffneGrundrissView();
     }
@@ -59,14 +62,14 @@ public class KundeControl implements PropertyChangeListener {
      */
     public void oeffneInnentuerenControl() {
     	if(this.innentuerenControl == null) {
-    		this.innentuerenControl = new InnentuerenControl(kundeModel);
+    		this.innentuerenControl = new InnentuerenControl();
     	}
     	this.innentuerenControl.oeffneInnentuerenView();
     }
     
 
 
-	  public void oeffneAussenanlageControl(){
+	  public void oeffneAussenanlageControl() throws Exception {
 		  if(this.aussenanlageControl == null){
 			  this.aussenanlageControl = new AussenanlageControl();
 		  }
@@ -79,8 +82,17 @@ public class KundeControl implements PropertyChangeListener {
 	 */
     public void speichereKunden(Kunde kunde){
       	try{
-    		kundeModel.speichereKunden(kunde);
+			  if(kunde.istValide()) {
+				  kundeModel.speichereKunden(kunde);
+				  kundeView.zeigeMeldung("Speichern erfolgreich","Das Speichern war ein voller Erfolg");
+
+			  }
+			  else{
+				  this.kundeView.zeigeFehlermeldung("Daten fehler", "Die eingeben Daten bitte überarbeiten ");
+			  }
     	}
+
+
     	catch(SQLException exc){
     		exc.printStackTrace();
     		this.kundeView.zeigeFehlermeldung("SQLException",
@@ -92,17 +104,54 @@ public class KundeControl implements PropertyChangeListener {
                 "Unbekannter Fehler");
     	}
     }
-
 	public void loadKundeByPlannummer(int plannummer) {
 		kundeModel.loadKundeByPlannummer(plannummer);
 	}
+	/**
+	 * LÖSCHT ein Kunde-Objekt in die Datenbank
+	 * @param planNr, int, welches zu löschen ist
+	 */
+	public void loescheKunde(int planNr){
+		try{
+			kundeModel.loescheKunde(planNr);
+			kundeView.zeigeMeldung("Löschen erfolgreich","Das Löschen war ein voller Erfolg");
 
+		}
+		catch(SQLException exc){
+			exc.printStackTrace();
+			this.kundeView.zeigeFehlermeldung("SQLException",
+					"Fehler beim Löschen in die Datenbank");
+		}
+		catch(Exception exc){
+			exc.printStackTrace();
+			this.kundeView.zeigeFehlermeldung("Exception",
+					"Unbekannter Fehler");
+		}
+	}
 	@Override
 	public void propertyChange(PropertyChangeEvent e) {
 		String propertyName = e.getPropertyName();
 		if (propertyName.equals(KundeModel.KUNDE_PROPERTY)){
 			Kunde kunde = (Kunde) e.getNewValue();
 			this.kundeView.setKundeDaten(kunde);
+		}
+	}
+
+	public void aendereKunden(Kunde kunde) {
+		try{
+			kundeModel.aendereKunden(kunde);
+			kundeView.zeigeMeldung("Ändern erfolgreich","Das Anpassen war ein voller Erfolg");
+
+		}
+		catch(SQLException exc){
+			exc.printStackTrace();
+			this.kundeView.zeigeFehlermeldung("SQLException",
+					"Fehler beim Speichern in die Datenbank");
+		}
+		catch(Exception exc){
+			exc.printStackTrace();
+			this.kundeView.zeigeFehlermeldung("Exception",
+					"Unbekannter Fehler");
 		}
 	}
 }

@@ -26,20 +26,18 @@ public class KundeModel {
 	}
 
 	private void setKunde(Kunde kunde) {
-
 		Kunde oldKunde = this.kunde;
 		this.kunde = kunde;
 		this.pcs.firePropertyChange("kunde", oldKunde, kunde);
-
 	}
 
 	public KundeDao kundeDao;
 	
 	/* enthaelt die Plannummern der Haeuser, diese muessen vielleicht noch
 	   in eine andere Klasse verschoben werden */
-	ObservableList<Integer> plannummern =
-	  FXCollections.observableArrayList(
-		0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24);
+	ObservableList<Integer> plannummern = 
+	    FXCollections.observableArrayList(
+		1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24);
 	
 
 	// enthaelt das einzige KundeModel-Objekt
@@ -62,9 +60,6 @@ public class KundeModel {
 		setKunde(kunde == null ? null : new Kunde(kunde));
 	}
 
-	public int getPlanNr() {
-		return kunde.getPlannummer();
-	}
 
 	/**
 	 *  Methode zum Erhalt des einzigen KundeModel-Objekts.
@@ -92,8 +87,9 @@ public class KundeModel {
 	 * @return ObservableList<Integer> , enthaelt saemtliche Plannummern der Haeuser
 	 */
 	public ObservableList<Integer> getPlannummern(){
-		return this.plannummern;
+		return this.plannummern; 
 	}
+		 	
 	// ---- Datenbankzugriffe -------------------
 	
 	/**
@@ -101,12 +97,11 @@ public class KundeModel {
 	 * @param kunde, Kunde-Objekt, welches zu speichern ist
 	 * @throws SQLException, Fehler beim Speichern in die Datenbank
 	 */
-	//TODO anschauen
 	public void speichereKunden(Kunde kunde)
 	    throws SQLException{
         // Speicherung des Kunden in der DB
    	    this.kunde = kunde;
-		   kundeDao.speichereKundeByButton(kunde);
+		kundeDao.speichereKundeByButton(kunde);
 	}
 
 	/**
@@ -122,5 +117,9 @@ public class KundeModel {
 
 	public void aendereKunden(Kunde kunde) throws SQLException {
 		kundeDao.aendereKunden(kunde);
+	}
+
+	public Kunde getKunde() {
+		return kunde;
 	}
 }
