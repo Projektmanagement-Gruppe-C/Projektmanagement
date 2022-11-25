@@ -43,10 +43,11 @@ public class KundeView {
     private final Button btnAnlegen = new Button("Anlegen");
     private final Button btnAendern = new Button("Ändern");
     private final Button btnLoeschen = new Button("Löschen");
+    private final Button btnZeigeGrundrissKunde = new Button("Grundrisse");
     private final MenuBar mnBar = new MenuBar();
     private final Menu mnSonderwuensche = new Menu("Sonderwünsche");
     private final MenuItem mnItmGrundriss = new MenuItem("Grundrissvarianten");
-    private MenuItem mnItmAussenanlage  = new MenuItem("Aussenanlage");
+    private final MenuItem mnItmAussenanlage  = new MenuItem("Aussenanlage");
     private final MenuItem mnItmInnentueren = new MenuItem("Innentueren");
     private final MenuItem mnItmExportCsv = new MenuItem("Export als CSV");
     
@@ -67,7 +68,7 @@ public class KundeView {
         this.kundeModel = kundeModel;
 
         primaryStage.setTitle(this.kundeModel.getUeberschrift());
-        Scene scene = new Scene(borderPane, 550, 450);
+        Scene scene = new Scene(borderPane, 550, 550);
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();
@@ -111,6 +112,9 @@ public class KundeView {
         btnAendern.setMinSize(150, 25);
         gridPane.add(btnLoeschen, 2, 12);
         btnLoeschen.setMinSize(150, 25);
+        gridPane.add(btnZeigeGrundrissKunde, 0, 13);
+        btnZeigeGrundrissKunde.setMinSize(150, 25);
+        btnLoeschen.setMinSize(150, 25);
  
         // MenuBar und Menu
         borderPane.setTop(mnBar);
@@ -134,7 +138,9 @@ public class KundeView {
         mnItmGrundriss.setOnAction(aEvent -> kundeControl.oeffneGrundrissControl());
         mnItmAussenanlage.setOnAction(actionEvent -> kundeControl.oeffneAussenanlageControl());
         mnItmInnentueren.setOnAction(aEvent -> kundeControl.oeffneInnentuerenControl());
+        btnZeigeGrundrissKunde.setOnAction(aEvent -> kundeControl.oeffneGrundrissKundeControl());
         mnItmExportCsv.setOnAction(aEvent -> exportSonderwuenscheCsv());
+
     }
 
     private void holeInfoDachgeschoss() {
