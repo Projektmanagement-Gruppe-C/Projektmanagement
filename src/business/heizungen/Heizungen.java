@@ -8,7 +8,7 @@ public class Heizungen implements IValidierung {
     private String beschreibung;
     private double preis;
 
-    public Heizungen() {
+    private Heizungen() {
     }
 
     public Heizungen(HeizungenEntity entity) {
@@ -43,7 +43,7 @@ public class Heizungen implements IValidierung {
 
     @Override
     public String toString() {
-        return "Aussenanlage{" +
+        return "Heizungen{" +
                 "id=" + id +
                 ", beschreibung='" + beschreibung + '\'' +
                 ", preis=" + preis +

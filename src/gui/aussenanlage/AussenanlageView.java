@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AussenanlageView extends BasisView {
@@ -88,8 +89,11 @@ public class AussenanlageView extends BasisView {
     }
 
     @Override
-    protected void speichereSonderwuensche() {
-
+    protected void speichereSonderwuensche() throws SQLException, ClassNotFoundException {
+        List<Integer> list = getChcks();
+        aussenanlageControl.loescheSonderwuensche();
+        for(int i : list)
+            aussenanlageControl.speichereSonderwunsch(i);
     }
 
     /*schreibt die ausgesuchten Sonderwuensche in eine CSV-Datei */
@@ -137,6 +141,27 @@ public class AussenanlageView extends BasisView {
             txtSektionalGarage.setText(la.get(6).getPreis() + "");
 
         }
+    }
+
+    public List<Integer> getChcks() {
+        List <Integer> list = new ArrayList<>();
+
+        if(chckTerasse.isSelected())
+            list.add(1);
+            if(chckElAntriebEG.isSelected())
+                list.add(2);
+                if(chckElAntriebDG.isSelected())
+                    list.add(3);
+                if(chckElMarkiseEG.isSelected())
+                    list.add(4);
+                    if(chckElMarkiseDG.isSelected())
+                        list.add(5);
+                        if(chckElGaragenTor.isSelected())
+                            list.add(6);
+                            if(chckSektionalGarage.isSelected())
+                                list.add(7);
+
+        return list;
     }
 }
 

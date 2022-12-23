@@ -1,5 +1,7 @@
 package business.fliesen;
 
+import business.aussenanlage.Aussenanlage;
+
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.sql.SQLException;
@@ -8,11 +10,11 @@ import java.util.stream.Collectors;
 
 public class FliesenModel {
 
-    public static final String AUSSENANLAGE_PROPERTY = "aussenanlage";
+    public static final String FLIESEN_PROPERTY = "fliesen";
 
     private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
-    private List<Fliesen> aussenanlagen;
+    private List<Fliesen> fliesen;
 
     private final FliesenDao fliesenDao;
     private static FliesenModel fliesenModel;
@@ -28,6 +30,11 @@ public class FliesenModel {
         return fliesenModel;
     }
 
+    public List<Integer> loadFliesenListe(int kid) {
+        List<Integer> fliesen_kunde = fliesenDao.getFliesenListe(kid);
+        return fliesen_kunde;
+    }
+
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         pcs.addPropertyChangeListener(listener);
     }
@@ -35,16 +42,31 @@ public class FliesenModel {
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         pcs.removePropertyChangeListener(listener);
     }
-
-    public void loadAussenanlagen() {
-        List<Fliesen> aussenanlagen = fliesenDao.getAussenanlagen()
-                .stream().map(Fliesen::new).collect(Collectors.toList());
-        setAussenanlagen(aussenanlagen);
+//set fliesen liste
+    private void setFliesen(List<Fliesen> fliesen) {
+        List<Fliesen> oldFliesen = this.fliesen;
+        this.fliesen = fliesen;
+        this.pcs.firePropertyChange("fliesen", oldFliesen, fliesen);
     }
 
-    private void setAussenanlagen(List<Fliesen> aussenanlagen) {
-        List<Fliesen> oldAnlagen = this.aussenanlagen;
-        this.aussenanlagen = aussenanlagen;
-        this.pcs.firePropertyChange("aussenanlage", oldAnlagen, aussenanlagen);
+    public List<Fliesen> getFliesen() {
+        return fliesen;
+    }
+
+    //get alle fliesen als lsite
+    public List<Fliesen> laodFliesen() {
+        List<Fliesen> fliesen = fliesenDao.getFliesen()
+                .stream().map(Fliesen::new).collect(Collectors.toList());
+        setFliesen(fliesen);
+        return fliesen;
+    }
+//   gibt die aufgabe an die dao weiter
+    public void speichereSonderwuensche(int sid,int kid) throws SQLException{
+        fliesenDao.speichereKundeByButton(sid,kid);
+    }
+
+
+    public void loescheSonderwuensche(int kid) throws SQLException {
+        fliesenDao.loescheSonderwunsch(kid);
     }
 }

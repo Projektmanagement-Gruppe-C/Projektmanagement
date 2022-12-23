@@ -8,8 +8,13 @@ import business.aussenanlage.AussenanlageModel;
 import business.kunde.Kunde;
 import business.kunde.KundeModel;
 import gui.aussenanlage.AussenanlageControl;
+import gui.fenster_aussentuer.FensterAussentuerControl;
+import gui.fliesen.FliesenControl;
 import gui.grundriss.GrundrissControl;
+import gui.heizungen.HeizungenControl;
 import gui.innentueren.InnentuerenControl;
+import gui.parkett.ParkettControl;
+import gui.sanitaer.SanitaerControl;
 import javafx.stage.Stage;
 
 /**
@@ -21,20 +26,19 @@ public class KundeControl implements PropertyChangeListener {
 	  private final KundeView kundeView;
     // das Model-Objekt des Grundfensters mit den Kundendaten
     private final KundeModel kundeModel;
-    /* das GrundrissControl-Objekt fuer die Sonderwuensche
-       zum Grundriss zu dem Kunden */
-    private GrundrissControl grundrissControl;
 
-    /* das InnentuerenControl-Objekt fuer die Sonderwuensche
-    zu den Innentueren zu dem Kunden */
+    /* das Control-Objekt fuer die Sonderwuensche */
     private InnentuerenControl innentuerenControl;
+	private AussenanlageControl aussenanlageControl;
+	private FliesenControl fliesenControl;
+	private ParkettControl parkettControl;
+	private GrundrissControl grundrissControl;
+	private FensterAussentuerControl fensterAussentuerControl;
+	private SanitaerControl sanitaerControl;
+	private HeizungenControl heizungenControl;
 
-	  private AussenanlageControl aussenanlageControl;
 
-	  private AussenanlageModel aussenanlageModel;
-
-    
-    /**
+	/**
 	 * erzeugt ein ControlObjekt inklusive View-Objekt und Model-Objekt zum 
 	 * Grundfenster mit den Kundendaten.
 	 * @param primaryStage, Stage fuer das View-Objekt zu dem Grundfenster mit den Kundendaten
@@ -49,25 +53,21 @@ public class KundeControl implements PropertyChangeListener {
      * erstellt, falls nicht vorhanden, ein Grundriss-Control-Objekt.
      * Das GrundrissView wird sichtbar gemacht.
      */
-    public void oeffneGrundrissControl(){
+    public void oeffneGrundrissControl() throws Exception {
     	if (this.grundrissControl == null){
     		this.grundrissControl = new GrundrissControl();
       	}
     	this.grundrissControl.oeffneGrundrissView();
     }
 
-    /*
-     * erstellt, falls nicht vorhanden, ein Innentueren-Control-Objekt.
-     * Das InnentuerenView wird sichtbar gemacht.
-     */
-    public void oeffneInnentuerenControl() {
-    	if(this.innentuerenControl == null) {
-    		this.innentuerenControl = new InnentuerenControl();
-    	}
-    	this.innentuerenControl.oeffneInnentuerenView();
-    }
-    
-
+//     * erstellt, falls nicht vorhanden, ein  SOnderwunsch-Control-Objekt.
+//     */
+		  public void oeffneInnentuerenControl() throws Exception {
+			  if (this.innentuerenControl == null) {
+				  this.innentuerenControl = new InnentuerenControl();
+			  }
+			  this.innentuerenControl.oeffneInnentuerenView();
+		  }
 
 	  public void oeffneAussenanlageControl() throws Exception {
 		  if(this.aussenanlageControl == null){
@@ -75,6 +75,41 @@ public class KundeControl implements PropertyChangeListener {
 		  }
 		  this.aussenanlageControl.oeffneAussenanlageView();
 	  }
+
+	  public void oeffneFensterAussentuerControl() throws Exception {
+		  if(this.fensterAussentuerControl == null){
+			  this.fensterAussentuerControl = new FensterAussentuerControl();
+		  }
+		  this.fensterAussentuerControl.oeffneFensterAussentuerView();
+	  }
+
+	public void oeffneParkettControl() throws Exception {
+		if(this.parkettControl == null){
+			this.parkettControl = new ParkettControl();
+		}
+		this.parkettControl.oeffneParkettView();
+	}
+
+	public void oeffneFliesenControl() throws Exception {
+		if(this.fliesenControl == null){
+			this.fliesenControl = new FliesenControl();
+		}
+		this.fliesenControl.oeffneFliesenView();
+	}
+
+	public void oeffneSanitaerControl() throws Exception {
+		if(this.sanitaerControl == null){
+			this.sanitaerControl = new SanitaerControl();
+		}
+		this.sanitaerControl.oeffneSanitaerView();
+	}
+
+	public void oeffneHeizungenControl() throws Exception {
+		if(this.heizungenControl == null){
+			this.heizungenControl = new HeizungenControl();
+		}
+		this.heizungenControl.oeffneHeizungenView();
+	}
 
 	/**
 	 * speichert ein Kunde-Objekt in die Datenbank

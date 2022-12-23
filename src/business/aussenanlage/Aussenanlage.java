@@ -14,10 +14,10 @@ public class Aussenanlage implements IValidierung {
     private String beschreibung;
     private double preis;
 
-    public Aussenanlage() {
+    private Aussenanlage() {
     }
 
-    public Aussenanlage(AussenanlageEntity entity) {
+    public  Aussenanlage(AussenanlageEntity entity) {
         this.id = entity.getId();
         this.beschreibung = entity.getBeschreibung();
         this.preis = entity.getPreis();

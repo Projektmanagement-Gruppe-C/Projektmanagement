@@ -8,11 +8,11 @@ import java.util.stream.Collectors;
 
 public class GrundrissModel {
 
-    public static final String AUSSENANLAGE_PROPERTY = "aussenanlage";
+    public static final String GRUNDRISS_PROPERTY = "grundriss";
 
     private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
-    private List<Grundriss> aussenanlagen;
+    private List<Grundriss> grundriss;
 
     private final GrundrissDao grundrissDao;
     private static GrundrissModel grundrissModel;
@@ -28,6 +28,11 @@ public class GrundrissModel {
         return grundrissModel;
     }
 
+    public List<Integer> loadGrundrissnListe(int kid) {
+        List<Integer> grundriss_kunde = grundrissDao.getGrundrissListe(kid);
+        return grundriss_kunde;
+    }
+
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         pcs.addPropertyChangeListener(listener);
     }
@@ -36,15 +41,30 @@ public class GrundrissModel {
         pcs.removePropertyChangeListener(listener);
     }
 
-    public void loadAussenanlagen() {
-        List<Grundriss> aussenanlagen = grundrissDao.getAussenanlagen()
-                .stream().map(Grundriss::new).collect(Collectors.toList());
-        setAussenanlagen(aussenanlagen);
+    private void setGrundriss(List<Grundriss> grundriss) {
+        List<Grundriss> oldGrundriss = this.grundriss;
+        this.grundriss = grundriss;
+        this.pcs.firePropertyChange("grundriss", oldGrundriss, grundriss);
     }
 
-    private void setAussenanlagen(List<Grundriss> aussenanlagen) {
-        List<Grundriss> oldAnlagen = this.aussenanlagen;
-        this.aussenanlagen = aussenanlagen;
-        this.pcs.firePropertyChange("aussenanlage", oldAnlagen, aussenanlagen);
+    public List<Grundriss> getGrundriss() {
+        return grundriss;
+    }
+
+    //get alle fliesen als lsite
+    public List<Grundriss> loadGrundriss() {
+        List<Grundriss> grundriss = grundrissDao.getGrundriss()
+                .stream().map(Grundriss::new).collect(Collectors.toList());
+        setGrundriss(grundriss);
+        return grundriss;
+    }
+//   gibt die aufgabe an die dao weiter
+    public void speichereSonderwuensche(int sid,int kid) throws SQLException{
+        grundrissDao.speichereKundeByButton(sid,kid);
+    }
+
+
+    public void loescheSonderwuensche(int kid) throws SQLException {
+        grundrissDao.loescheSonderwunsch(kid);
     }
 }

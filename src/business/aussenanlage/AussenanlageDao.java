@@ -58,4 +58,15 @@ public class AussenanlageDao {
         }
         return aussenanlagen_kunde_entities;
     }
+
+    public void loescheSonderwunsch(int kID) throws SQLException {
+        int resultSet = datenbank.executeUpdate("DELETE FROM Außenanlage_Sonderwunsch_Kunde WHERE Kundeid="+kID+"\n");
+    }
+
+    public void speichereKundeByButton(int sID,int kID) throws SQLException {
+        int resultSet = datenbank.executeUpdate("INSERT INTO Außenanlage_Sonderwunsch_Kunde(sonderwunschid,Kundeid) VALUES ("+sID+", "+kID+");");
+        System.out.println(resultSet);
+    }
+
+
 }

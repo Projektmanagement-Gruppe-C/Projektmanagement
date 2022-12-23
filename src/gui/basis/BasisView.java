@@ -7,6 +7,8 @@ import javafx.scene.layout.*;
 import javafx.scene.text.*;
 import javafx.stage.Stage;
 
+import java.sql.SQLException;
+
 /**
  * Klasse, welche die Basis fuer die Fenster zu den Sonderwuenschen bereitstellt.
  */
@@ -20,7 +22,6 @@ public abstract class BasisView {
    	private final Label lblSonderwunsch   	= new Label("Sonderwunsch");
     private final Button btnBerechnen 	 	= new Button("Preis berechnen");
     private final Button btnSpeichern 	 	= new Button("Speichern");
-	private final Button btnCSVExport		= new Button("In CSV exportieren");
     //-------Ende Attribute der grafischen Oberflaeche-------
   
    /**
@@ -52,8 +53,6 @@ public abstract class BasisView {
 	    btnBerechnen.setMinSize(150,  25);
     	gridPaneButtons.add(btnSpeichern, 2, 0);
 	    btnSpeichern.setMinSize(150,  25);
-		gridPaneButtons.add(btnCSVExport, 3, 0);
-		btnCSVExport.setMinSize(150,  25);
     }  
     
     /* Es muessen die Listener implementiert werden. */
@@ -62,10 +61,13 @@ public abstract class BasisView {
     		berechneUndZeigePreisSonderwuensche();
      	});
         btnSpeichern.setOnAction(aEvent -> {
-    		speichereSonderwuensche();
-    	});
-		btnCSVExport.setOnAction(aEvent -> {
-			schreibeInCSV();
+			try {
+				speichereSonderwuensche();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
 		});
     }
     
@@ -88,11 +90,9 @@ public abstract class BasisView {
   	protected abstract void berechneUndZeigePreisSonderwuensche();
   	
    	/* speichert die ausgesuchten Sonderwuensche in der Datenbank ab */
-  	protected abstract void speichereSonderwuensche();
-
-	/*schreibt die ausgesuchten Sonderwuensche in eine CSV-Datei */
-	protected abstract void schreibeInCSV();
-
+  	protected abstract void speichereSonderwuensche() throws SQLException, ClassNotFoundException;
+  	
+ 	
 }
 
 
