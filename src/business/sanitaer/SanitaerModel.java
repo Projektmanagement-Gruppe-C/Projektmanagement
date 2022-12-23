@@ -8,11 +8,11 @@ import java.util.stream.Collectors;
 
 public class SanitaerModel {
 
-    public static final String AUSSENANLAGE_PROPERTY = "aussenanlage";
+    public static final String SANITAER_PROPERTY = "sanitaer";
 
     private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
-    private List<Sanitaer> aussenanlagen;
+    private List<Sanitaer> sanitaer;
 
     private final SanitaerDao sanitaerDao;
     private static SanitaerModel sanitaerModel;
@@ -28,6 +28,11 @@ public class SanitaerModel {
         return sanitaerModel;
     }
 
+    public List<Integer> loadSanitaerListe(int kid) {
+        List<Integer> sanitaer_kunde = sanitaerDao.getSanitaerListe(kid);
+        return sanitaer_kunde;
+    }
+
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         pcs.addPropertyChangeListener(listener);
     }
@@ -35,16 +40,30 @@ public class SanitaerModel {
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         pcs.removePropertyChangeListener(listener);
     }
-
-    public void loadAussenanlagen() {
-        List<Sanitaer> aussenanlagen = sanitaerDao.getAussenanlagen()
-                .stream().map(Sanitaer::new).collect(Collectors.toList());
-        setAussenanlagen(aussenanlagen);
+//set fliesen liste
+    private void setSanitaer(List<Sanitaer> sanitaer) {
+        List<Sanitaer> oldSanitaer = this.sanitaer;
+        this.sanitaer = sanitaer;
+        this.pcs.firePropertyChange("sanitaer", oldSanitaer, sanitaer);
     }
 
-    private void setAussenanlagen(List<Sanitaer> aussenanlagen) {
-        List<Sanitaer> oldAnlagen = this.aussenanlagen;
-        this.aussenanlagen = aussenanlagen;
-        this.pcs.firePropertyChange("aussenanlage", oldAnlagen, aussenanlagen);
+    public List<Sanitaer> getSanitaer() {
+        return sanitaer;
+    }
+
+    //get alle fliesen als lsite
+    public List<Sanitaer> laodSanitaer() {
+        List<Sanitaer> sanitaer = sanitaerDao.getSanitaer()
+                .stream().map(Sanitaer::new).collect(Collectors.toList());
+        setSanitaer(sanitaer);
+        return sanitaer;
+    }
+//   gibt die aufgabe an die dao weiter
+    public void speichereSonderwuensche(int sid,int kid) throws SQLException{
+        sanitaerDao.speichereKundeByButton(sid,kid);
+    }
+
+    public void loescheSonderwuensche(int kid) throws SQLException {
+        sanitaerDao.loescheSonderwunsch(kid);
     }
 }

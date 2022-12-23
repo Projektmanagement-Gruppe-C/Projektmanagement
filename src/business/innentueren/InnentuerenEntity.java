@@ -1,4 +1,4 @@
-package business.innentureen;
+package business.innentueren;
 
 public class InnentuerenEntity {
 

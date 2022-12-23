@@ -8,7 +8,7 @@ public class Grundriss implements IValidierung {
     private String beschreibung;
     private double preis;
 
-    public Grundriss() {
+    private Grundriss() {
     }
 
     public Grundriss(GrundrissEntity entity) {
@@ -43,7 +43,7 @@ public class Grundriss implements IValidierung {
 
     @Override
     public String toString() {
-        return "Aussenanlage{" +
+        return "Grundriss{" +
                 "id=" + id +
                 ", beschreibung='" + beschreibung + '\'' +
                 ", preis=" + preis +

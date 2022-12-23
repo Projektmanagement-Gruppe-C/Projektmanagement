@@ -1,45 +1,40 @@
-package gui.aussenanlage;
+package gui.heizungen;
 
 
-import business.aussenanlage.AussenanlageModel;
+import business.heizungen.HeizungenModel;
 import business.kunde.Kunde;
 import business.kunde.KundeModel;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.sql.SQLException;
 import java.util.List;
 
-public class AussenanlageControl implements PropertyChangeListener {
+public class HeizungenControl implements PropertyChangeListener {
 
-    // das View-Objekt des Grundriss-Fensters
-    private AussenanlageView aussenanlageView;
+    // das View-Objekt des Heizungen-Fensters
+    private HeizungenView heizungenView;
 
-    private AussenanlageModel aussenanlageModel;
+    private HeizungenModel heizungenModel;
 
+   //TODO
     private KundeModel kundeModel;
 
 
-    public AussenanlageControl() throws Exception {
-        Stage stageAussenanlage = new Stage();
-        stageAussenanlage.initModality(Modality.APPLICATION_MODAL);
-        this.aussenanlageModel = AussenanlageModel.getInstance();
-        this.aussenanlageView = new AussenanlageView(this, stageAussenanlage, this.aussenanlageModel);
+    public HeizungenControl() throws Exception {
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        this.heizungenModel= HeizungenModel.getInstance();
+        this.heizungenView = new HeizungenView(this, stage, this.heizungenModel);
         this.kundeModel = KundeModel.getInstance();
-        this.aussenanlageModel.addPropertyChangeListener(this);
+        this.heizungenModel.addPropertyChangeListener(this);
     }
 
-    public void oeffneAussenanlageView(){
-        this.aussenanlageView.oeffneAussenanlageView();
+    public void oeffneHeizungenView(){
+        this.heizungenView.oeffneHeizungenView();
     }
-
-    /*public void leseAussenanlageSonderwuensche(){
-        //TODO
-        int p= kundeModel.getKunde().getPlannummer();
-        int i= kundeModel.getKunde().getKundennummer();
-
-    }*/
 
     public void hatDachgeschoss() {
         //TODO
@@ -54,8 +49,7 @@ public class AussenanlageControl implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         String propertyName = evt.getPropertyName();
-        if (propertyName.equals(AussenanlageModel.AUSSENANLAGE_PROPERTY)){
-
+        if (propertyName.equals(HeizungenModel.HEIZUNGEN_PROPERTY)){
 
         }
     }
@@ -63,25 +57,27 @@ public class AussenanlageControl implements PropertyChangeListener {
     public void test() throws SQLException, ClassNotFoundException {
         List<Integer>la = connectKunde();
         Kunde kunde = kundeModel.getInstance().getKunde();
-       // aussenanlageModel.getAussenanlagen().istValide(kunde,la);
     }
+
+// NIMMT SICH von KUndenmodel kunde (getKundennummer)und verbindet es mit Fliese
+    //GIbt fliesenliste von aktuellen Kunden
 
     public List<Integer> connectKunde() throws SQLException, ClassNotFoundException {
         Kunde kunde= kundeModel.getInstance().getKunde();
-        List<Integer>la = aussenanlageModel.loadAussenanlagenListe(kunde.getKundennummer());
+        List<Integer>la = heizungenModel.loadHeizungenListe(kunde.getKundennummer());
         return la;
     }
 
     public void speichereSonderwunsch(int sid) throws SQLException, ClassNotFoundException {
         int kid = kundeModel.getKunde().getKundennummer();
         List<Integer> li = connectKunde();
-        if(!li.contains(sid))
-            aussenanlageModel.speichereSonderwuensche(sid,kid);
+            if(!li.contains(sid))
+                heizungenModel.speichereSonderwuensche(sid,kid);
     }
 
     public void loescheSonderwuensche() throws SQLException {
         int kid = kundeModel.getKunde().getKundennummer();
-        aussenanlageModel.loescheSonderwuensche(kid);
+        heizungenModel.loescheSonderwuensche(kid);
     }
 }
 

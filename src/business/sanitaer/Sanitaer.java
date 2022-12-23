@@ -8,7 +8,7 @@ public class Sanitaer implements IValidierung {
     private String beschreibung;
     private double preis;
 
-    public Sanitaer() {
+    private Sanitaer() {
     }
 
     public Sanitaer(SanitaerEntity entity) {
@@ -43,7 +43,7 @@ public class Sanitaer implements IValidierung {
 
     @Override
     public String toString() {
-        return "Aussenanlage{" +
+        return "Sanitaer{" +
                 "id=" + id +
                 ", beschreibung='" + beschreibung + '\'' +
                 ", preis=" + preis +

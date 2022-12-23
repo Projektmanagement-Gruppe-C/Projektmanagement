@@ -1,4 +1,4 @@
-package business.innentureen;
+package business.innentueren;
 
 import business.IValidierung;
 
@@ -8,7 +8,7 @@ public class Innentueren implements IValidierung {
     private String beschreibung;
     private double preis;
 
-    public Innentueren() {
+    private Innentueren() {
     }
 
     public Innentueren(InnentuerenEntity entity) {
@@ -43,7 +43,7 @@ public class Innentueren implements IValidierung {
 
     @Override
     public String toString() {
-        return "Innentüren{" +
+        return "Innentueren{" +
                 "id=" + id +
                 ", beschreibung='" + beschreibung + '\'' +
                 ", preis=" + preis +

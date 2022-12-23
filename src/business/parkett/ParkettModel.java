@@ -8,11 +8,11 @@ import java.util.stream.Collectors;
 
 public class ParkettModel {
 
-    public static final String AUSSENANLAGE_PROPERTY = "aussenanlage";
+    public static final String PARKETT_PROPERTY = "parkett";
 
     private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
-    private List<Parkett> aussenanlagen;
+    private List<Parkett> parkett;
 
     private final ParkettDao parkettDao;
     private static ParkettModel parkettModel;
@@ -28,6 +28,11 @@ public class ParkettModel {
         return parkettModel;
     }
 
+    public List<Integer> loadParkettListe(int kid) {
+        List<Integer> parkett_kunde = parkettDao.getParkettListe(kid);
+        return parkett_kunde;
+    }
+
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         pcs.addPropertyChangeListener(listener);
     }
@@ -35,16 +40,31 @@ public class ParkettModel {
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         pcs.removePropertyChangeListener(listener);
     }
-
-    public void loadAussenanlagen() {
-        List<Parkett> aussenanlagen = parkettDao.getAussenanlagen()
-                .stream().map(Parkett::new).collect(Collectors.toList());
-        setAussenanlagen(aussenanlagen);
+//set fliesen liste
+    private void setParkett(List<Parkett> parkett) {
+        List<Parkett> oldParkett = this.parkett;
+        this.parkett = parkett;
+        this.pcs.firePropertyChange("parkett", oldParkett, parkett);
     }
 
-    private void setAussenanlagen(List<Parkett> aussenanlagen) {
-        List<Parkett> oldAnlagen = this.aussenanlagen;
-        this.aussenanlagen = aussenanlagen;
-        this.pcs.firePropertyChange("aussenanlage", oldAnlagen, aussenanlagen);
+    public List<Parkett> getParkett() {
+        return parkett;
+    }
+
+    //get alle Parkett als lsite
+    public List<Parkett> laodParkett() {
+        List<Parkett> parkett = parkettDao.getParkett()
+                .stream().map(Parkett::new).collect(Collectors.toList());
+        setParkett(parkett);
+        return parkett;
+    }
+//   gibt die aufgabe an die dao weiter
+    public void speichereSonderwuensche(int sid,int kid) throws SQLException{
+        parkettDao.speichereKundeByButton(sid,kid);
+    }
+
+
+    public void loescheSonderwuensche(int kid) throws SQLException {
+        parkettDao.loescheSonderwunsch(kid);
     }
 }

@@ -1,15 +1,15 @@
-package business.fenster_und_Außenpposten;
+package business.fenster_aussentuer;
 
-public class Fenster_AußentuerenEntity {
+public class FensterAussentuerEntity {
 
     private int id;
     private String beschreibung;
     private double preis;
 
-    public Fenster_AußentuerenEntity() {
+    public FensterAussentuerEntity() {
     }
 
-    public Fenster_AußentuerenEntity(int id, String beschreibung, double preis) {
+    public FensterAussentuerEntity(int id, String beschreibung, double preis) {
         this.id = id;
         this.beschreibung = beschreibung;
         this.preis = preis;

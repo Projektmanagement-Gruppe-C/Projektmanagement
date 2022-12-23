@@ -75,6 +75,8 @@ public class Kunde implements IValidierung {
 	}
 
 	Kunde() {}
+
+
 //TODO FRagen ob hier public darf
 	public Kunde(
             KundeEntity kundeEntity

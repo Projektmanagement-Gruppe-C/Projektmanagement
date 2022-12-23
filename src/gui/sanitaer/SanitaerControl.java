@@ -1,45 +1,41 @@
-package gui.aussenanlage;
+package gui.sanitaer;
 
 
-import business.aussenanlage.AussenanlageModel;
+import business.fenster_aussentuer.FensterAussentuerModel;
 import business.kunde.Kunde;
 import business.kunde.KundeModel;
+import business.sanitaer.SanitaerModel;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.sql.SQLException;
 import java.util.List;
 
-public class AussenanlageControl implements PropertyChangeListener {
+public class SanitaerControl implements PropertyChangeListener {
 
     // das View-Objekt des Grundriss-Fensters
-    private AussenanlageView aussenanlageView;
+    private SanitaerView view;
 
-    private AussenanlageModel aussenanlageModel;
+    private SanitaerModel model;
 
     private KundeModel kundeModel;
 
 
-    public AussenanlageControl() throws Exception {
+    public SanitaerControl() throws Exception {
         Stage stageAussenanlage = new Stage();
         stageAussenanlage.initModality(Modality.APPLICATION_MODAL);
-        this.aussenanlageModel = AussenanlageModel.getInstance();
-        this.aussenanlageView = new AussenanlageView(this, stageAussenanlage, this.aussenanlageModel);
+        this.model = SanitaerModel.getInstance();
+        this.view = new SanitaerView(this, stageAussenanlage, this.model);
         this.kundeModel = KundeModel.getInstance();
-        this.aussenanlageModel.addPropertyChangeListener(this);
+        this.model.addPropertyChangeListener(this);
     }
 
-    public void oeffneAussenanlageView(){
-        this.aussenanlageView.oeffneAussenanlageView();
+    public void oeffneSanitaerView(){
+        this.view.oeffneSanitaerView();
     }
 
-    /*public void leseAussenanlageSonderwuensche(){
-        //TODO
-        int p= kundeModel.getKunde().getPlannummer();
-        int i= kundeModel.getKunde().getKundennummer();
-
-    }*/
 
     public void hatDachgeschoss() {
         //TODO
@@ -54,8 +50,7 @@ public class AussenanlageControl implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         String propertyName = evt.getPropertyName();
-        if (propertyName.equals(AussenanlageModel.AUSSENANLAGE_PROPERTY)){
-
+        if (propertyName.equals(SanitaerModel.SANITAER_PROPERTY)){
 
         }
     }
@@ -68,7 +63,7 @@ public class AussenanlageControl implements PropertyChangeListener {
 
     public List<Integer> connectKunde() throws SQLException, ClassNotFoundException {
         Kunde kunde= kundeModel.getInstance().getKunde();
-        List<Integer>la = aussenanlageModel.loadAussenanlagenListe(kunde.getKundennummer());
+        List<Integer>la = model.loadSanitaerListe(kunde.getKundennummer());
         return la;
     }
 
@@ -76,12 +71,12 @@ public class AussenanlageControl implements PropertyChangeListener {
         int kid = kundeModel.getKunde().getKundennummer();
         List<Integer> li = connectKunde();
         if(!li.contains(sid))
-            aussenanlageModel.speichereSonderwuensche(sid,kid);
+            model.speichereSonderwuensche(sid,kid);
     }
 
     public void loescheSonderwuensche() throws SQLException {
         int kid = kundeModel.getKunde().getKundennummer();
-        aussenanlageModel.loescheSonderwuensche(kid);
+        model.loescheSonderwuensche(kid);
     }
 }
 

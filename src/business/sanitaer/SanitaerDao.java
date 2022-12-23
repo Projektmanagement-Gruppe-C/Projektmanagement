@@ -24,12 +24,12 @@ public class SanitaerDao {
         return instance;
     }
 
-    public List<SanitaerEntity> getAussenanlagen() {
-        List<SanitaerEntity> aussenanlagen = new ArrayList<>();
+    public List<SanitaerEntity> getSanitaer() {
+        List<SanitaerEntity> fliesen = new ArrayList<>();
         try {
-            ResultSet resultSet = datenbank.executeQuery("SELECT * FROM Außenanlage_Sonderwunsch");
+            ResultSet resultSet = datenbank.executeQuery("SELECT * FROM Sanitaer_Sonderwunsch");
             while (resultSet.next()) {
-                aussenanlagen.add(new SanitaerEntity(
+                fliesen.add(new SanitaerEntity(
                         resultSet.getInt(1),
                         resultSet.getString(2),
                         resultSet.getDouble(3)
@@ -38,6 +38,28 @@ public class SanitaerDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return aussenanlagen;
+        return fliesen;
+    }
+
+    public List<Integer> getSanitaerListe(int kID) {
+        List<Integer> sanitaer_kunde = new ArrayList<>();
+        try {
+            ResultSet resultSet = datenbank.executeQuery("SELECT sonderwunschid FROM Sanitaer_Sonderwunsch_Kunde WHERE kundeid="+kID+"\n");
+            while (resultSet.next()) {
+                sanitaer_kunde.add(resultSet.getInt(1));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return sanitaer_kunde;
+    }
+
+    public void speichereKundeByButton(int sID,int kID) throws SQLException {
+        int resultSet = datenbank.executeUpdate("INSERT INTO Sanitaer_Sonderwunsch_Kunde(sonderwunschid,kundeid) VALUES ("+sID+", "+kID+");");
+        System.out.println(resultSet);
+    }
+
+    public void loescheSonderwunsch(int kID) throws SQLException {
+        int resultSet = datenbank.executeUpdate("DELETE FROM Sanitaer_Sonderwunsch_Kunde WHERE kundeid="+kID+"\n");
     }
 }

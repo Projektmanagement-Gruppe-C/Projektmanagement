@@ -13,7 +13,6 @@ public class AussenanlageModel {
     private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
     private List<Aussenanlage> aussenanlagen;
-
     private final AussenanlageDao aussenanlageDao;
     private static AussenanlageModel aussenanlageModel;
 
@@ -53,4 +52,18 @@ public class AussenanlageModel {
         List<Integer> aussenanlagen_kunde = aussenanlageDao.getAussenanlagenListe(kID);
         return aussenanlagen_kunde;
     }
+
+    public List<Aussenanlage> getAussenanlagen() {
+        return aussenanlagen;
+    }
+    //   gibt die aufgabe an die dao weiter
+    public void speichereSonderwuensche(int sid,int kid) throws SQLException{
+        aussenanlageDao.speichereKundeByButton(sid,kid);
+    }
+
+//löscht alle sonderwunsche für außenanlage von kunde kid
+    public void loescheSonderwuensche(int kid) throws SQLException {
+        aussenanlageDao.loescheSonderwunsch(kid);
+    }
+
 }

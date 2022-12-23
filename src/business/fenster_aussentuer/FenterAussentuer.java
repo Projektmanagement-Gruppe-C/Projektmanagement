@@ -1,17 +1,17 @@
-package business.fenster_und_Außenpposten;
+package business.fenster_aussentuer;
 
 import business.IValidierung;
 
-public class Fenster_Außentueren implements IValidierung {
+public class FenterAussentuer implements IValidierung {
 
     private int id;
     private String beschreibung;
     private double preis;
 
-    public Fenster_Außentueren() {
+    private FenterAussentuer() {
     }
 
-    public Fenster_Außentueren(Fenster_AußentuerenEntity entity) {
+    public FenterAussentuer(FensterAussentuerEntity entity) {
         this.id = entity.getId();
         this.beschreibung = entity.getBeschreibung();
         this.preis = entity.getPreis();
@@ -43,7 +43,7 @@ public class Fenster_Außentueren implements IValidierung {
 
     @Override
     public String toString() {
-        return "Aussenanlage{" +
+        return "Fenster_Außentuer{" +
                 "id=" + id +
                 ", beschreibung='" + beschreibung + '\'' +
                 ", preis=" + preis +

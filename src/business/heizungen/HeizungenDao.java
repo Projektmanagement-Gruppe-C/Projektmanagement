@@ -24,12 +24,12 @@ public class HeizungenDao {
         return instance;
     }
 
-    public List<HeizungenEntity> getAussenanlagen() {
-        List<HeizungenEntity> aussenanlagen = new ArrayList<>();
+    public List<HeizungenEntity> getHeizungen() {
+        List<HeizungenEntity> heizungen = new ArrayList<>();
         try {
-            ResultSet resultSet = datenbank.executeQuery("SELECT * FROM Außenanlage_Sonderwunsch");
+            ResultSet resultSet = datenbank.executeQuery("SELECT * FROM Heizungen_Sonderwunsch");
             while (resultSet.next()) {
-                aussenanlagen.add(new HeizungenEntity(
+                heizungen.add(new HeizungenEntity(
                         resultSet.getInt(1),
                         resultSet.getString(2),
                         resultSet.getDouble(3)
@@ -38,6 +38,30 @@ public class HeizungenDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return aussenanlagen;
+        return heizungen;
+    }
+
+    public List<Integer> getHeizungenListe(int kID) {
+        List<Integer> heizungen_kunde_entities = new ArrayList<>();
+        try {
+            ResultSet resultSet = datenbank.executeQuery("SELECT Sonderwunschid FROM Heizungen_Sonderwunsch_Kunde WHERE Kundeid="+kID+"\n");
+            while (resultSet.next()) {
+                heizungen_kunde_entities.add(resultSet.getInt(1));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return heizungen_kunde_entities;
+    }
+
+    public void speichereKundeByButton(int sID,int kID) throws SQLException {
+        int resultSet = datenbank.executeUpdate("INSERT INTO Heizungen_Sonderwunsch_Kunde(sonderwunschid,Kundeid) VALUES ("+sID+", "+kID+");");
+        System.out.println(resultSet);
+    }
+
+    public void loescheSonderwunsch(int kID) throws SQLException {
+        int resultSet = datenbank.executeUpdate("DELETE FROM Heizungen_Sonderwunsch_Kunde WHERE Kundeid="+kID+"\n");
+        System.out.println(resultSet);
+
     }
 }

@@ -47,8 +47,17 @@ public class KundeView {
     private final Button btnAendern = new Button("Ändern");
     private final Button btnLoeschen = new Button("Löschen");
     private final MenuBar mnBar = new MenuBar();
+    // SOnderwuensche
     private final Menu mnSonderwuensche = new Menu("Sonderwünsche");
-    private final MenuItem mnItmAussenfenster = new MenuItem("Aussenfenstervarianten");
+    private final MenuItem mnItmAussenanlage = new MenuItem("Aussenanlagevarianten");
+    private final MenuItem mnItmFliesen = new MenuItem("Fliesenvarianten");
+    private final MenuItem mnItmInnentueren = new MenuItem("Innentuervarianten");
+    private final MenuItem mnItmParkett = new MenuItem("Parkettvarianten");
+    private final MenuItem mnItmFensterAussentuer = new MenuItem("Fenster-Aussentuervarianten");
+    private final MenuItem mnItmSanitaer = new MenuItem("Sanitaer-Aussentuervarianten");
+    private final MenuItem mnItmGrundriss = new MenuItem("Grundriss-Aussentuervarianten");
+    private final MenuItem mnItmHeizungen = new MenuItem("Heizungen-Aussentuervarianten");
+
     //-------Ende Attribute der grafischen Oberflaeche-------
 
     /**
@@ -109,7 +118,15 @@ public class KundeView {
         // MenuBar und Menu
         borderPane.setTop(mnBar);
         mnBar.getMenus().add(mnSonderwuensche);
-        mnSonderwuensche.getItems().add(mnItmAussenfenster);
+        mnSonderwuensche.getItems().add(mnItmAussenanlage);
+        mnSonderwuensche.getItems().add(mnItmFliesen);
+        mnSonderwuensche.getItems().add(mnItmInnentueren);
+        mnSonderwuensche.getItems().add(mnItmParkett);
+        mnSonderwuensche.getItems().add(mnItmFensterAussentuer);
+        mnSonderwuensche.getItems().add(mnItmSanitaer);
+        mnSonderwuensche.getItems().add(mnItmGrundriss);
+        mnSonderwuensche.getItems().add(mnItmHeizungen);
+
     }
 
     /* initialisiert die Listener zu den Steuerelementen auf der Maske */
@@ -129,9 +146,79 @@ public class KundeView {
             loescheKunde(plannummer);
         });
 
-        mnItmAussenfenster.setOnAction(aEvent -> {
+        mnItmAussenanlage.setOnAction(aEvent -> {
             try {
                 kundeControl.oeffneAussenanlageControl();
+            } catch (NullPointerException e2){
+                zeigeFehlermeldung("Kein Kunde","Wähl Kunden aus du OTTO");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+        mnItmFliesen.setOnAction(aEvent -> {
+            try {
+                kundeControl.oeffneFliesenControl();
+            } catch (NullPointerException e2){
+                zeigeFehlermeldung("Kein Kunde","Wähl Kunden aus du OTTO");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+        mnItmInnentueren.setOnAction(aEvent -> {
+               try {
+                    kundeControl.oeffneInnentuerenControl();
+                } catch (NullPointerException e2){
+                   zeigeFehlermeldung("Kein Kunde","Wähl Kunden aus du OTTO");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                });
+
+        mnItmFensterAussentuer.setOnAction(aEvent -> {
+            try {
+                kundeControl.oeffneFensterAussentuerControl();
+            } catch (NullPointerException e2){
+                zeigeFehlermeldung("Kein Kunde","Wähl Kunden aus du OTTO");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+        mnItmParkett.setOnAction(aEvent -> {
+            try {
+                kundeControl.oeffneParkettControl();
+            } catch (NullPointerException e2){
+                zeigeFehlermeldung("Kein Kunde","Wähl Kunden aus du OTTO");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+        mnItmSanitaer.setOnAction(aEvent -> {
+            try {
+                kundeControl.oeffneSanitaerControl();
+            } catch (NullPointerException e2){
+                zeigeFehlermeldung("Kein Kunde","Wähl Kunden aus du OTTO");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+        mnItmGrundriss.setOnAction(aEvent -> {
+            try {
+                kundeControl.oeffneGrundrissControl();
+            } catch (NullPointerException e2){
+                zeigeFehlermeldung("Kein Kunde","Wähl Kunden aus du OTTO");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+        mnItmHeizungen.setOnAction(aEvent -> {
+            try {
+                kundeControl.oeffneHeizungenControl();
             } catch (NullPointerException e2){
                 zeigeFehlermeldung("Kein Kunde","Wähl Kunden aus du OTTO");
             } catch (Exception e) {

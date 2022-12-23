@@ -8,7 +8,7 @@ public class Parkett implements IValidierung {
     private String beschreibung;
     private double preis;
 
-    public Parkett() {
+    private Parkett() {
     }
 
     public Parkett(ParkettEntity entity) {
@@ -43,7 +43,7 @@ public class Parkett implements IValidierung {
 
     @Override
     public String toString() {
-        return "Aussenanlage{" +
+        return "Parkett{" +
                 "id=" + id +
                 ", beschreibung='" + beschreibung + '\'' +
                 ", preis=" + preis +
