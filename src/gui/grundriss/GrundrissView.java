@@ -79,7 +79,6 @@ public class GrundrissView extends BasisView{
 			super.getGridPaneSonderwunsch().add(new Label("Euro"), 2, (i + 1));
 			super.getGridPaneSonderwunsch().add(checkBoxArray[i], 3, (i + 1));
 		}
-
 	}
 
 	@Override
@@ -87,12 +86,50 @@ public class GrundrissView extends BasisView{
 		int gsmtPreis;
 	}
 
+
+
+	public List<Integer> validierung(List<Integer> list) {
+
+		if(!(control.hatDachgeschoss())) {
+			chck4.setSelected(false);
+			chck4.setDisable(true);
+			list.remove(new Integer(4));
+
+			chck5.setSelected(false);
+			chck5.setDisable(true);
+			list.remove(new Integer(5));
+
+			chck6.setSelected(false);
+			chck6.setDisable(true);
+			list.remove(new Integer(6));
+		}
+
+		if(!list.contains(1)) {
+			chck2.setSelected(false);
+			list.remove(new Integer(2));
+			System.out.println("2 entfernt!");
+		}
+
+		if(!(control.hatDachgeschoss() && list.contains(5))) {
+			chck6.setSelected(false);
+			list.remove(new Integer(6));
+			System.out.println("6 entfernt!");
+		}
+
+		return list;
+	}
+
 	@Override
 	protected void speichereSonderwuensche() throws SQLException, ClassNotFoundException {
 		List<Integer> list = getChcks();
+
+		list = validierung(list);
+
 		control.loescheSonderwuensche();
-		for(int i : list)
+		for(int i : list) {
 			control.speichereSonderwunsch(i);
+		}
+
 	}
 
 	public void oeffneGrundrissView() {

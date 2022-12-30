@@ -97,11 +97,7 @@ public class AussenanlageView extends BasisView {
     }
 
     /*schreibt die ausgesuchten Sonderwuensche in eine CSV-Datei */
-    @Override
-    protected void schreibeInCSV() {
-        //TODO
-        System.out.println("CSV Export_Aussenanlagen");
-    }
+
 
     public void oeffneAussenanlageView() {
         super.oeffneBasisView();

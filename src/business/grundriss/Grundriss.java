@@ -2,6 +2,8 @@ package business.grundriss;
 
 import business.IValidierung;
 
+import java.util.Arrays;
+
 public class Grundriss implements IValidierung {
 
     private int id;
@@ -50,9 +52,40 @@ public class Grundriss implements IValidierung {
                 '}';
     }
 
+
     @Override
     public boolean istValide() {
         // TODO
-        return false;
+           /*int plannummer = 0;
+        boolean[] checkbox_List = {true, false, true, false, false, false};
+        int[] plannummer_EG = {1, 6, 7, 14, 15};
+        int[] plannummer_OG = {2, 3, 4, 5, 8, 9, 10, 11, 12, 13, 16, 17, 18, 19, 20, 21, 22, 23, 24};
+
+        if (Arrays.asList(plannummer_EG).contains(plannummer)) {
+            if (checkbox_List[4] == true || checkbox_List[5] == true || checkbox_List[6] == true) {
+                return false;
+            } else if (checkbox_List[2] == true && checkbox_List[1] == false) {
+                return false;
+            } else {
+                return true;
+            }
+        } else {
+            return false;
+        }
+
+
+        if (Arrays.asList(plannummer_OG).contains(plannummer)) {
+            if (checkbox_List[2] == true && checkbox_List[1] == false) {
+                return false;
+            } else if (checkbox_List[6] == true && checkbox_List[5] == false) {
+                return false;
+            } else {
+                return true;
+            }
+        } else {
+            return false;
+        }
+        */
+    return false;
     }
 }
