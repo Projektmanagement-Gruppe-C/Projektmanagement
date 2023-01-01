@@ -9,6 +9,7 @@ import gui.fenster_aussentuer.FensterAussentuerControl;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -86,36 +87,31 @@ public class GrundrissView extends BasisView{
 		int gsmtPreis;
 	}
 
-
+	public void checkboxDeaktivieren(List<Integer> list, CheckBox ch, int index,boolean disable) {
+		ch.setSelected(false);
+		list.remove(new Integer(index));
+		if (disable) {
+			ch.setDisable(true);
+		}
+	}
 
 	public List<Integer> validierung(List<Integer> list) {
 
 		if(!(control.hatDachgeschoss())) {
-			chck4.setSelected(false);
-			chck4.setDisable(true);
-			list.remove(new Integer(4));
+			checkboxDeaktivieren(list,chck4,4,false);
 
-			chck5.setSelected(false);
-			chck5.setDisable(true);
-			list.remove(new Integer(5));
+			checkboxDeaktivieren(list,chck5,5,false);
 
-			chck6.setSelected(false);
-			chck6.setDisable(true);
-			list.remove(new Integer(6));
+			checkboxDeaktivieren(list,chck6,6,false);
 		}
 
 		if(!list.contains(1)) {
-			chck2.setSelected(false);
-			list.remove(new Integer(2));
-			System.out.println("2 entfernt!");
+			checkboxDeaktivieren(list,chck2,2,false);
 		}
 
 		if(!(control.hatDachgeschoss() && list.contains(5))) {
-			chck6.setSelected(false);
-			list.remove(new Integer(6));
-			System.out.println("6 entfernt!");
+			checkboxDeaktivieren(list,chck6,6,false);
 		}
-
 		return list;
 	}
 
