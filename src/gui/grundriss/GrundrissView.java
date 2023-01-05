@@ -173,7 +173,6 @@ public class GrundrissView extends BasisView{
 			System.out.println("Die Konstellation ist nicht erlaubt! Sonderwuensche koennen nicht gespeichert werden!");
 			return;
 		}
-
 		for(int i = 0; i < ausgewaehlteSw.length; i++) {
 			if(ausgewaehlteSw[i] == 1) {
 				grundrissModel.setKundeSonderwunsch(i+1);

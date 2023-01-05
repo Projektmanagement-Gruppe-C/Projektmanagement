@@ -54,6 +54,7 @@ public class GrundrissModel {
             e.printStackTrace();
         }
     }
+
     public static GrundrissModel getInstance() throws SQLException, ClassNotFoundException {
         if (instance == null) {
             instance = new GrundrissModel();
