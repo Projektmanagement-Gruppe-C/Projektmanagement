@@ -5,6 +5,7 @@ import business.fenster_aussentuer.FensterAussentuerModel;
 import business.kunde.Kunde;
 import business.kunde.KundeModel;
 import business.sanitaer.SanitaerModel;
+import javafx.scene.control.CheckBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -37,9 +38,21 @@ public class SanitaerControl implements PropertyChangeListener {
     }
 
 
-    public void hatDachgeschoss() {
-        //TODO
 
+    public boolean hatDachgeschoss() {
+        switch (kundeModel.getKunde().getPlannummer()){
+            case 1:
+            case 6:
+            case 7:
+            case 14:
+            case 15:
+            case 24:
+                System.out.println("Kein Dach");
+                return false;
+            default:
+                System.out.println("Ein Dach");
+                return true;
+        }
     }
 
     public boolean pruefeKonstellationSonderwuensche(int[] ausgewaehlteSw){

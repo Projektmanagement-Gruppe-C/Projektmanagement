@@ -1,6 +1,9 @@
 package business.innentueren;
 
 import business.IValidierung;
+import business.kunde.KundeModel;
+import gui.grundriss.GrundrissControl;
+import gui.innentueren.InnentuerenControl;
 
 public class Innentueren implements IValidierung {
 
@@ -52,7 +55,7 @@ public class Innentueren implements IValidierung {
 
     @Override
     public boolean istValide() {
-        // TODO
+
         return false;
     }
 }

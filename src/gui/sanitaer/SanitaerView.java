@@ -17,14 +17,14 @@ import java.util.List;
 public class SanitaerView extends BasisView {
 
     // das Control-Objekt des Grundriss-Fensters
-    private SanitaerControl sanitaerControl;
+    private SanitaerControl control;
     private SanitaerModel sanitaerModel;
 
     // ---Anfang Attribute der grafischen Oberflaeche---
     private Label lbl1 = new Label("Mehrpreis für ein größeres Waschbecken im OG");
     private Label lbl2 = new Label("Mehrpreis für ein größeres Waschbecken im DG");
     private Label lbl3 = new Label("Mehrpreis für eine bodentiefe Dusche im OG");
-    private Label lbl4 = new Label("Mehrpreis für ein größeres Waschbecken im DG");
+    private Label lbl4 = new Label("Mehrpreis für eine bodentiefe Dusche im DG");
 
 
     private TextField txt1 = new TextField();
@@ -38,13 +38,35 @@ public class SanitaerView extends BasisView {
     private CheckBox chck3 = new CheckBox();
     private CheckBox chck4 = new CheckBox();
 
+    public void checkboxDeaktivieren(List<Integer> list, CheckBox ch, int index, boolean disable) {
+        ch.setSelected(false);
+        list.remove(new Integer(index));
+        if (disable) {
+            ch.setDisable(true);
+        }
+    }
 
+    public List<Integer> validierung(List<Integer> listSanitaer) {
+        if (listSanitaer.contains(1)) {
+            checkboxDeaktivieren(listSanitaer,chck3,3,false);
+        }
+
+        if (control.hatDachgeschoss() && listSanitaer.contains(2)) {
+            checkboxDeaktivieren(listSanitaer,chck4,4,false);
+        }
+
+        if (!control.hatDachgeschoss()) {
+            checkboxDeaktivieren(listSanitaer,chck2,2,false);
+            checkboxDeaktivieren(listSanitaer,chck4,4,false);
+        }
+        return listSanitaer;
+    }
 
     // -------Ende Attribute der grafischen Oberflaeche-------
 
     public SanitaerView(SanitaerControl sanitaerControl, Stage stage, SanitaerModel model) throws SQLException, ClassNotFoundException {
         super(stage);
-        this.sanitaerControl = sanitaerControl;
+        this.control = sanitaerControl;
         stage.setTitle("Sonderwuensche zu Sanitaer-Varianten");
 
        // this.aussenanlageControl.leseAussenanlageSonderwuensche();
@@ -84,9 +106,12 @@ public class SanitaerView extends BasisView {
     @Override
     protected void speichereSonderwuensche() throws SQLException, ClassNotFoundException {
         List<Integer> list = getChcks();
-        sanitaerControl.loescheSonderwuensche();
+
+        list = validierung(list);
+
+        control.loescheSonderwuensche();
         for(int i : list)
-            sanitaerControl.speichereSonderwunsch(i);
+            control.speichereSonderwunsch(i);
     }
 
     public void oeffneSanitaerView() {
@@ -94,7 +119,7 @@ public class SanitaerView extends BasisView {
     }
 
     protected void getSanitaerKunde() throws SQLException, ClassNotFoundException {
-        List<Integer> liste= sanitaerControl.connectKunde();
+        List<Integer> liste= control.connectKunde();
         for(int i:liste){
             if(i==1)
                 chck1.setSelected(true);

@@ -15,7 +15,7 @@ import java.util.List;
 public class HeizungenControl implements PropertyChangeListener {
 
     // das View-Objekt des Heizungen-Fensters
-    private HeizungenView heizungenView;
+    private HeizungenView view;
 
     private HeizungenModel heizungenModel;
 
@@ -27,18 +27,37 @@ public class HeizungenControl implements PropertyChangeListener {
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
         this.heizungenModel= HeizungenModel.getInstance();
-        this.heizungenView = new HeizungenView(this, stage, this.heizungenModel);
+        this.view = new HeizungenView(this, stage, this.heizungenModel);
         this.kundeModel = KundeModel.getInstance();
         this.heizungenModel.addPropertyChangeListener(this);
     }
 
     public void oeffneHeizungenView(){
-        this.heizungenView.oeffneHeizungenView();
+        this.view.oeffneHeizungenView();
     }
 
-    public void hatDachgeschoss() {
-        //TODO
+    public boolean hatDachgeschoss() {
+        switch (kundeModel.getKunde().getPlannummer()){
+            case 1:
+            case 6:
+            case 7:
+            case 14:
+            case 15:
+            case 24:
+                System.out.println("Kein Dach");
+                return false;
+            default:
+                System.out.println("Ein Dach");
+                return true;
+        }
+    }
 
+    public boolean validierung() {
+        int x=0,y=0,z=0;
+
+        List<Integer> listInnentueren = view.getChcks();
+
+        return false;
     }
 
     public boolean pruefeKonstellationSonderwuensche(int[] ausgewaehlteSw){

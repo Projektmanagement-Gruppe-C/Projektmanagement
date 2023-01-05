@@ -42,9 +42,31 @@ public class InnentuerenControl implements PropertyChangeListener {
 
     }*/
 
-	public void hatDachgeschoss() {
-		//TODO
+	public boolean hatDachgeschoss() {
+		switch (kundeModel.getKunde().getPlannummer()){
+			case 1:
+			case 6:
+			case 7:
+			case 14:
+			case 15:
+			case 24:
+				System.out.println("Kein Dach");
+				return false;
+			default:
+				System.out.println("Ein Dach");
+				return true;
+		}
+	}
 
+	public KundeModel getKundeModel() {
+		return kundeModel;
+	}
+
+	public boolean validierung() {
+		int x=0,y=0,z=0;
+		List<Integer> listInnentueren = view.getChcks();
+
+		return false;
 	}
 
 	public boolean pruefeKonstellationSonderwuensche(int[] ausgewaehlteSw){
