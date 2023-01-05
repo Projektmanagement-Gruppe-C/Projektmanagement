@@ -1,6 +1,8 @@
 package business.fenster_aussentuer;
 
 import business.IValidierung;
+import gui.fenster_aussentuer.FensterAussentuerView;
+import java.util.List;
 
 public class FenterAussentuer implements IValidierung {
 
@@ -34,6 +36,7 @@ public class FenterAussentuer implements IValidierung {
     }
 
     public double getPreis() {
+
         return preis;
     }
 
@@ -49,6 +52,20 @@ public class FenterAussentuer implements IValidierung {
                 ", preis=" + preis +
                 '}';
     }
+    public String toString2(List<Integer> chcks) {
+        String s="";
+
+        for(int i : chcks)
+            if (id==i)
+                s+= "Fenster_Außentuer{" +
+                        "id=" + id +
+                        ", beschreibung='" + beschreibung + '\'' +
+                        ", preis=" + preis +
+                        '}';
+        return  s;
+
+    }
+
 
     @Override
     public boolean istValide() {

@@ -1,10 +1,8 @@
 package gui.parkett;
 
-import business.fliesen.Fliesen;
-import business.fliesen.FliesenModel;
+import gui.basis.BasisView;
 import business.parkett.Parkett;
 import business.parkett.ParkettModel;
-import gui.basis.BasisView;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;

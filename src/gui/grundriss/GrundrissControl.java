@@ -1,10 +1,8 @@
 package gui.grundriss;
 
-import business.fenster_aussentuer.FensterAussentuerModel;
 import business.grundriss.GrundrissModel;
 import business.kunde.Kunde;
 import business.kunde.KundeModel;
-import gui.fenster_aussentuer.FensterAussentuerView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 

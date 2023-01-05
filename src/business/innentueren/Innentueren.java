@@ -2,6 +2,8 @@ package business.innentueren;
 
 import business.IValidierung;
 
+import java.util.List;
+
 public class Innentueren implements IValidierung {
 
     private int id;
@@ -48,6 +50,21 @@ public class Innentueren implements IValidierung {
                 ", beschreibung='" + beschreibung + '\'' +
                 ", preis=" + preis +
                 '}';
+    }
+    public String toString2(List<Integer> chcks) {
+        String s = "";
+
+        for (int i : chcks)
+            if (id == i)
+                s += "Innentueren{" +
+                        "id=" + id +
+                        ", beschreibung='" + beschreibung + '\'' +
+                        ", preis=" + preis +
+                        '}';
+
+
+        return  s;
+
     }
 
     @Override

@@ -1,7 +1,6 @@
 package gui.sanitaer;
 
 
-import business.fenster_aussentuer.FensterAussentuerModel;
 import business.kunde.Kunde;
 import business.kunde.KundeModel;
 import business.sanitaer.SanitaerModel;

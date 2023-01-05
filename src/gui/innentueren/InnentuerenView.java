@@ -1,11 +1,8 @@
 package gui.innentueren;
 
-import business.aussenanlage.Aussenanlage;
-import business.aussenanlage.AussenanlageModel;
+import gui.basis.BasisView;
 import business.innentueren.Innentueren;
 import business.innentueren.InnentuerenModel;
-import gui.aussenanlage.AussenanlageControl;
-import gui.basis.BasisView;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
@@ -137,7 +134,7 @@ public class InnentuerenView extends BasisView {
 	@Override
 	protected void schreibeInCSV() {
 		try {
-			model.schreibeFreizeitbaederInCsvDatei();
+			model.schreibeFreizeitbaederInCsvDatei(getChcks());
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}

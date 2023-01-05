@@ -1,7 +1,5 @@
 package gui.fenster_aussentuer;
 
-import business.aussenanlage.Aussenanlage;
-import business.aussenanlage.AussenanlageModel;
 import business.fenster_aussentuer.FensterAussentuerModel;
 import business.fenster_aussentuer.FenterAussentuer;
 import gui.basis.BasisView;
@@ -93,7 +91,8 @@ public class FensterAussentuerView extends BasisView {
 
     @Override
     protected void berechneUndZeigePreisSonderwuensche() {
-        int gsmtPreis;
+
+        int a ;
     }
 
     @Override
@@ -102,11 +101,6 @@ public class FensterAussentuerView extends BasisView {
         fensterAussentuerControl.loescheSonderwuensche();
         for(int i : list)
             fensterAussentuerControl.speichereSonderwunsch(i);
-    }
-
-    @Override
-    protected void schreibeInCSV() {
-
     }
 
     public void oeffneFensterAussentuerView() {
@@ -155,7 +149,6 @@ public class FensterAussentuerView extends BasisView {
 
     public List<Integer> getChcks() {
         List <Integer> list = new ArrayList<>();
-
         if(chck1.isSelected())
             list.add(1);
         if(chck2.isSelected())
@@ -174,10 +167,15 @@ public class FensterAussentuerView extends BasisView {
             list.add(8);
         if(chck9.isSelected())
             list.add(9);
-
-
-
         return list;
+    }
+    @Override
+    protected void schreibeInCSV() {
+        try {
+            fensterAussentuerModel.schreibeFreizeitbaederInCsvDatei(getChcks());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 

@@ -1,7 +1,6 @@
 package gui.parkett;
 
 
-import business.fliesen.FliesenModel;
 import business.kunde.Kunde;
 import business.kunde.KundeModel;
 import business.parkett.ParkettModel;

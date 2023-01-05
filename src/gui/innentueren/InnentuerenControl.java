@@ -1,10 +1,8 @@
 package gui.innentueren;
 
-import business.aussenanlage.AussenanlageModel;
 import business.innentueren.InnentuerenModel;
 import business.kunde.Kunde;
 import business.kunde.KundeModel;
-import gui.aussenanlage.AussenanlageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.beans.PropertyChangeEvent;

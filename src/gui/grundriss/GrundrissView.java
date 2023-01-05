@@ -1,11 +1,8 @@
 package gui.grundriss;
 
-import business.fenster_aussentuer.FensterAussentuerModel;
-import business.fenster_aussentuer.FenterAussentuer;
+import gui.basis.BasisView;
 import business.grundriss.Grundriss;
 import business.grundriss.GrundrissModel;
-import gui.basis.BasisView;
-import gui.fenster_aussentuer.FensterAussentuerControl;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
@@ -17,7 +14,7 @@ import java.util.List;
  * Klasse, welche das Fenster mit den Sonderwuenschen zu 
  * den Grundrissvarianten bereitstellt.
  */
-public class GrundrissView extends BasisView{
+public class GrundrissView extends BasisView {
  
  	// das Control-Objekt des Grundriss-Fensters
 	private GrundrissControl control;
@@ -150,7 +147,11 @@ public class GrundrissView extends BasisView{
 	}
 	@Override
 	protected void schreibeInCSV() {
-
+		try {
+			model.schreibeFreizeitbaederInCsvDatei(getChcks());
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 }
 

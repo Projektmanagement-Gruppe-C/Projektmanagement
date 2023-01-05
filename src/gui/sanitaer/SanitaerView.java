@@ -1,10 +1,8 @@
 package gui.sanitaer;
 
-import business.fenster_aussentuer.FensterAussentuerModel;
-import business.fenster_aussentuer.FenterAussentuer;
+import gui.basis.BasisView;
 import business.sanitaer.Sanitaer;
 import business.sanitaer.SanitaerModel;
-import gui.basis.BasisView;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;

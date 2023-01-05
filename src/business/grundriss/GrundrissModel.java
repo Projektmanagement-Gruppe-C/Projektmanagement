@@ -1,7 +1,11 @@
 package business.grundriss;
 
+import business.fenster_aussentuer.FenterAussentuer;
+
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -66,5 +70,19 @@ public class GrundrissModel {
 
     public void loescheSonderwuensche(int kid) throws SQLException {
         grundrissDao.loescheSonderwunsch(kid);
+    }
+    public void schreibeFreizeitbaederInCsvDatei(List<Integer> chcks) throws Exception {
+
+        BufferedWriter aus = new BufferedWriter(new FileWriter("Grundriss.csv", true));
+        aus.write("GrundrissModel");
+        aus.newLine();
+        for (Grundriss x : getGrundriss()) {
+            aus.write(x.toString2(chcks));
+            aus.newLine();
+            System.out.println(x.toString2(chcks));
+        }
+        aus.close();
+
+
     }
 }

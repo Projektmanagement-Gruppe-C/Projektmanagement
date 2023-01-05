@@ -2,6 +2,8 @@ package business.grundriss;
 
 import business.IValidierung;
 
+import java.util.List;
+
 public class Grundriss implements IValidierung {
 
     private int id;
@@ -43,11 +45,27 @@ public class Grundriss implements IValidierung {
 
     @Override
     public String toString() {
+
         return "Grundriss{" +
                 "id=" + id +
                 ", beschreibung='" + beschreibung + '\'' +
                 ", preis=" + preis +
                 '}';
+    }
+    public String toString2(List<Integer> chcks) {
+        String s = "";
+
+            for (int i : chcks)
+                if (id == i)
+                    s += "Grundriss{" +
+                            "id=" + id +
+                            ", beschreibung='" + beschreibung + '\'' +
+                            ", preis=" + preis +
+                            '}';
+
+
+        return  s;
+
     }
 
     @Override

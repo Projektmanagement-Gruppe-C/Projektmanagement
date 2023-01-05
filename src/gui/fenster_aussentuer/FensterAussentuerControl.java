@@ -1,7 +1,6 @@
 package gui.fenster_aussentuer;
 
 
-import business.aussenanlage.AussenanlageModel;
 import business.fenster_aussentuer.FensterAussentuerModel;
 import business.kunde.Kunde;
 import business.kunde.KundeModel;

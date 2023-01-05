@@ -1,9 +1,9 @@
 package gui.heizungen;
 
 
+import gui.basis.BasisView;
 import business.heizungen.Heizungen;
 import business.heizungen.HeizungenModel;
-import gui.basis.BasisView;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
