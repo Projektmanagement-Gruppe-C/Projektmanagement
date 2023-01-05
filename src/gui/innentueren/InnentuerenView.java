@@ -15,19 +15,19 @@ public class InnentuerenView extends BasisView{
    
     //---Anfang Attribute der grafischen Oberflaeche---
     private final Label lblKlarglas
-        = new Label("Mehrpreis für die Ausführung eines Glasausschnitts"
-        		+ "(Klarglas) in einer Innentür:");
+        = new Label("Mehrpreis fï¿½r die Ausfï¿½hrung eines Glasausschnitts"
+        		+ "(Klarglas) in einer Innentï¿½r:");
     private final TextField txtPreisKlarglas 	= new TextField();
     private final Label lblKlarglasEuro 		= new Label("Euro pro Tuer");
     private final TextField anzahlKlarglas      = new TextField("0");
    
-    private final Label lblMilchglas = new Label("Mehrpreis für die Ausführung eines Glasausschnitts"
-    		+ "(Milchglas) in einer Innentür:");
+    private final Label lblMilchglas = new Label("Mehrpreis fï¿½r die Ausfï¿½hrung eines Glasausschnitts"
+    		+ "(Milchglas) in einer Innentï¿½r:");
     private final TextField txtPreisMilchglas 	= new TextField();
     private final Label lblMilchglasEuro 		= new Label("Euro pro Tuer");
     private final TextField anzahlMilchglas     = new TextField("0");
     
-    private final Label lblGarageHolz = new Label("Innentür zur Garage als Holztür:");
+    private final Label lblGarageHolz = new Label("Innentï¿½r zur Garage als Holztï¿½r:");
     private final TextField txtPreisGarageHolz 	= new TextField();
     private final Label lblGarageHolzEuro		= new Label("Euro");
     private final CheckBox chckBxGarageHolz		= new CheckBox();
@@ -50,7 +50,8 @@ public class InnentuerenView extends BasisView{
     	super(innentuerenStage);
         this.innentuerenControl = innentuerenControl;
         innentuerenStage.setTitle("SonderwÃ¼nsche zu den Innentueren");
-                
+		innentuerenStage.setWidth(800.0);
+
 	    this.initKomponenten();
 	    this.leseInnentuerenSonderwuensche();
     }
@@ -111,8 +112,15 @@ public class InnentuerenView extends BasisView{
  		// Es wird erst die Methode pruefeKonstellationSonderwuensche(int[] ausgewaehlteSw)
   		// aus dem Control aufgerufen, dann die Sonderwuensche gespeichert.
   	}
-  	
- 	
- }
+
+	/*schreibt die ausgesuchten Sonderwuensche in eine CSV-Datei */
+	@Override
+	protected void schreibeInCSV() {
+		//TODO
+		System.out.println("CSV Export_Innentï¿½ren");
+	}
+
+
+}
 
 

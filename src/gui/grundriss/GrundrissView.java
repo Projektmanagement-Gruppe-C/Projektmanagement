@@ -137,8 +137,14 @@ public class GrundrissView extends BasisView{
  		// Es wird erst die Methode pruefeKonstellationSonderwuensche(int[] ausgewaehlteSw)
   		// aus dem Control aufgerufen, dann die Sonderwuensche gespeichert.
   	}
-  	
- 	
- }
+
+	/*schreibt die ausgesuchten Sonderwuensche in eine CSV-Datei */
+	protected void schreibeInCSV() {
+		//TODO
+		System.out.println("CSV Export_Grundriss");
+	}
+
+
+}
 
 

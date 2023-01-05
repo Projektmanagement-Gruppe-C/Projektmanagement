@@ -8,6 +8,7 @@ import business.kunde.Kunde;
 import business.kunde.KundeModel;
 import gui.aussenanlage.AussenanlageControl;
 import gui.grundriss.GrundrissControl;
+import gui.grundrissKunde.GrundrissKundeControl;
 import gui.innentueren.InnentuerenControl;
 import javafx.stage.Stage;
 
@@ -28,9 +29,10 @@ public class KundeControl implements PropertyChangeListener {
     zu den Innentueren zu dem Kunden */
     private InnentuerenControl innentuerenControl;
 
-	  private AussenanlageControl aussenanlageControl;
+	private AussenanlageControl aussenanlageControl;
 
-    
+	private GrundrissKundeControl grundrissKundeControl;
+
     /**
 	 * erzeugt ein ControlObjekt inklusive View-Objekt und Model-Objekt zum 
 	 * Grundfenster mit den Kundendaten.
@@ -60,6 +62,21 @@ public class KundeControl implements PropertyChangeListener {
 		}
     	this.grundrissControl.oeffneGrundrissView();
     }
+
+
+	/*
+	 * erstellt, falls nicht vorhanden, ein Grundriss-Control-Objekt.
+	 * Das GrundrissKundeView wird sichtbar gemacht.
+	 */
+
+
+	public void oeffneGrundrissKundeControl(){
+		if (this.grundrissKundeControl == null){
+			this.grundrissKundeControl = new GrundrissKundeControl(kundeModel);
+		}
+		this.grundrissKundeControl.oeffneGrundrissKundeView();
+	}
+
 
     /*
      * erstellt, falls nicht vorhanden, ein Innentueren-Control-Objekt.
