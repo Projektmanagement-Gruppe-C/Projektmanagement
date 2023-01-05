@@ -109,6 +109,7 @@ public class SanitaerView extends BasisView {
 
         list = validierung(list);
 
+
         control.loescheSonderwuensche();
         for(int i : list)
             control.speichereSonderwunsch(i);
