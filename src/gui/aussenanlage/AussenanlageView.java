@@ -15,7 +15,8 @@ import java.util.List;
 public class AussenanlageView extends BasisView {
 
     // das Control-Objekt des Grundriss-Fensters
-    private AussenanlageControl aussenanlageControl;
+    // private AussenanlageControl aussenanlageControl;
+    private AussenanlageControl control;
     private AussenanlageModel aussenanlageModel;
 
     // ---Anfang Attribute der grafischen Oberflaeche---
@@ -45,9 +46,36 @@ public class AussenanlageView extends BasisView {
 
     // -------Ende Attribute der grafischen Oberflaeche-------
 
+
+    // Methode für Checkbox deaktivierung
+    public void checkboxDeaktivieren(List<Integer> list, CheckBox ch, int index, boolean disable) {
+        ch.setSelected(false);
+        list.remove(new Integer(index));//kein richtiger fehler -> Lösung anstatt index element übergeben.
+        if (disable) {
+            ch.setDisable(true);
+        }
+    }
+
+    //Validierung
+    public List<Integer> validierung(List<Integer> listSanitaer) {
+        if (listSanitaer.contains(1)) {
+            checkboxDeaktivieren(listSanitaer,chck3,3,false);
+        }
+
+        if (control.hatDachgeschoss() && listSanitaer.contains(2)) { // 2 checkbox 2
+            checkboxDeaktivieren(listSanitaer,chck4,4,false);
+        }
+
+        if (!control.hatDachgeschoss()) {
+            checkboxDeaktivieren(listSanitaer,chck2,2,false);
+            checkboxDeaktivieren(listSanitaer,chck4,4,false);
+        }
+        return listSanitaer;
+    }
+
     public AussenanlageView(AussenanlageControl aussenanlageControl, Stage aussenanlageStage,AussenanlageModel aussenanlageModel) throws SQLException, ClassNotFoundException {
         super(aussenanlageStage);
-        this.aussenanlageControl = aussenanlageControl;
+        this.control = aussenanlageControl;
         aussenanlageStage.setTitle("Sonderwuensche zu Aussenanlage-Varianten");
 
        // this.aussenanlageControl.leseAussenanlageSonderwuensche();
@@ -91,9 +119,13 @@ public class AussenanlageView extends BasisView {
     @Override
     protected void speichereSonderwuensche() throws SQLException, ClassNotFoundException {
         List<Integer> list = getChcks();
-        aussenanlageControl.loescheSonderwuensche();
+
+        //liste für die validierung
+        list = validierung(list);
+
+        control.loescheSonderwuensche();
         for(int i : list)
-            aussenanlageControl.speichereSonderwunsch(i);
+            control.speichereSonderwunsch(i);
     }
 
     /*schreibt die ausgesuchten Sonderwuensche in eine CSV-Datei */
@@ -104,7 +136,7 @@ public class AussenanlageView extends BasisView {
     }
 
     protected void getAussenanlageKunde() throws SQLException, ClassNotFoundException {
-        List<Integer> liste=aussenanlageControl.connectKunde();
+        List<Integer> liste = control.connectKunde();
         for(int i:liste){
             if(i==1)
                 chckTerasse.setSelected(true);
