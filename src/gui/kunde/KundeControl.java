@@ -6,9 +6,9 @@ import java.sql.SQLException;
 
 import business.kunde.Kunde;
 import business.kunde.KundeModel;
-import gui.grundrissKunde.GrundrissKundeControl;
 import gui.aussenanlage.AussenanlageControl;
 import gui.grundriss.GrundrissControl;
+import gui.grundrissKunde.GrundrissKundeControl;
 import gui.innentueren.InnentuerenControl;
 import javafx.stage.Stage;
 
@@ -23,7 +23,7 @@ public class KundeControl implements PropertyChangeListener {
     private final KundeModel kundeModel;
     /* das GrundrissControl-Objekt fuer die Sonderwuensche
        zum Grundriss zu dem Kunden */
-    private GrundrissControl GrundrissControl;
+    private GrundrissControl grundrissControl;
 
     /* das InnentuerenControl-Objekt fuer die Sonderwuensche
     zu den Innentueren zu dem Kunden */
@@ -31,11 +31,8 @@ public class KundeControl implements PropertyChangeListener {
 
 	private AussenanlageControl aussenanlageControl;
 
-	private GrundrissKundeControl GrundrissKundeControl;
+	private GrundrissKundeControl grundrissKundeControl;
 
-
-
-    
     /**
 	 * erzeugt ein ControlObjekt inklusive View-Objekt und Model-Objekt zum 
 	 * Grundfenster mit den Kundendaten.
@@ -52,10 +49,18 @@ public class KundeControl implements PropertyChangeListener {
      * Das GrundrissView wird sichtbar gemacht.
      */
     public void oeffneGrundrissControl(){
-    	if (this.GrundrissControl == null){
-    		this.GrundrissControl = new GrundrissControl(kundeModel);
-      	}
-    	this.GrundrissControl.oeffneGrundrissView();
+		if (this.kundeModel.getKunde() == null) {
+			this.kundeView.zeigeFehlermeldung("Fehler", "Bitte zuerst einen Kunden auswählen.");
+			return;
+		}
+    	if (this.grundrissControl == null){
+			try {
+				this.grundrissControl = new GrundrissControl(this.kundeModel.getKunde().getId());
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+		}
+    	this.grundrissControl.oeffneGrundrissView();
     }
 
 
@@ -66,10 +71,10 @@ public class KundeControl implements PropertyChangeListener {
 
 
 	public void oeffneGrundrissKundeControl(){
-		if (this.GrundrissKundeControl == null){
-			this.GrundrissKundeControl = new GrundrissKundeControl(kundeModel);
+		if (this.grundrissKundeControl == null){
+			this.grundrissKundeControl = new GrundrissKundeControl(kundeModel);
 		}
-		this.GrundrissKundeControl.oeffneGrundrissKundeView();
+		this.grundrissKundeControl.oeffneGrundrissKundeView();
 	}
 
 
@@ -125,5 +130,4 @@ public class KundeControl implements PropertyChangeListener {
 			this.kundeView.setKundeDaten(kunde);
 		}
 	}
-
 }

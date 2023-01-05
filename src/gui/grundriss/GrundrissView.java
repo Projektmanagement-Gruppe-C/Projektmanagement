@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 public class GrundrissView extends BasisView{
  
  	// das Control-Objekt des Grundriss-Fensters
-	private final GrundrissControl GrundrissControl;
+	private final GrundrissControl grundrissControl;
    
     //---Anfang Attribute der grafischen Oberflaeche---
     private final Label lblWandKueche
@@ -20,12 +20,12 @@ public class GrundrissView extends BasisView{
     private final Label lblWandKuecheEuro 		= new Label("Euro");
     private final CheckBox chckBxWandKueche 		= new CheckBox();
    
-    private final Label lblTurKueche = new Label("T�r in der Wand zwischen K�che und Essbereich");
+    private final Label lblTurKueche = new Label("Tür in der Wand zwischen Küche und Essbereich");
     private final TextField txtTurKueche 	= new TextField();
     private final Label lblTurKuecheEuro 		= new Label("Euro");
     private final CheckBox chckBxTurKueche 		= new CheckBox();
     
-    private final Label lblGrossZimmer = new Label("Gro�es Zimmer im OG statt zwei kleine Zimmern");
+    private final Label lblGrossZimmer = new Label("Großes Zimmer im OG statt zwei kleine Zimmern");
     private final TextField txtGrossZimmer 	= new TextField();
     private final Label lblGrossZimmerEuro		= new Label("Euro");
     private final CheckBox chckBxGrossZimmer 		= new CheckBox();
@@ -40,7 +40,7 @@ public class GrundrissView extends BasisView{
     private final Label lblVorBadEuro		= new Label("Euro");
     private final CheckBox chckBxVorBad 		= new CheckBox();
     
-    private final Label lblAusBad = new Label("Ausf�hrung eines Bades im DG");
+    private final Label lblAusBad = new Label("Ausführung eines Bades im DG");
     private final TextField txtAusBad 	= new TextField();
     private final Label lblAusBadEuro		= new Label("Euro");
     private final CheckBox chckBxAusBad 		= new CheckBox();
@@ -55,12 +55,12 @@ public class GrundrissView extends BasisView{
     /**
      * erzeugt ein GrundrissView-Objekt, belegt das zugehoerige Control
      * mit dem vorgegebenen Objekt und initialisiert die Steuerelemente der Maske
-     * @param GrundrissControl GrundrissControl, enthaelt das zugehoerige Control
+     * @param grundrissControl GrundrissControl, enthaelt das zugehoerige Control
      * @param grundrissStage Stage, enthaelt das Stage-Objekt fuer diese View
      */
-    public GrundrissView (GrundrissControl GrundrissControl, Stage grundrissStage){
+    public GrundrissView (GrundrissControl grundrissControl, Stage grundrissStage){
     	super(grundrissStage);
-        this.GrundrissControl = GrundrissControl;
+        this.grundrissControl = grundrissControl;
         grundrissStage.setTitle("Sonderwünsche zu Grundriss-Varianten");
                 
 	    this.initKomponenten();
@@ -123,7 +123,7 @@ public class GrundrissView extends BasisView{
 	}
     
     private void leseGrundrissSonderwuensche(){
-    	this.GrundrissControl.leseGrundrissSonderwuensche();
+    	this.grundrissControl.leseGrundrissSonderwuensche();
     }
     
  	/* berechnet den Preis der ausgesuchten Sonderwuensche und zeigt diesen an */
@@ -139,7 +139,6 @@ public class GrundrissView extends BasisView{
   	}
 
 	/*schreibt die ausgesuchten Sonderwuensche in eine CSV-Datei */
-	@Override
 	protected void schreibeInCSV() {
 		//TODO
 		System.out.println("CSV Export_Grundriss");
