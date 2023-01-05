@@ -43,11 +43,11 @@ public class Aussenanlage implements IValidierung {
 
     @Override
     public String toString() {
-        return "Aussenanlage{" +
-                "id=" + id +
-                ", beschreibung='" + beschreibung + '\'' +
-                ", preis=" + preis +
-                '}';
+        return
+
+                " beschreibung= '" + beschreibung + '\'' +"    "+
+                ", preis= " + preis
+                ;
     }
 
     @Override
