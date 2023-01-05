@@ -181,6 +181,10 @@ public class ParkettView extends BasisView {
 
         return list;
     }
+    @Override
+    protected void schreibeInCSV() {
+
+    }
 
 
 }

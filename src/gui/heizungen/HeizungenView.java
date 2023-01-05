@@ -88,6 +88,11 @@ public class HeizungenView extends BasisView {
         heizungenControl.speichereSonderwunsch(i);
     }
 
+    @Override
+    protected void schreibeInCSV() {
+
+    }
+
     public void oeffneHeizungenView() {
         super.oeffneBasisView();
     }

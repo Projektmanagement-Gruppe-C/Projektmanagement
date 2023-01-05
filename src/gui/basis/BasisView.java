@@ -22,6 +22,7 @@ public abstract class BasisView {
    	private final Label lblSonderwunsch   	= new Label("Sonderwunsch");
     private final Button btnBerechnen 	 	= new Button("Preis berechnen");
     private final Button btnSpeichern 	 	= new Button("Speichern");
+	private final Button btnCSVExport		= new Button("In CSV exportieren");
     //-------Ende Attribute der grafischen Oberflaeche-------
   
    /**
@@ -53,6 +54,8 @@ public abstract class BasisView {
 	    btnBerechnen.setMinSize(150,  25);
     	gridPaneButtons.add(btnSpeichern, 2, 0);
 	    btnSpeichern.setMinSize(150,  25);
+		gridPaneButtons.add(btnCSVExport, 3, 0);
+		btnCSVExport.setMinSize(150,  25);
     }  
     
     /* Es muessen die Listener implementiert werden. */
@@ -68,6 +71,9 @@ public abstract class BasisView {
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			}
+		});
+		btnCSVExport.setOnAction(aEvent -> {
+			schreibeInCSV();
 		});
     }
     
@@ -91,8 +97,8 @@ public abstract class BasisView {
   	
    	/* speichert die ausgesuchten Sonderwuensche in der Datenbank ab */
   	protected abstract void speichereSonderwuensche() throws SQLException, ClassNotFoundException;
-  	
- 	
+
+	protected abstract void schreibeInCSV();
 }
 
 

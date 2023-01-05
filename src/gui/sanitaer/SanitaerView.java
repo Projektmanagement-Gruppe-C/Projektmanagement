@@ -89,6 +89,11 @@ public class SanitaerView extends BasisView {
             sanitaerControl.speichereSonderwunsch(i);
     }
 
+    @Override
+    protected void schreibeInCSV() {
+
+    }
+
     public void oeffneSanitaerView() {
         super.oeffneBasisView();
     }

@@ -144,7 +144,10 @@ public class FliesenView extends BasisView {
         return list;
     }
 
+    @Override
+    protected void schreibeInCSV() {
 
+    }
 }
 
 

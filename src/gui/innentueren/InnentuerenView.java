@@ -134,4 +134,12 @@ public class InnentuerenView extends BasisView {
 
 		return list;
 	}
+	@Override
+	protected void schreibeInCSV() {
+		try {
+			model.schreibeFreizeitbaederInCsvDatei();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
 }

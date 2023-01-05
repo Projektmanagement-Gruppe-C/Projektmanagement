@@ -156,6 +156,10 @@ public class AussenanlageView extends BasisView {
 
         return list;
     }
+    @Override
+    protected void schreibeInCSV() {
+
+    }
 }
 
 

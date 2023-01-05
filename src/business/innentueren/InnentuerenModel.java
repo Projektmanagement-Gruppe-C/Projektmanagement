@@ -1,7 +1,11 @@
 package business.innentueren;
 
+import business.aussenanlage.Aussenanlage;
+
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -65,6 +69,18 @@ public class InnentuerenModel {
 //löscht alle sonderwunsche für außenanlage von kunde kid
     public void loescheSonderwuensche(int kid) throws SQLException {
         innentuerenDao.loescheSonderwunsch(kid);
+    }
+    public void schreibeFreizeitbaederInCsvDatei() throws Exception {
+
+        BufferedWriter aus = new BufferedWriter(new FileWriter("Innentueren.csv",true));
+        aus.write("Aussenanlage");
+        aus.newLine();
+        for( Innentueren x:getInnentueren()){
+            aus.write(x.toString());
+            aus.newLine();
+        }
+
+        aus.close();
     }
 
 }

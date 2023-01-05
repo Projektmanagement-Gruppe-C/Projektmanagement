@@ -148,6 +148,10 @@ public class GrundrissView extends BasisView{
 
 		return list;
 	}
+	@Override
+	protected void schreibeInCSV() {
+
+	}
 }
 
 

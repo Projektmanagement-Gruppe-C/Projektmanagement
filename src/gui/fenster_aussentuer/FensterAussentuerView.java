@@ -104,6 +104,11 @@ public class FensterAussentuerView extends BasisView {
             fensterAussentuerControl.speichereSonderwunsch(i);
     }
 
+    @Override
+    protected void schreibeInCSV() {
+
+    }
+
     public void oeffneFensterAussentuerView() {
         super.oeffneBasisView();
     }
@@ -174,6 +179,8 @@ public class FensterAussentuerView extends BasisView {
 
         return list;
     }
+
+
 }
 
 
