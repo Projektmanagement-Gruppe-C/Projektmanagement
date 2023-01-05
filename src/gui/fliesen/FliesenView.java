@@ -42,6 +42,29 @@ public class FliesenView extends BasisView {
 
 
     // -------Ende Attribute der grafischen Oberflaeche-------
+    public void checkboxDeaktivieren(List<Integer> list, CheckBox ch, int index, boolean disable) {
+        ch.setSelected(false);
+        list.remove(new Integer(index));
+        if (disable) {
+            ch.setDisable(true);
+        }
+    }
+
+    public List<Integer> validierung(List<Integer> listFliesen) {
+        if (listFliesen.contains(1)) {
+            checkboxDeaktivieren(listFliesen,chckMFEG,3,false);
+        }
+
+        if (fliesenControl.hatDachgeschoss() && listFliesen.contains(2)) {
+            checkboxDeaktivieren(listFliesen,chckKFOG,4,false);
+        }
+
+        if (!fliesenControl.hatDachgeschoss()) {
+            checkboxDeaktivieren(listFliesen,chckKFOG,2,false);
+            checkboxDeaktivieren(listFliesen,chckKFOG,4,false);
+        }
+        return listFliesen;
+    }
 
     public FliesenView(FliesenControl fliesenControl, Stage fliesenStage, FliesenModel fliesenModel) throws SQLException, ClassNotFoundException {
         super(fliesenStage);
@@ -84,9 +107,12 @@ public class FliesenView extends BasisView {
     @Override
     protected void speichereSonderwuensche() throws SQLException, ClassNotFoundException {
         List<Integer> list = getChcks();
+
+        list = validierung(list);
+
         fliesenControl.loescheSonderwuensche();
         for(int i : list)
-        fliesenControl.speichereSonderwunsch(i);
+            fliesenControl.speichereSonderwunsch(i);
     }
 
     public void oeffneFliesenView() {
