@@ -2,6 +2,9 @@ package business.aussenanlage;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -46,5 +49,20 @@ public class AussenanlageModel {
         List<Aussenanlage> oldAnlagen = this.aussenanlagen;
         this.aussenanlagen = aussenanlagen;
         this.pcs.firePropertyChange("aussenanlage", oldAnlagen, aussenanlagen);
+    }
+
+    public void schreibeInCsv(){
+        try {
+            //TODO: name csv-datei
+            BufferedWriter aus = new BufferedWriter(new FileWriter("Kundennummer_NachnameDesKunden_ Aussenanlagen.csv", false));
+            aus.write(this.getAussenanlage());
+            aus.close();
+        } catch (IOException e) {
+            System.out.print("IO Fehler");
+        }
+    }
+
+    private String getAussenanlage() {
+        return null;
     }
 }
