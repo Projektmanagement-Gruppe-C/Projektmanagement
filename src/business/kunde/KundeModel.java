@@ -2,6 +2,9 @@ package business.kunde;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.SQLException;
 import javafx.collections.*;
   
@@ -104,5 +107,16 @@ public class KundeModel {
 	    throws SQLException{
         // Speicherung des Kunden in der DB
    	    this.kunde = kunde;
-	}  
+	}
+
+	public void schreibeInCsv(){
+		try {
+			//TODO: name csv-datei
+			BufferedWriter aus = new BufferedWriter(new FileWriter("Kundennummer_NachnameDesKunden_ Aussenanlagen.csv", false));
+			aus.write(this.getKunde().toString());
+			aus.close();
+		} catch (IOException e) {
+			System.out.print("IO Fehler");
+		}
+	}
 }

@@ -44,13 +44,14 @@ public class KundeView {
     private final Button btnAendern = new Button("Ändern");
     private final Button btnLoeschen = new Button("Löschen");
     private final Button btnZeigeGrundrissKunde = new Button("Grundrisse");
+    private final Button btnExportKundendaten = new Button("Kundendaten exportieren");
     private final MenuBar mnBar = new MenuBar();
     private final Menu mnSonderwuensche = new Menu("Sonderwünsche");
     private final MenuItem mnItmGrundriss = new MenuItem("Grundrissvarianten");
     private final MenuItem mnItmAussenanlage  = new MenuItem("Aussenanlage");
     private final MenuItem mnItmInnentueren = new MenuItem("Innentueren");
     private final MenuItem mnItmExportCsv = new MenuItem("Export als CSV");
-    
+
 
 
     //-------Ende Attribute der grafischen Oberflaeche-------
@@ -115,6 +116,8 @@ public class KundeView {
         gridPane.add(btnZeigeGrundrissKunde, 0, 13);
         btnZeigeGrundrissKunde.setMinSize(150, 25);
         btnLoeschen.setMinSize(150, 25);
+        btnExportKundendaten.setMinSize(150, 25);
+        gridPane.add(btnExportKundendaten, 1, 13);
  
         // MenuBar und Menu
         borderPane.setTop(mnBar);
@@ -140,6 +143,7 @@ public class KundeView {
         mnItmInnentueren.setOnAction(aEvent -> kundeControl.oeffneInnentuerenControl());
         btnZeigeGrundrissKunde.setOnAction(aEvent -> kundeControl.oeffneGrundrissKundeControl());
         mnItmExportCsv.setOnAction(aEvent -> exportSonderwuenscheCsv());
+        btnExportKundendaten.setOnAction(aEvent -> exportKundendatenCsv());
 
     }
 
@@ -163,6 +167,10 @@ public class KundeView {
     
     private void exportSonderwuenscheCsv() {
     	
+    }
+
+    private void exportKundendatenCsv(){
+        this.kundeControl.schreibeInCsv();
     }
 
     public void setKundeDaten(Kunde kunde) {
