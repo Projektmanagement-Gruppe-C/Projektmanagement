@@ -48,6 +48,10 @@ public class Aussenanlage implements IValidierung {
         this.preis = preis;
     }
 
+    public void addAnlagen(Aussenanlage anlage) {
+        this.anlagen.add(anlage);
+    }
+
     @Override
     public String toString() {
         return "Aussenanlage{" +
