@@ -130,4 +130,8 @@ public class KundeControl implements PropertyChangeListener {
 			this.kundeView.setKundeDaten(kunde);
 		}
 	}
+
+	public void schreibeInCsv(){
+		this.kundeModel.schreibeInCsv();
+	}
 }
