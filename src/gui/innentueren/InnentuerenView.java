@@ -100,7 +100,7 @@ public class InnentuerenView extends BasisView {
 	}
 
 	private void leseInnentuerenSonderwuensche(){
-		this.innentuerenControl.leseInnentuerenSonderwuensche();
+		this.control.leseInnentuerenSonderwuensche();
 	}
 
 	@Override

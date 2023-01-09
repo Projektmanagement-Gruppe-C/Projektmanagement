@@ -4,10 +4,10 @@ public class GrundrissEntity {
 
     private int id;
     private String beschreibung;
-    private int preis;
+    private double preis;
 
 
-    public GrundrissEntity(int id, String beschreibung, int preis) {
+    public GrundrissEntity(int id, String beschreibung, double preis) {
         this.id = id;
         this.beschreibung = beschreibung;
         this.preis = preis;
@@ -29,7 +29,7 @@ public class GrundrissEntity {
         this.beschreibung = beschreibung;
     }
 
-    public int getPreis() {
+    public double getPreis() {
         return preis;
     }
 

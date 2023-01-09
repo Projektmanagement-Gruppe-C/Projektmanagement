@@ -4,14 +4,13 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.sql.SQLException;
 
-import gui.grundriss.GrundrissControl;
 import business.kunde.Kunde;
 import business.kunde.KundeModel;
 import gui.aussenanlage.AussenanlageControl;
-import gui.grundriss.GrundrissControl;
-import gui.grundrissKunde.GrundrissKundeControl;
 import gui.fenster_aussentuer.FensterAussentuerControl;
 import gui.fliesen.FliesenControl;
+import gui.grundriss.GrundrissControl;
+import gui.grundrissKunde.GrundrissKundeControl;
 import gui.heizungen.HeizungenControl;
 import gui.innentueren.InnentuerenControl;
 import gui.parkett.ParkettControl;
@@ -56,7 +55,6 @@ public class KundeControl implements PropertyChangeListener {
      * Das GrundrissView wird sichtbar gemacht.
      */
     public void oeffneGrundrissControl() throws Exception {
-    public void oeffneGrundrissControl(){
 		if (this.kundeModel.getKunde() == null) {
 			this.kundeView.zeigeFehlermeldung("Fehler", "Bitte zuerst einen Kunden auswählen.");
 			return;
@@ -68,7 +66,7 @@ public class KundeControl implements PropertyChangeListener {
 				throw new RuntimeException(e);
 			}
       	}
-		}
+
     	this.grundrissControl.oeffneGrundrissView();
     }
 

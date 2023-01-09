@@ -1,9 +1,13 @@
 package business.grundriss;
 
-public class Grundriss {
+import java.util.List;
+
+import business.IValidierung;
+
+public class Grundriss implements IValidierung {
     private int id;
     private String beschreibung;
-    private int preis;
+    private double preis;
 
     public Grundriss(int id, String beschreibung, int preis) {
         this.id = id;
@@ -30,7 +34,7 @@ public class Grundriss {
         return beschreibung;
     }
 
-    public int getPreis() {
+    public double getPreis() {
         return preis;
     }
     public void setBeschreibung(String beschreibung) {

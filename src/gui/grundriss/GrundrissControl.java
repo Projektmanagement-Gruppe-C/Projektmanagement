@@ -18,9 +18,7 @@ import java.util.List;
 public final class GrundrissControl implements PropertyChangeListener {
 
 	// das View-Objekt des Grundriss-Fensters
-	private GrundrissView view;
-
-	private GrundrissModel model;
+	private GrundrissView grundrissView;
 
 	private final GrundrissModel grundrissModel;
 
@@ -38,12 +36,12 @@ public final class GrundrissControl implements PropertyChangeListener {
 	   	Stage stageGrundriss = new Stage();
     	stageGrundriss.initModality(Modality.APPLICATION_MODAL);
 		this.grundrissModel = GrundrissModel.getInstance();
-    	this.grundrissView = new GrundrissView(this, stageGrundriss, this.model);
-		this.model.addPropertyChangeListener(this);
+    	this.grundrissView = new GrundrissView(this, stageGrundriss, this.grundrissModel);
+		this.grundrissModel.addPropertyChangeListener(this);
 	}
 
 	public void oeffneGrundrissView(){
-		this.view.oeffneGrundrissView();
+		this.grundrissView.oeffneGrundrissView();
 	}
 
 	public void leseGrundrissSonderwuensche(){
@@ -76,7 +74,7 @@ public final class GrundrissControl implements PropertyChangeListener {
 
 	public List<Integer> connectKunde() throws SQLException, ClassNotFoundException {
 		Kunde kunde= kundeModel.getInstance().getKunde();
-		List<Integer>la = model.loadGrundrissnListe(kunde.getKundennummer());
+		List<Integer>la = grundrissModel.loadGrundrissnListe(kunde.getKundennummer());
 		return la;
 	}
 
@@ -84,11 +82,11 @@ public final class GrundrissControl implements PropertyChangeListener {
 		int kid = kundeModel.getKunde().getKundennummer();
 		List<Integer> li = connectKunde();
 		if(!li.contains(sid))
-			model.speichereSonderwuensche(sid,kid);
+			grundrissModel.speichereSonderwuensche(sid,kid);
 	}
 
 	public void loescheSonderwuensche() throws SQLException {
 		int kid = kundeModel.getKunde().getKundennummer();
-		model.loescheSonderwuensche(kid);
+		grundrissModel.loescheSonderwuensche(kid);
 	}
 }

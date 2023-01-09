@@ -122,7 +122,4 @@ public class KundeModel {
 		kundeDao.aendereKunden(kunde);
 	}
 
-	public Kunde getKunde() {
-		return kunde;
-	}
 }

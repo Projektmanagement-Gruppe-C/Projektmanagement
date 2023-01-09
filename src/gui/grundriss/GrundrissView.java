@@ -97,7 +97,7 @@ public class GrundrissView extends BasisView {
 	}
     
     private void leseGrundrissSonderwuensche(){
-    	this.grundrissControl.leseGrundrissSonderwuensche();
+    	this.control.leseGrundrissSonderwuensche();
     }
 
 	protected void getGrundrissKunde() throws SQLException, ClassNotFoundException {

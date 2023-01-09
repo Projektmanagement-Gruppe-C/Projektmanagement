@@ -122,7 +122,7 @@ public class KundeView {
         mnSonderwuensche.getItems().add(mnItmAussenanlage);
         mnSonderwuensche.getItems().add(mnItmFliesen);
         mnSonderwuensche.getItems().add(mnItmInnentueren);
-        mnSonderwuensche.getItems().add(mnItmExportCsv);
+        // mnSonderwuensche.getItems().add(mnItmExportCsv);
         mnSonderwuensche.getItems().add(mnItmParkett);
         mnSonderwuensche.getItems().add(mnItmFensterAussentuer);
         mnSonderwuensche.getItems().add(mnItmSanitaer);
@@ -146,7 +146,13 @@ public class KundeView {
             int plannummer = cmbBxNummerHaus.getValue();
             loescheKunde(plannummer);
         });
-        mnItmGrundriss.setOnAction(aEvent -> kundeControl.oeffneGrundrissControl());
+        mnItmGrundriss.setOnAction(aEvent -> {
+            try {
+                kundeControl.oeffneGrundrissControl();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
         mnItmAussenanlage.setOnAction(aEvent -> {
             try {
                 kundeControl.oeffneAussenanlageControl();
@@ -166,7 +172,8 @@ public class KundeView {
             }
         });
         btnZeigeGrundrissKunde.setOnAction(aEvent -> kundeControl.oeffneGrundrissKundeControl());
-        mnItmExportCsv.setOnAction(aEvent -> exportSonderwuenscheCsv());
+
+        // mnItmExportCsv.setOnAction(aEvent -> exportSonderwuenscheCsv());
 
         mnItmFliesen.setOnAction(aEvent -> {
             try {
@@ -177,7 +184,7 @@ public class KundeView {
                 e.printStackTrace();
             }
         });
-    }
+
 
         mnItmFensterAussentuer.setOnAction(aEvent -> {
             try {
