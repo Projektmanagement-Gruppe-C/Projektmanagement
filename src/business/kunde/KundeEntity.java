@@ -47,7 +47,7 @@ public class KundeEntity {
     private String nachname;
     private String telefonnummer;
     private String email;
-
+    private int hausnr;
     private int plannummer;
 
     public int getPlannummer() {
@@ -61,12 +61,21 @@ public class KundeEntity {
     public KundeEntity() {
     }
 
-    public KundeEntity(int kundeID, String vorname, String nachname, String telefonnummer, String email, int plannummer) {
+    public int getHausnr() {
+        return hausnr;
+    }
+
+    public void setHausnr(int hausnr) {
+        this.hausnr = hausnr;
+    }
+
+    public KundeEntity(int kundeID, String vorname, String nachname, String telefonnummer, String email, int plannummer, int hausnummer) {
         this.kundeID = kundeID;
         this.vorname = vorname;
         this.nachname = nachname;
         this.telefonnummer = telefonnummer;
         this.email = email;
         this.plannummer = plannummer;
+        this.hausnr = hausnummer;
     }
 }

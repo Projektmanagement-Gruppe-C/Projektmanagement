@@ -29,7 +29,7 @@ public class AussenanlageDao {
     }
 
     public List<AussenanlageEntity> getAussenanlagen() {
-        List<AussenanlageEntity> aussenanlagen = new ArrayList<>();
+        List<AussenanlageEntity>    aussenanlagen = new ArrayList<>();
         try {
             ResultSet resultSet = datenbank.executeQuery("SELECT * FROM Au\u00DFenanlage_Sonderwunsch");
             while (resultSet.next()) {
@@ -38,10 +38,35 @@ public class AussenanlageDao {
                         resultSet.getString(2),
                         resultSet.getDouble(3)
                 ));
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return aussenanlagen;
     }
+
+    public List<Integer> getAussenanlagenListe(int kID) {
+        List<Integer> aussenanlagen_kunde_entities = new ArrayList<>();
+        try {
+            ResultSet resultSet = datenbank.executeQuery("SELECT Sonderwunschid FROM Außenanlage_Sonderwunsch_Kunde WHERE Kundeid="+kID+"\n");
+            while (resultSet.next()) {
+                aussenanlagen_kunde_entities.add(resultSet.getInt(1));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return aussenanlagen_kunde_entities;
+    }
+
+    public void loescheSonderwunsch(int kID) throws SQLException {
+        int resultSet = datenbank.executeUpdate("DELETE FROM Außenanlage_Sonderwunsch_Kunde WHERE Kundeid="+kID+"\n");
+    }
+
+    public void speichereKundeByButton(int sID,int kID) throws SQLException {
+        int resultSet = datenbank.executeUpdate("INSERT INTO Außenanlage_Sonderwunsch_Kunde(sonderwunschid,Kundeid) VALUES ("+sID+", "+kID+");");
+        System.out.println(resultSet);
+    }
+
+
 }

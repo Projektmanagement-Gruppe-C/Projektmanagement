@@ -1,150 +1,163 @@
 package gui.grundriss;
 
 import gui.basis.BasisView;
+import business.grundriss.Grundriss;
+import business.grundriss.GrundrissModel;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Klasse, welche das Fenster mit den Sonderwuenschen zu 
  * den Grundrissvarianten bereitstellt.
  */
-public class GrundrissView extends BasisView{
+public class GrundrissView extends BasisView {
  
  	// das Control-Objekt des Grundriss-Fensters
-	private final GrundrissControl grundrissControl;
-   
-    //---Anfang Attribute der grafischen Oberflaeche---
-    private final Label lblWandKueche
-        = new Label("Wand zur Abtrennung der Küche von dem Essbereich");
-    private final TextField txtPreisWandKueche 	= new TextField();
-    private final Label lblWandKuecheEuro 		= new Label("Euro");
-    private final CheckBox chckBxWandKueche 		= new CheckBox();
-   
-    private final Label lblTurKueche = new Label("Tür in der Wand zwischen Küche und Essbereich");
-    private final TextField txtTurKueche 	= new TextField();
-    private final Label lblTurKuecheEuro 		= new Label("Euro");
-    private final CheckBox chckBxTurKueche 		= new CheckBox();
-    
-    private final Label lblGrossZimmer = new Label("Großes Zimmer im OG statt zwei kleine Zimmern");
-    private final TextField txtGrossZimmer 	= new TextField();
-    private final Label lblGrossZimmerEuro		= new Label("Euro");
-    private final CheckBox chckBxGrossZimmer 		= new CheckBox();
-    
-    private final Label lblAbtTreppen = new Label("Abgetrennter Treppenraum im DG");
-    private final TextField txtAbtTreppen 	= new TextField();
-    private final Label lblAbtTreppenEuro		= new Label("Euro");
-    private final CheckBox chckBxAbtTreppen		= new CheckBox();
-    
-    private final Label lblVorBad = new Label("Vorrichtung eines Bades im DG");
-    private final TextField txtVorBad 	= new TextField();
-    private final Label lblVorBadEuro		= new Label("Euro");
-    private final CheckBox chckBxVorBad 		= new CheckBox();
-    
-    private final Label lblAusBad = new Label("Ausführung eines Bades im DG");
-    private final TextField txtAusBad 	= new TextField();
-    private final Label lblAusBadEuro		= new Label("Euro");
-    private final CheckBox chckBxAusBad 		= new CheckBox();
-    
-    private final Label lblGesamtP = new Label("Gesamtpreis");
-    private final TextField txtGesamtP 	= new TextField();
-    private final Label lblGesamtPEuro		= new Label("Euro");
+	private GrundrissControl control;
+	private GrundrissModel model;
 
-    
-    //-------Ende Attribute der grafischen Oberflaeche-------
-  
-    /**
-     * erzeugt ein GrundrissView-Objekt, belegt das zugehoerige Control
-     * mit dem vorgegebenen Objekt und initialisiert die Steuerelemente der Maske
-     * @param grundrissControl GrundrissControl, enthaelt das zugehoerige Control
-     * @param grundrissStage Stage, enthaelt das Stage-Objekt fuer diese View
-     */
-    public GrundrissView (GrundrissControl grundrissControl, Stage grundrissStage){
-    	super(grundrissStage);
-        this.grundrissControl = grundrissControl;
-        grundrissStage.setTitle("Sonderwünsche zu Grundriss-Varianten");
-                
-	    this.initKomponenten();
-	    this.leseGrundrissSonderwuensche();
-    }
-  
-    /* initialisiert die Steuerelemente auf der Maske */
-    protected void initKomponenten(){
-    	super.initKomponenten(); 
-       	
-    	super.getLblSonderwunsch().setText("Grundriss-Varianten");
-       	super.getGridPaneSonderwunsch().add(lblWandKueche, 0, 1);
-    	super.getGridPaneSonderwunsch().add(txtPreisWandKueche, 1, 1);
-    	txtPreisWandKueche.setEditable(false);
-    	super.getGridPaneSonderwunsch().add(lblWandKuecheEuro, 2, 1);
-    	super.getGridPaneSonderwunsch().add(chckBxWandKueche, 3, 1);
-    	
-    	super.getGridPaneSonderwunsch().add(lblTurKueche, 0, 2);
-    	super.getGridPaneSonderwunsch().add(txtTurKueche, 1, 2);
-    	txtTurKueche.setEditable(false);
-    	super.getGridPaneSonderwunsch().add(lblTurKuecheEuro, 2, 2);
-    	super.getGridPaneSonderwunsch().add(chckBxTurKueche, 3, 2);
-    	
-    	super.getGridPaneSonderwunsch().add(lblGrossZimmer, 0, 3);
-    	super.getGridPaneSonderwunsch().add(txtGrossZimmer, 1, 3);
-    	txtGrossZimmer.setEditable(false);
-    	super.getGridPaneSonderwunsch().add(lblGrossZimmerEuro, 2, 3);
-    	super.getGridPaneSonderwunsch().add(chckBxGrossZimmer, 3, 3);
-    	
-    	super.getGridPaneSonderwunsch().add(lblAbtTreppen, 0, 4);
-    	super.getGridPaneSonderwunsch().add(txtAbtTreppen, 1, 4);
-    	txtAbtTreppen.setEditable(false);
-    	super.getGridPaneSonderwunsch().add(lblAbtTreppenEuro, 2, 4);
-    	super.getGridPaneSonderwunsch().add(chckBxAbtTreppen, 3, 4);
-    	
-    	super.getGridPaneSonderwunsch().add(lblVorBad, 0, 5);
-    	super.getGridPaneSonderwunsch().add(txtVorBad, 1, 5);
-    	txtVorBad.setEditable(false);
-    	super.getGridPaneSonderwunsch().add(lblVorBadEuro, 2, 5);
-    	super.getGridPaneSonderwunsch().add(chckBxVorBad, 3, 5);
-    	
-    	super.getGridPaneSonderwunsch().add(lblAusBad, 0, 6);
-    	super.getGridPaneSonderwunsch().add(txtAusBad, 1, 6);
-    	txtAusBad.setEditable(false);
-    	super.getGridPaneSonderwunsch().add(lblAusBadEuro, 2, 6);
-    	super.getGridPaneSonderwunsch().add(chckBxAusBad, 3, 6);
-    	
-    	super.getGridPaneSonderwunsch().add(lblGesamtP, 0, 8);
-    	super.getGridPaneSonderwunsch().add(txtGesamtP, 1, 8);
-    	txtGesamtP.setEditable(false);
-    	super.getGridPaneSonderwunsch().add(lblGesamtPEuro, 2, 8);
-    	
-    }  
-    
-    /**
-	 * macht das GrundrissView-Objekt sichtbar.
-	 */
-	public void oeffneGrundrissView(){ 
+	// ---Anfang Attribute der grafischen Oberflaeche---
+	private Label lbl1 = new Label("Wand zur Abtrennung der Küche von dem Essbereich");
+	private Label lbl2 = new Label("Tür in der Wand zwischen Küche und Essbereich");
+	private Label lbl3 = new Label("Großes Zimmer im OG statt zwei kleinen Zimmern");
+	private Label lbl4 = new Label("Abgetrennter Treppenraum im DG");
+	private Label lbl5 = new Label("Vorrichtung eines Bades im DG");
+	private Label lbl6 = new Label("Ausführung eines Bades im DG");
+
+	private TextField txt1 = new TextField();
+	private TextField txt2 = new TextField();
+	private TextField txt3 = new TextField();
+	private TextField txt4 = new TextField();
+	private TextField txt5 = new TextField();
+	private TextField txt6 = new TextField();
+
+	private CheckBox chck1 = new CheckBox();
+	private CheckBox chck2 = new CheckBox();
+	private CheckBox chck3 = new CheckBox();
+	private CheckBox chck4 = new CheckBox();
+	private CheckBox chck5 = new CheckBox();
+	private CheckBox chck6 = new CheckBox();
+
+	// -------Ende Attribute der grafischen Oberflaeche-------
+
+	public GrundrissView(GrundrissControl grundrissControl, Stage stage, GrundrissModel grundrissModel) throws SQLException, ClassNotFoundException {
+		super(stage);
+		this.control = grundrissControl;
+		stage.setTitle("Sonderwuensche zu Grundriss-Varianten");
+
+		// this.aussenanlageControl.leseAussenanlageSonderwuensche();
+		this.model = grundrissModel;
+		this.initKomponenten();
+		setInhalt();
+		getGrundrissKunde();
+
+
+	}
+
+	/* initialisiert die Steuerelemente auf der Maske */
+	protected void initKomponenten() {
+		super.initKomponenten();
+
+		Label[] lblSonderwunschArray = { lbl1, lbl2, lbl3 ,lbl4,lbl5,lbl6};
+
+		TextField[] txtFieldArray = {txt1, txt2, txt3, txt4, txt5,txt6};
+
+		CheckBox[] checkBoxArray = {chck1,chck2,chck3,chck4,chck5,chck6};
+
+		for (int i = 0; i < 6; i++) {
+
+			super.getGridPaneSonderwunsch().add(lblSonderwunschArray[i], 0, (i + 1));
+			super.getGridPaneSonderwunsch().add(txtFieldArray[i], 1, (i + 1));
+			txtFieldArray[i].setEditable(false);
+			super.getGridPaneSonderwunsch().add(new Label("Euro"), 2, (i + 1));
+			super.getGridPaneSonderwunsch().add(checkBoxArray[i], 3, (i + 1));
+		}
+
+	}
+
+	@Override
+	protected void berechneUndZeigePreisSonderwuensche() {
+		int gsmtPreis;
+	}
+
+	@Override
+	protected void speichereSonderwuensche() throws SQLException, ClassNotFoundException {
+		List<Integer> list = getChcks();
+		control.loescheSonderwuensche();
+		for(int i : list)
+			control.speichereSonderwunsch(i);
+	}
+
+	public void oeffneGrundrissView() {
 		super.oeffneBasisView();
 	}
     
     private void leseGrundrissSonderwuensche(){
-    	this.grundrissControl.leseGrundrissSonderwuensche();
+    	this.control.leseGrundrissSonderwuensche();
     }
-    
- 	/* berechnet den Preis der ausgesuchten Sonderwuensche und zeigt diesen an */
-  	protected void berechneUndZeigePreisSonderwuensche(){
-  		// Es wird erst die Methode pruefeKonstellationSonderwuensche(int[] ausgewaehlteSw)
-  		// aus dem Control aufgerufen, dann der Preis berechnet.
-  	}
-  	
-   	/* speichert die ausgesuchten Sonderwuensche in der Datenbank ab */
-  	protected void speichereSonderwuensche(){
- 		// Es wird erst die Methode pruefeKonstellationSonderwuensche(int[] ausgewaehlteSw)
-  		// aus dem Control aufgerufen, dann die Sonderwuensche gespeichert.
-  	}
 
-	/*schreibt die ausgesuchten Sonderwuensche in eine CSV-Datei */
-	protected void schreibeInCSV() {
-		//TODO
-		System.out.println("CSV Export_Grundriss");
+	protected void getGrundrissKunde() throws SQLException, ClassNotFoundException {
+		List<Integer> liste= control.connectKunde();
+		for(int i:liste){
+			if(i==1)
+				chck1.setSelected(true);
+			else if(i==2)
+				chck2.setSelected(true);
+			else if(i==3)
+				chck3.setSelected(true);
+			else if(i==4)
+				chck4.setSelected(true);
+			else if(i==5)
+				chck5.setSelected(true);
+			else if(i==6)
+				chck6.setSelected(true);
+		}
+
 	}
 
+	protected void setInhalt() {
+		if (model != null) {
+			List<Grundriss> la = model.loadGrundriss();
+			txt1.setText(la.get(0).getPreis() + "");
+			txt2.setText(la.get(1).getPreis() + "");
+			txt3.setText(la.get(2).getPreis() + "");
+			txt4.setText(la.get(3).getPreis() + "");
+			txt5.setText(la.get(4).getPreis() + "");
+			txt6.setText(la.get(5).getPreis() + "");
+		}
+	}
 
-}
+	public List<Integer> getChcks() {
+		List <Integer> list = new ArrayList<>();
+
+		if(chck1.isSelected())
+			list.add(1);
+		if(chck2.isSelected())
+			list.add(2);
+		if(chck3.isSelected())
+			list.add(3);
+		if(chck4.isSelected())
+			list.add(4);
+		if(chck5.isSelected())
+			list.add(5);
+		if(chck6.isSelected())
+			list.add(6);
+
+		return list;
+	}
+
+	@Override
+	protected void schreibeInCSV() {
+		try {
+			model.schreibeFreizeitbaederInCsvDatei(getChcks());
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+ }
 
 
