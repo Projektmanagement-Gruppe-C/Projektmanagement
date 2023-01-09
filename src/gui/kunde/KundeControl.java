@@ -8,6 +8,8 @@ import gui.grundriss.GrundrissControl;
 import business.kunde.Kunde;
 import business.kunde.KundeModel;
 import gui.aussenanlage.AussenanlageControl;
+import gui.grundriss.GrundrissControl;
+import gui.grundrissKunde.GrundrissKundeControl;
 import gui.fenster_aussentuer.FensterAussentuerControl;
 import gui.fliesen.FliesenControl;
 import gui.heizungen.HeizungenControl;
@@ -36,9 +38,10 @@ public class KundeControl implements PropertyChangeListener {
 	private SanitaerControl sanitaerControl;
 	private HeizungenControl heizungenControl;
 
+	private GrundrissKundeControl grundrissKundeControl;
 
-	/**
-	 * erzeugt ein ControlObjekt inklusive View-Objekt und Model-Objekt zum 
+    /**
+	 * erzeugt ein ControlObjekt inklusive View-Objekt und Model-Objekt zum
 	 * Grundfenster mit den Kundendaten.
 	 * @param primaryStage, Stage fuer das View-Objekt zu dem Grundfenster mit den Kundendaten
 	 */
@@ -53,20 +56,48 @@ public class KundeControl implements PropertyChangeListener {
      * Das GrundrissView wird sichtbar gemacht.
      */
     public void oeffneGrundrissControl() throws Exception {
+    public void oeffneGrundrissControl(){
+		if (this.kundeModel.getKunde() == null) {
+			this.kundeView.zeigeFehlermeldung("Fehler", "Bitte zuerst einen Kunden auswählen.");
+			return;
+		}
     	if (this.grundrissControl == null){
-    		this.grundrissControl = new GrundrissControl();
+			try {
+				this.grundrissControl = new GrundrissControl(this.kundeModel.getKunde().getId());
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
       	}
+		}
     	this.grundrissControl.oeffneGrundrissView();
     }
 
-//     * erstellt, falls nicht vorhanden, ein  SOnderwunsch-Control-Objekt.
-//     */
-		  public void oeffneInnentuerenControl() throws Exception {
-			  if (this.innentuerenControl == null) {
-				  this.innentuerenControl = new InnentuerenControl();
-			  }
-			  this.innentuerenControl.oeffneInnentuerenView();
-		  }
+
+	/*
+	 * erstellt, falls nicht vorhanden, ein Grundriss-Control-Objekt.
+	 * Das GrundrissKundeView wird sichtbar gemacht.
+	 */
+
+
+	public void oeffneGrundrissKundeControl(){
+		if (this.grundrissKundeControl == null){
+			this.grundrissKundeControl = new GrundrissKundeControl(kundeModel);
+		}
+		this.grundrissKundeControl.oeffneGrundrissKundeView();
+	}
+
+
+    /*
+     * erstellt, falls nicht vorhanden, ein Innentueren-Control-Objekt.
+     * Das InnentuerenView wird sichtbar gemacht.
+     */
+    public void oeffneInnentuerenControl() throws Exception {
+    	if(this.innentuerenControl == null) {
+    		this.innentuerenControl = new InnentuerenControl(kundeModel);
+    	}
+    	this.innentuerenControl.oeffneInnentuerenView();
+    }
+
 
 	  public void oeffneAussenanlageControl() throws Exception {
 		  if(this.aussenanlageControl == null){

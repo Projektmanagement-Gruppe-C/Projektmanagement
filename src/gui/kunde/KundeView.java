@@ -42,6 +42,7 @@ public class KundeView {
     private final Button btnAnlegen = new Button("Anlegen");
     private final Button btnAendern = new Button("Ändern");
     private final Button btnLoeschen = new Button("Löschen");
+    private final Button btnZeigeGrundrissKunde = new Button("Grundrisse");
     private final MenuBar mnBar = new MenuBar();
     // SOnderwuensche
     private final Menu mnSonderwuensche = new Menu("Sonderwünsche");
@@ -68,7 +69,7 @@ public class KundeView {
         this.kundeModel = kundeModel;
 
         primaryStage.setTitle(this.kundeModel.getUeberschrift());
-        Scene scene = new Scene(borderPane, 550, 400);
+        Scene scene = new Scene(borderPane, 550, 550);
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();
@@ -111,12 +112,17 @@ public class KundeView {
         btnAendern.setMinSize(150, 25);
         gridPane.add(btnLoeschen, 2, 10);
         btnLoeschen.setMinSize(150, 25);
+        gridPane.add(btnZeigeGrundrissKunde, 0, 13);
+        btnZeigeGrundrissKunde.setMinSize(150, 25);
+        btnLoeschen.setMinSize(150, 25);
+
         // MenuBar und Menu
         borderPane.setTop(mnBar);
         mnBar.getMenus().add(mnSonderwuensche);
         mnSonderwuensche.getItems().add(mnItmAussenanlage);
         mnSonderwuensche.getItems().add(mnItmFliesen);
         mnSonderwuensche.getItems().add(mnItmInnentueren);
+        mnSonderwuensche.getItems().add(mnItmExportCsv);
         mnSonderwuensche.getItems().add(mnItmParkett);
         mnSonderwuensche.getItems().add(mnItmFensterAussentuer);
         mnSonderwuensche.getItems().add(mnItmSanitaer);
@@ -136,12 +142,11 @@ public class KundeView {
         btnAnlegen.setOnAction(aEvent -> legeKundenAn());
 
         btnAendern.setOnAction(aEvent -> aendereKunden());
-
         btnLoeschen.setOnAction(aEvent -> {
             int plannummer = cmbBxNummerHaus.getValue();
             loescheKunde(plannummer);
         });
-
+        mnItmGrundriss.setOnAction(aEvent -> kundeControl.oeffneGrundrissControl());
         mnItmAussenanlage.setOnAction(aEvent -> {
             try {
                 kundeControl.oeffneAussenanlageControl();
@@ -151,6 +156,17 @@ public class KundeView {
                 e.printStackTrace();
             }
         });
+        mnItmInnentueren.setOnAction(aEvent -> {
+            try {
+                kundeControl.oeffneInnentuerenControl();
+            } catch (NullPointerException e2){
+                zeigeFehlermeldung("Kein Kunde","Wähl Kunden aus du OTTO");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        btnZeigeGrundrissKunde.setOnAction(aEvent -> kundeControl.oeffneGrundrissKundeControl());
+        mnItmExportCsv.setOnAction(aEvent -> exportSonderwuenscheCsv());
 
         mnItmFliesen.setOnAction(aEvent -> {
             try {
@@ -161,16 +177,7 @@ public class KundeView {
                 e.printStackTrace();
             }
         });
-
-        mnItmInnentueren.setOnAction(aEvent -> {
-               try {
-                    kundeControl.oeffneInnentuerenControl();
-                } catch (NullPointerException e2){
-                   zeigeFehlermeldung("Kein Kunde","Wähl Kunden aus du OTTO");
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                });
+    }
 
         mnItmFensterAussentuer.setOnAction(aEvent -> {
             try {
@@ -286,6 +293,10 @@ public class KundeView {
         txtTelefonnummer.setText("");
         txtEmail.setText("");
         txtHausnummer.setText("");
+    }
+
+    private void exportSonderwuenscheCsv() {
+
     }
 
     public void setKundeDaten(Kunde kunde) {

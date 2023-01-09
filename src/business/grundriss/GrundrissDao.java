@@ -8,16 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GrundrissDao {
-
     private static GrundrissDao instance;
-
     private final Datenbank datenbank;
 
     private GrundrissDao(Datenbank datenbank) {
         this.datenbank = datenbank;
     }
 
-    public static GrundrissDao getInstance() throws SQLException {
+    public static GrundrissDao getInstance() throws ClassNotFoundException, SQLException {
         if (instance == null) {
             instance = new GrundrissDao(Datenbank.getInstance());
         }
@@ -52,6 +50,33 @@ public class GrundrissDao {
             e.printStackTrace();
         }
         return grundriss_kunde_entities;
+    }
+
+    public List<Grundriss> getGrundrisseForKunde(int kundeID) {
+        String query = "SELECT GS.* FROM " +
+                "Grundriss_Sonderwunsch_Kunde GSK " +
+                "INNER JOIN Grundriss_Sonderwunsch GS on GSK.Sonderwunschid = GS.Id " +
+                "WHERE GSK.Kundeid = " + kundeID;
+        return getGrundrisses(query);
+    }
+
+    private List<Grundriss> getGrundrisses(String query) {
+        List<Grundriss> grundrisse = new ArrayList<>();
+        try (ResultSet resultSet = datenbank.executeQuery(query)) {
+            while (resultSet.next()) {
+                GrundrissEntity grundrissEntity = new GrundrissEntity(
+                        resultSet.getInt("Id"),
+                        resultSet.getString("Beschreibung"),
+                        resultSet.getInt("Preis")
+                );
+                Grundriss grundriss = new Grundriss(grundrissEntity);
+                grundrisse.add(grundriss);
+            }
+            return grundrisse;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
     }
 
     public void speichereKundeByButton(int sID,int kID) throws SQLException {

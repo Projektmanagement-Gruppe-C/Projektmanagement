@@ -2,7 +2,13 @@ package business.aussenanlage;
 
 import business.IValidierung;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class Aussenanlage implements IValidierung {
+
+    private List<Aussenanlage> anlagen = new ArrayList<>();
 
     private int id;
     private String beschreibung;
@@ -15,6 +21,7 @@ public class Aussenanlage implements IValidierung {
         this.id = entity.getId();
         this.beschreibung = entity.getBeschreibung();
         this.preis = entity.getPreis();
+        this.anlagen.add(this);
     }
 
     public int getId() {
@@ -41,6 +48,10 @@ public class Aussenanlage implements IValidierung {
         this.preis = preis;
     }
 
+    public void addAnlagen(Aussenanlage anlage) {
+        this.anlagen.add(anlage);
+    }
+
     @Override
     public String toString() {
         return
@@ -52,7 +63,18 @@ public class Aussenanlage implements IValidierung {
 
     @Override
     public boolean istValide() {
-        // TODO
-        return false;
+        List<String> bezeichnungen = anlagen.stream()
+                .map(anlage -> anlage.beschreibung.trim()).collect(Collectors.toList());
+
+        if (bezeichnungen.contains("Elektrische Markise EG")
+                && !bezeichnungen.contains("Vorbereitung für elektrische Antriebe Markise EG")) {
+            return false;
+        }
+        if (bezeichnungen.contains("Elektrische Markise DG")
+                && !bezeichnungen.contains("Vorbereitung für elektrische Antriebe Markise DG")) {
+            return false;
+        }
+        return !bezeichnungen.contains("Sektionaltor anstatt Schwingtor für die Garage")
+                || bezeichnungen.contains("Elektrischen Antrieb für das Garagentor");
     }
 }

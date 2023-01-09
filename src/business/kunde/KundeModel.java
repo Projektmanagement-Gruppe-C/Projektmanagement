@@ -31,6 +31,10 @@ public class KundeModel {
 		this.pcs.firePropertyChange("kunde", oldKunde, kunde);
 	}
 
+	public Kunde getKunde() {
+		return kunde;
+	}
+
 	public KundeDao kundeDao;
 	
 	/* enthaelt die Plannummern der Haeuser, diese muessen vielleicht noch

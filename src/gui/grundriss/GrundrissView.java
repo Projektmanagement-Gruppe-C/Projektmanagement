@@ -95,6 +95,10 @@ public class GrundrissView extends BasisView {
 	public void oeffneGrundrissView() {
 		super.oeffneBasisView();
 	}
+    
+    private void leseGrundrissSonderwuensche(){
+    	this.grundrissControl.leseGrundrissSonderwuensche();
+    }
 
 	protected void getGrundrissKunde() throws SQLException, ClassNotFoundException {
 		List<Integer> liste= control.connectKunde();
@@ -145,6 +149,7 @@ public class GrundrissView extends BasisView {
 
 		return list;
 	}
+
 	@Override
 	protected void schreibeInCSV() {
 		try {
@@ -153,7 +158,6 @@ public class GrundrissView extends BasisView {
 			throw new RuntimeException(e);
 		}
 	}
-}
-
+ }
 
 

@@ -42,18 +42,23 @@ public class InnentuerenView extends BasisView {
 
 
 	//-------Ende Attribute der grafischen Oberflaeche-------
-
+	/**
+	 * erzeugt ein InnentuerenView-Objekt, belegt das zugehoerige Control
+	 * mit dem vorgegebenen Objekt und initialisiert die Steuerelemente der Maske
+	 * @param innentuerenControl InnentuerenControl, enthaelt das zugehoerige Control
+	 * @param innentuerenStage Stage, enthaelt das Stage-Objekt fuer diese View
+	 */
 	public InnentuerenView(InnentuerenControl innentuerenControl, Stage innentuerenStage,InnentuerenModel innentuerenModel) throws SQLException, ClassNotFoundException {
 		super(innentuerenStage);
 		this.control = innentuerenControl;
 		innentuerenStage.setTitle("Sonderwuensche zu Innentueren-Varianten");
-
+		innentuerenStage.setWidth(800.0);
 		// this.aussenanlageControl.leseAussenanlageSonderwuensche();
 		this.model = innentuerenModel;
 		this.initKomponenten();
 		setInhalt();
 		getInnentuerenKunde();
-
+		this.leseInnentuerenSonderwuensche();
 
 	}
 
@@ -87,6 +92,17 @@ public class InnentuerenView extends BasisView {
 
 	}
 
+	/**
+	 * macht das InnentuerenView-Objekt sichtbar.
+	 */
+	public void oeffneInnentuerenView(){
+		super.oeffneBasisView();
+	}
+
+	private void leseInnentuerenSonderwuensche(){
+		this.innentuerenControl.leseInnentuerenSonderwuensche();
+	}
+
 	@Override
 	protected void berechneUndZeigePreisSonderwuensche() {
 		int gsmtPreis;
@@ -98,10 +114,6 @@ public class InnentuerenView extends BasisView {
 		control.loescheSonderwuensche();
 		for(int i : list)
 			control.speichereSonderwunsch(i);
-	}
-
-	public void oeffneInnentuerenView() {
-		super.oeffneBasisView();
 	}
 
 	protected void getInnentuerenKunde() throws SQLException, ClassNotFoundException {

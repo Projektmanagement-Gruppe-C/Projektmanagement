@@ -17,9 +17,13 @@ public class AussenanlageDao {
         this.datenbank = datenbank;
     }
 
-    public static AussenanlageDao getInstance() throws SQLException {
+    public static AussenanlageDao getInstance() {
         if (instance == null) {
-            instance = new AussenanlageDao(Datenbank.getInstance());
+            try {
+                instance = new AussenanlageDao(Datenbank.getInstance());
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
         return instance;
     }
@@ -27,7 +31,7 @@ public class AussenanlageDao {
     public List<AussenanlageEntity> getAussenanlagen() {
         List<AussenanlageEntity>    aussenanlagen = new ArrayList<>();
         try {
-            ResultSet resultSet = datenbank.executeQuery("SELECT * FROM Außenanlage_Sonderwunsch");
+            ResultSet resultSet = datenbank.executeQuery("SELECT * FROM Au\u00DFenanlage_Sonderwunsch");
             while (resultSet.next()) {
                 aussenanlagen.add(new AussenanlageEntity(
                         resultSet.getInt(1),

@@ -96,6 +96,12 @@ public class AussenanlageView extends BasisView {
             aussenanlageControl.speichereSonderwunsch(i);
     }
 
+    /*schreibt die ausgesuchten Sonderwuensche in eine CSV-Datei */
+    @Override
+    protected void schreibeInCSV() {
+        this.aussenanlageControl.schreibeInCsv();
+    }
+
     public void oeffneAussenanlageView() {
         super.oeffneBasisView();
     }

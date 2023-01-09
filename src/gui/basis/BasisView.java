@@ -56,7 +56,7 @@ public abstract class BasisView {
 	    btnSpeichern.setMinSize(150,  25);
 		gridPaneButtons.add(btnCSVExport, 3, 0);
 		btnCSVExport.setMinSize(150,  25);
-    }  
+    }
     
     /* Es muessen die Listener implementiert werden. */
     protected void initListener(){
@@ -96,9 +96,10 @@ public abstract class BasisView {
   	protected abstract void berechneUndZeigePreisSonderwuensche();
   	
    	/* speichert die ausgesuchten Sonderwuensche in der Datenbank ab */
-  	protected abstract void speichereSonderwuensche() throws SQLException, ClassNotFoundException;
+  	protected abstract void speichereSonderwuensche();
 
+	/*schreibt die ausgesuchten Sonderwuensche in eine CSV-Datei */
 	protected abstract void schreibeInCSV();
-}
+
 
 

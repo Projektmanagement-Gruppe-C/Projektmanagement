@@ -22,15 +22,23 @@ public final class GrundrissControl implements PropertyChangeListener {
 
 	private GrundrissModel model;
 
+	private final GrundrissModel grundrissModel;
+
+	private final int kundeId;
+
 	private KundeModel kundeModel;
 
-
-	public GrundrissControl() throws Exception {
-		Stage stageAussenanlage = new Stage();
-		stageAussenanlage.initModality(Modality.APPLICATION_MODAL);
-		this.model = model.getInstance();
-		this.view = new GrundrissView(this, stageAussenanlage, this.model);
+	/**
+	 * erzeugt ein ControlObjekt inklusive View-Objekt und Model-Objekt zum
+	 * Fenster fuer die Sonderwuensche zum Grundriss.
+	 */
+	public GrundrissControl (int kundeID) throws SQLException, ClassNotFoundException {
+		this.kundeId = kundeID;
 		this.kundeModel = KundeModel.getInstance();
+	   	Stage stageGrundriss = new Stage();
+    	stageGrundriss.initModality(Modality.APPLICATION_MODAL);
+		this.grundrissModel = GrundrissModel.getInstance();
+    	this.grundrissView = new GrundrissView(this, stageGrundriss, this.model);
 		this.model.addPropertyChangeListener(this);
 	}
 
@@ -38,6 +46,10 @@ public final class GrundrissControl implements PropertyChangeListener {
 		this.view.oeffneGrundrissView();
 	}
 
+	public void leseGrundrissSonderwuensche(){
+		grundrissModel.loadKundenData(kundeId);
+    }
+	
 
 	public void hatDachgeschoss() {
 		//TODO

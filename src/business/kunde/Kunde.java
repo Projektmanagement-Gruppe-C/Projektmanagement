@@ -3,7 +3,8 @@ package business.kunde;
 import business.IValidierung;
 
 public class Kunde implements IValidierung {
-	
+
+	private int id;
 	private int hausnummer;
 	private String vorname;
 	private String nachname;
@@ -66,6 +67,10 @@ public class Kunde implements IValidierung {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public int getId() {
+		return id;
 	}
 
 	@Override

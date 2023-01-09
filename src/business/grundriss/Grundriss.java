@@ -1,19 +1,18 @@
 package business.grundriss;
 
-import business.IValidierung;
-
-import java.util.List;
-
-public class Grundriss implements IValidierung {
-
+public class Grundriss {
     private int id;
     private String beschreibung;
-    private double preis;
+    private int preis;
 
-    private Grundriss() {
+    public Grundriss(int id, String beschreibung, int preis) {
+        this.id = id;
+        this.beschreibung = beschreibung;
+        this.preis = preis;
     }
 
-    public Grundriss(GrundrissEntity entity) {
+    public Grundriss(GrundrissEntity entity)
+    {
         this.id = entity.getId();
         this.beschreibung = entity.getBeschreibung();
         this.preis = entity.getPreis();
@@ -31,12 +30,11 @@ public class Grundriss implements IValidierung {
         return beschreibung;
     }
 
+    public int getPreis() {
+        return preis;
+    }
     public void setBeschreibung(String beschreibung) {
         this.beschreibung = beschreibung;
-    }
-
-    public double getPreis() {
-        return preis;
     }
 
     public void setPreis(double preis) {

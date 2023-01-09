@@ -1,5 +1,6 @@
 package gui.aussenanlage;
 
+import business.aussenanlage.AussenanlageModel;
 
 import business.aussenanlage.AussenanlageModel;
 import business.kunde.Kunde;
@@ -50,6 +51,11 @@ public class AussenanlageControl implements PropertyChangeListener {
         //TODO
         return true;
     }
+
+    public void schreibeInCsv(){
+        this.aussenanlageModel.schreibeInCsv();
+    }
+
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
